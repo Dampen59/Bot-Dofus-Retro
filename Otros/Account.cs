@@ -19,7 +19,7 @@ using System.Net;
 
 namespace Bot_Dofus_1._29._1.Otros
 {
-    public class Cuenta : IDisposable
+    public class Account : IDisposable
     {
         public string apodo { get; set; } = string.Empty;
         public string key_bienvenida { get; set; } = string.Empty;
@@ -29,8 +29,8 @@ namespace Bot_Dofus_1._29._1.Otros
         public Juego juego { get; private set; }
         public ManejadorScript script { get; set; }
         public PeleaExtensiones pelea_extension { get; set; }
-        public CuentaConf configuracion { get; private set; }
-        private EstadoCuenta estado_cuenta = EstadoCuenta.DESCONECTADO;
+        public AccountConf configuracion { get; private set; }
+        private EstadoAccount estado_cuenta = EstadoAccount.DESCONECTADO;
         public bool puede_utilizar_dragopavo = false;
 
         public Grupo grupo { get; set; }
@@ -41,7 +41,7 @@ namespace Bot_Dofus_1._29._1.Otros
         public event Action evento_estado_cuenta;
         public event Action cuenta_desconectada;
 
-        public Cuenta(CuentaConf _configuracion)
+        public Account(AccountConf _configuracion)
         {
             configuracion = _configuracion;
             logger = new Logger();
@@ -56,14 +56,14 @@ namespace Bot_Dofus_1._29._1.Otros
             conexion.conexion_Servidor(IPAddress.Parse(GlobalConf.ip_conexion), GlobalConf.puerto_conexion);
         }
 
-        public void desconectar()
+        public void disconnect()
         {
             conexion?.Dispose();
             conexion = null;
 
             script.detener_Script();
             juego.limpiar();
-            Estado_Cuenta = EstadoCuenta.DESCONECTADO;
+            Estado_Account = EstadoAccount.DESCONECTADO;
             cuenta_desconectada?.Invoke();
         }
 
@@ -73,7 +73,7 @@ namespace Bot_Dofus_1._29._1.Otros
             conexion.conexion_Servidor(IPAddress.Parse(ip), puerto);
         }
 
-        public EstadoCuenta Estado_Cuenta
+        public EstadoAccount Estado_Account
         {
             get => estado_cuenta;
             set
@@ -83,15 +83,15 @@ namespace Bot_Dofus_1._29._1.Otros
             }
         }
 
-        public bool esta_ocupado() => Estado_Cuenta != EstadoCuenta.CONECTADO_INACTIVO && Estado_Cuenta != EstadoCuenta.REGENERANDO;
-        public bool esta_dialogando() => Estado_Cuenta == EstadoCuenta.ALMACENAMIENTO || Estado_Cuenta == EstadoCuenta.DIALOGANDO || Estado_Cuenta == EstadoCuenta.INTERCAMBIO || Estado_Cuenta == EstadoCuenta.COMPRANDO || Estado_Cuenta == EstadoCuenta.VENDIENDO;
-        public bool esta_luchando() => Estado_Cuenta == EstadoCuenta.LUCHANDO;
-        public bool esta_recolectando() => Estado_Cuenta == EstadoCuenta.RECOLECTANDO;
-        public bool esta_desplazando() => Estado_Cuenta == EstadoCuenta.MOVIMIENTO;
+        public bool esta_ocupado() => Estado_Account != EstadoAccount.CONECTADO_INACTIVO && Estado_Account != EstadoAccount.REGENERANDO;
+        public bool esta_dialogando() => Estado_Account == EstadoAccount.ALMACENAMIENTO || Estado_Account == EstadoAccount.DIALOGANDO || Estado_Account == EstadoAccount.INTERCAMBIO || Estado_Account == EstadoAccount.COMPRANDO || Estado_Account == EstadoAccount.VENDIENDO;
+        public bool esta_luchando() => Estado_Account == EstadoAccount.LUCHANDO;
+        public bool esta_recolectando() => Estado_Account == EstadoAccount.RECOLECTANDO;
+        public bool esta_desplazando() => Estado_Account == EstadoAccount.MOVIMIENTO;
 
         #region Zona Dispose
         public void Dispose() => Dispose(true);
-        ~Cuenta() => Dispose(false);
+        ~Account() => Dispose(false);
 
         public virtual void Dispose(bool disposing)
         {
@@ -103,7 +103,7 @@ namespace Bot_Dofus_1._29._1.Otros
                     conexion?.Dispose();
                     juego.Dispose();
                 }
-                Estado_Cuenta = EstadoCuenta.DESCONECTADO;
+                Estado_Account = EstadoAccount.DESCONECTADO;
                 script = null;
                 key_bienvenida = null;
                 conexion = null;

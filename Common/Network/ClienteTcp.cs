@@ -23,7 +23,7 @@ namespace Bot_Dofus_1._29._1.Comun.Network
     {
         private Socket socket { get; set; }
         private byte[] buffer { get; set; }
-        public Cuenta cuenta;
+        public Account Account;
         private SemaphoreSlim semaforo;
         private bool disposed;
 
@@ -36,7 +36,7 @@ namespace Bot_Dofus_1._29._1.Comun.Network
         private int ticks;
         private List<int> pings;
 
-        public ClienteTcp(Cuenta _cuenta) => cuenta = _cuenta;
+        public ClienteTcp(Account _account) => Account = _account;
 
         public void conexion_Servidor(IPAddress ip, int puerto)
         {
@@ -115,7 +115,7 @@ namespace Bot_Dofus_1._29._1.Comun.Network
                     socket.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, new AsyncCallback(recibir_CallBack), socket);
             }
             else
-                cuenta.desconectar();
+                Account.disconnect();
         }
 
         public async Task enviar_Paquete_Async(string paquete, bool necesita_respuesta)
@@ -207,7 +207,7 @@ namespace Bot_Dofus_1._29._1.Comun.Network
                 }
 
                 semaforo = null;
-                cuenta = null;
+                Account = null;
                 socket = null;
                 buffer = null;
                 paquete_recibido = null;

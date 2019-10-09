@@ -18,11 +18,11 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts.Api
     [MoonSharpUserData]
     public class InventarioApi : IDisposable
     {
-        private Cuenta cuenta;
+        private Account cuenta;
         private ManejadorAcciones manejar_acciones;
         private bool disposed = false;
 
-        public InventarioApi(Cuenta _cuenta, ManejadorAcciones _manejar_acciones)
+        public InventarioApi(Account _cuenta, ManejadorAcciones _manejar_acciones)
         {
             cuenta = _cuenta;
             manejar_acciones = _manejar_acciones;

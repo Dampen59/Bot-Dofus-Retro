@@ -16,7 +16,7 @@ namespace Bot_Dofus_1._29._1.Interfaces
 {
     public partial class UI_Hechizos : UserControl
     {
-        private Cuenta cuenta;
+        private Account cuenta;
 
         public UI_Hechizos()
         {
@@ -24,7 +24,7 @@ namespace Bot_Dofus_1._29._1.Interfaces
             set_DoubleBuffered(dataGridView_hechizos);
         }
 
-        public void set_Cuenta(Cuenta _cuenta)
+        public void set_Account(Account _cuenta)
         {
             cuenta = _cuenta;
             cuenta.juego.personaje.hechizos_actualizados += actualizar_Agregar_Lista_Hechizos;

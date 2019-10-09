@@ -5,7 +5,7 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts.Acciones.Almacenamiento
 {
     class AlmacenarTodosLosObjetosAccion : AccionesScript
     {
-        internal override async Task<ResultadosAcciones> proceso(Cuenta cuenta)
+        internal override async Task<ResultadosAcciones> proceso(Account cuenta)
         {
             InventarioGeneral inventario = cuenta.juego.personaje.inventario;
             

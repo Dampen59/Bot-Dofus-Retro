@@ -25,7 +25,7 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts.Acciones
             monstruos_obligatorios = _monstruos_obligatorios;
         }
 
-        internal override Task<ResultadosAcciones> proceso(Cuenta cuenta)
+        internal override Task<ResultadosAcciones> proceso(Account cuenta)
         {
             Mapa mapa = cuenta.juego.mapa;
             List<Monstruos> grupos_disponibles = mapa.get_Grupo_Monstruos(monstruos_minimos, monstruos_maximos, monstruo_nivel_minimo, monstruo_nivel_maximo, monstruos_prohibidos, monstruos_obligatorios);

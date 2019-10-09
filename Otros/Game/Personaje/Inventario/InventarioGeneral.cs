@@ -9,7 +9,7 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Personaje.Inventario
 {
     public class InventarioGeneral : IDisposable, IEliminable
     {
-        private Cuenta cuenta;
+        private Account cuenta;
         private ConcurrentDictionary<uint, ObjetosInventario> _objetos;
         private bool disposed;
 
@@ -30,7 +30,7 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Personaje.Inventario
         public event Action almacenamiento_cerrado;
 
         // Constructor
-        internal InventarioGeneral(Cuenta _cuenta)
+        internal InventarioGeneral(Account _cuenta)
         {
             cuenta = _cuenta;
             _objetos = new ConcurrentDictionary<uint, ObjetosInventario>();

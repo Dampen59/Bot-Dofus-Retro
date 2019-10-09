@@ -22,7 +22,7 @@ namespace Bot_Dofus_1._29._1.Otros.Peleas
 {
     public class Pelea : IEliminable, IDisposable
     {
-        public Cuenta cuenta { get; private set; }
+        public Account cuenta { get; private set; }
         private ConcurrentDictionary<int, Luchadores> luchadores;
         private ConcurrentDictionary<int, Luchadores> enemigos;
         private ConcurrentDictionary<int, Luchadores> aliados;
@@ -49,7 +49,7 @@ namespace Bot_Dofus_1._29._1.Otros.Peleas
         public event Action<short, bool> hechizo_lanzado;
         public event Action<bool> movimiento;
 
-        public Pelea(Cuenta _cuenta)
+        public Pelea(Account _cuenta)
         {
             cuenta = _cuenta;
             luchadores = new ConcurrentDictionary<int, Luchadores>();
@@ -64,7 +64,7 @@ namespace Bot_Dofus_1._29._1.Otros.Peleas
 
         public async Task get_Lanzar_Hechizo(short hechizo_id, short celda_id)
         {
-            if (cuenta.Estado_Cuenta != EstadoCuenta.LUCHANDO)
+            if (cuenta.Estado_Account != EstadoAccount.LUCHANDO)
                 return;
 
             await cuenta.conexion.enviar_Paquete_Async("GA300" + hechizo_id + ';' + celda_id, false);
@@ -519,7 +519,7 @@ namespace Bot_Dofus_1._29._1.Otros.Peleas
         public void get_Combate_Creado()
         {
             cuenta.juego.personaje.timer_regeneracion.Change(Timeout.Infinite, Timeout.Infinite);
-            cuenta.Estado_Cuenta = EstadoCuenta.LUCHANDO;
+            cuenta.Estado_Account = EstadoAccount.LUCHANDO;
             pelea_creada?.Invoke();
             cuenta.logger.log_informacion("PELEA", "Nueva pelea iniciada");
         }
@@ -528,7 +528,7 @@ namespace Bot_Dofus_1._29._1.Otros.Peleas
         {
             limpiar();
             pelea_acabada?.Invoke();
-            cuenta.Estado_Cuenta = EstadoCuenta.CONECTADO_INACTIVO;
+            cuenta.Estado_Account = EstadoAccount.CONECTADO_INACTIVO;
             cuenta.logger.log_informacion("PELEA", "Pelea acabada");
         }
 

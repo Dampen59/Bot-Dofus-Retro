@@ -21,16 +21,16 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
         [PaqueteAtributo("DCK")]
         public void get_Dialogo_Creado(ClienteTcp cliente, string paquete)
         {
-            Cuenta cuenta = cliente.cuenta;
+            Account cuenta = cliente.Account;
 
-            cuenta.Estado_Cuenta = EstadoCuenta.DIALOGANDO;
+            cuenta.Estado_Account = EstadoAccount.DIALOGANDO;
             cuenta.juego.personaje.hablando_npc_id = sbyte.Parse(paquete.Substring(3));
         }
 
         [PaqueteAtributo("DQ")]
         public void get_Lista_Respuestas(ClienteTcp cliente, string paquete)
         {
-            Cuenta cuenta = cliente.cuenta;
+            Account cuenta = cliente.Account;
 
             if (!cuenta.esta_dialogando())
                 return;

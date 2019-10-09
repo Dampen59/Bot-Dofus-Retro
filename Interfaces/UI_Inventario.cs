@@ -12,9 +12,9 @@ namespace Bot_Dofus_1._29._1.Interfaces
 {
     public partial class UI_Inventario : UserControl
     {
-        private Cuenta cuenta = null;
+        private Account cuenta = null;
 
-        public UI_Inventario(Cuenta _cuenta)
+        public UI_Inventario(Account _cuenta)
         {
             InitializeComponent();
             set_DoubleBuffered(dataGridView_equipamientos);

@@ -20,10 +20,10 @@ namespace Bot_Dofus_1._29._1.Interfaces
 {
     public partial class UI_Principal : UserControl
     {
-        private Cuenta cuenta;
+        private Account cuenta;
         private string nombre_cuenta;
 
-        public UI_Principal(Cuenta _cuenta)
+        public UI_Principal(Account _cuenta)
         {
             InitializeComponent();
             cuenta = _cuenta;
@@ -35,8 +35,8 @@ namespace Bot_Dofus_1._29._1.Interfaces
             desconectarOconectarToolStripMenuItem.Text = "Conectar";
             escribir_mensaje($"[{DateTime.Now.ToString("HH:mm:ss")}] -> [INFORMACIÓN] Bot creado por Alvaro, http://www.salesprendes.com versión: {Application.ProductVersion} alpha", LogTipos.ERROR.ToString("X"));
 
-            cuenta.evento_estado_cuenta += eventos_Estados_Cuenta;
-            cuenta.cuenta_desconectada += desconectar_Cuenta;
+            cuenta.evento_estado_cuenta += eventos_Estados_Account;
+            cuenta.cuenta_desconectada += desconectar_Account;
             cuenta.logger.log_evento += (mensaje, color) => escribir_mensaje(mensaje.ToString(), color);
 
             cuenta.script.evento_script_cargado += evento_Scripts_Cargado;
@@ -57,7 +57,7 @@ namespace Bot_Dofus_1._29._1.Interfaces
             if (Principal.cuentas_cargadas.ContainsKey(nombre_cuenta))
             {
                 if (cuenta.tiene_grupo && cuenta.es_lider_grupo)
-                    cuenta.grupo.desconectar_Cuentas();
+                    cuenta.grupo.desconectar_Accounts();
                 else if (cuenta.tiene_grupo)
                     cuenta.grupo.eliminar_Miembro(cuenta);
 
@@ -91,10 +91,10 @@ namespace Bot_Dofus_1._29._1.Interfaces
                 desconectarOconectarToolStripMenuItem.Text = "Desconectar";
             }
             else if (desconectarOconectarToolStripMenuItem.Text.Equals("Desconectar"))
-                cuenta.desconectar();
+                cuenta.disconnect();
         }
 
-        private void desconectar_Cuenta()
+        private void desconectar_Account()
         {
             if (!IsHandleCreated)
                 return;
@@ -128,15 +128,15 @@ namespace Bot_Dofus_1._29._1.Interfaces
             }));
         }
 
-        private void eventos_Estados_Cuenta()
+        private void eventos_Estados_Account()
         {
-            switch (cuenta.Estado_Cuenta)
+            switch (cuenta.Estado_Account)
             {
-                case EstadoCuenta.DESCONECTADO:
+                case EstadoAccount.DESCONECTADO:
                     cambiar_Tab_Imagen(Properties.Resources.circulo_rojo);
                     break;
 
-                case EstadoCuenta.CONECTANDO:
+                case EstadoAccount.CONECTANDO:
                     cambiar_Tab_Imagen(Properties.Resources.circulo_naranja);
                     break;
 
@@ -146,7 +146,7 @@ namespace Bot_Dofus_1._29._1.Interfaces
             }
 
             if (cuenta != null && Principal.cuentas_cargadas.ContainsKey(nombre_cuenta))
-                Principal.cuentas_cargadas[nombre_cuenta].cabezera.propiedad_Estado = cuenta.Estado_Cuenta.cadena_Amigable();
+                Principal.cuentas_cargadas[nombre_cuenta].cabezera.propiedad_Estado = cuenta.Estado_Account.cadena_Amigable();
         }
 
         private void agregar_Tab_Pagina(string nombre, UserControl control, int imagen_index)
@@ -181,7 +181,7 @@ namespace Bot_Dofus_1._29._1.Interfaces
 
         private void canal_Chat_Click(object sender, EventArgs e)
         {
-            if (cuenta?.Estado_Cuenta != EstadoCuenta.DESCONECTADO && cuenta?.Estado_Cuenta != EstadoCuenta.CONECTANDO)
+            if (cuenta?.Estado_Account != EstadoAccount.DESCONECTADO && cuenta?.Estado_Account != EstadoAccount.CONECTANDO)
             {
                 string[] canales = { "i", "*", "#$p", "%", "!", "?", ":", "^" };
                 CheckBox control = sender as CheckBox;

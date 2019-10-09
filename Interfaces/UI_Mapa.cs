@@ -23,14 +23,14 @@ namespace Bot_Dofus_1._29._1.Interfaces
 {
     public partial class UI_Mapa : UserControl
     {
-        private Cuenta cuenta = null;
+        private Account cuenta = null;
 
-        public UI_Mapa(Cuenta _cuenta)
+        public UI_Mapa(Account _cuenta)
         {
             InitializeComponent();
 
             cuenta = _cuenta;
-            control_mapa.set_Cuenta(cuenta);
+            control_mapa.set_Account(cuenta);
         }
 
         private void UI_Mapa_Load(object sender, EventArgs e)

@@ -17,7 +17,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
     internal class ServidorSeleccionFrame : Frame
     {
         [PaqueteAtributo("HG")]
-        public void bienvenida_Juego(ClienteTcp cliente, string paquete) => cliente.enviar_Paquete("AT" + cliente.cuenta.tiquet_game);
+        public void bienvenida_Juego(ClienteTcp cliente, string paquete) => cliente.enviar_Paquete("AT" + cliente.Account.tiquet_game);
 
         [PaqueteAtributo("ATK0")]
         public void resultado_Servidor_Seleccion(ClienteTcp cliente, string paquete)
@@ -37,7 +37,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
         [PaqueteAtributo("ALK")]
         public void seleccionar_Personaje(ClienteTcp cliente, string paquete)
         {
-            Cuenta cuenta = cliente.cuenta;
+            Account cuenta = cliente.Account;
             string[] _loc6_ = paquete.Substring(3).Split('|');
             int contador = 2;
             bool encontrado = false;
@@ -64,7 +64,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
         [PaqueteAtributo("ASK")]
         public void personaje_Seleccionado(ClienteTcp cliente, string paquete)
         {
-            Cuenta cuenta = cliente.cuenta;
+            Account cuenta = cliente.Account;
             string[] _loc4 = paquete.Substring(4).Split('|');
 
             int id = int.Parse(_loc4[0]);
@@ -81,7 +81,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
 
             cuenta.juego.personaje.evento_Personaje_Seleccionado();
             cuenta.juego.personaje.timer_afk.Change(1200000, 1200000);
-            cliente.cuenta.Estado_Cuenta = EstadoCuenta.CONECTADO_INACTIVO;
+            cliente.Account.Estado_Account = EstadoAccount.CONECTADO_INACTIVO;
         }
     }
 }

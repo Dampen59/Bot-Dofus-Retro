@@ -19,7 +19,7 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts.Acciones.Npcs
 
         public NpcBancoAccion(int _npc_id) => npc_id = _npc_id;
 
-        internal override Task<ResultadosAcciones> proceso(Cuenta cuenta)
+        internal override Task<ResultadosAcciones> proceso(Account cuenta)
         {
             if (cuenta.esta_ocupado())
                 return resultado_fallado;

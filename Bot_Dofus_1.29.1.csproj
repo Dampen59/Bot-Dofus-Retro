@@ -185,7 +185,7 @@
     <Compile Include="Interfaces\UI_Debugger.Designer.cs">
       <DependentUpon>UI_Debugger.cs</DependentUpon>
     </Compile>
-    <Compile Include="Otros\Cuenta.cs" />
+    <Compile Include="Otros\Account.cs" />
     <Compile Include="Otros\Game\Servidor\ServidorJuego.cs" />
     <Compile Include="Otros\Mapas\Entidades\Entidad.cs" />
     <Compile Include="Otros\Game\Manejadores\Interactivos\Interactivo.cs" />

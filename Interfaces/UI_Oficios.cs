@@ -8,7 +8,7 @@ namespace Bot_Dofus_1._29._1.Interfaces
 {
     public partial class UI_Oficios : UserControl
     {
-        private Cuenta cuenta;
+        private Account cuenta;
 
         public UI_Oficios()
         {
@@ -17,7 +17,7 @@ namespace Bot_Dofus_1._29._1.Interfaces
             set_DoubleBuffered(dataGridView_skills);
         }
 
-        public void set_Cuenta(Cuenta _cuenta)
+        public void set_Account(Account _cuenta)
         {
             cuenta = _cuenta;
             cuenta.juego.personaje.oficios_actualizados += personaje_Oficios_Actualizados;

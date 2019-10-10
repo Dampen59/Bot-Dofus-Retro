@@ -5,33 +5,33 @@ namespace Bot_Dofus_1._29._1.Utilidades.Extensiones
 {
     public static class Extensiones
     {
-        public static string cadena_Amigable(this EstadoCuenta estado)
+        public static string cadena_Amigable(this EstadoAccount estado)
         {
             switch (estado)
             {
-                case EstadoCuenta.CONECTANDO:
+                case EstadoAccount.CONECTANDO:
                     return "Conectando";
-                case EstadoCuenta.DESCONECTADO:
+                case EstadoAccount.DESCONECTADO:
                     return "Desconectado";
-                case EstadoCuenta.INTERCAMBIO:
+                case EstadoAccount.INTERCAMBIO:
                     return "Intercambiando";
-                case EstadoCuenta.LUCHANDO:
+                case EstadoAccount.LUCHANDO:
                     return "Combate";
-                case EstadoCuenta.RECOLECTANDO:
+                case EstadoAccount.RECOLECTANDO:
                     return "Recolectando";
-                case EstadoCuenta.MOVIMIENTO:
+                case EstadoAccount.MOVIMIENTO:
                     return "Desplazando";
-                case EstadoCuenta.CONECTADO_INACTIVO:
+                case EstadoAccount.CONECTADO_INACTIVO:
                     return "Inactivo";
-                case EstadoCuenta.ALMACENAMIENTO:
+                case EstadoAccount.ALMACENAMIENTO:
                     return "Almacenamiento";
-                case EstadoCuenta.DIALOGANDO:
+                case EstadoAccount.DIALOGANDO:
                     return "Dialogando";
-                case EstadoCuenta.COMPRANDO:
+                case EstadoAccount.COMPRANDO:
                     return "Comprando";
-                case EstadoCuenta.VENDIENDO:
+                case EstadoAccount.VENDIENDO:
                     return "Vendiendo";
-                case EstadoCuenta.REGENERANDO:
+                case EstadoAccount.REGENERANDO:
                     return "Regenerando Vida";
                 default:
                     return "-";

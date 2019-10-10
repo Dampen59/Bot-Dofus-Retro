@@ -12,7 +12,7 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts.Acciones.Inventario
             modelo_id = _modelo_id;
         }
 
-        internal override async Task<ResultadosAcciones> proceso(Cuenta cuenta)
+        internal override async Task<ResultadosAcciones> proceso(Account cuenta)
         {
             ObjetosInventario objeto = cuenta.juego.personaje.inventario.get_Objeto_Modelo_Id(modelo_id);
 

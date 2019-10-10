@@ -22,12 +22,12 @@ namespace Bot_Dofus_1._29._1.Otros.Peleas
 {
     public class ManejadorHechizos : IDisposable
     {
-        private Cuenta cuenta;
+        private Account cuenta;
         private Mapa mapa;
         private Pelea pelea;
         private bool disposed;
 
-        public ManejadorHechizos(Cuenta _cuenta)
+        public ManejadorHechizos(Account _cuenta)
         {
             cuenta = _cuenta;
             mapa = cuenta.juego.mapa;

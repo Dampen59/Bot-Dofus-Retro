@@ -29,7 +29,7 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts.Acciones
             celda_id = _celda_id;
         }
 
-        internal override Task<ResultadosAcciones> proceso(Cuenta cuenta)
+        internal override Task<ResultadosAcciones> proceso(Account cuenta)
         {
             if (celda_especifica)
             {

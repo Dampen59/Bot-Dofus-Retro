@@ -9,7 +9,7 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts.Acciones.Mapas
         public short celda_id { get; private set; }
         public MoverCeldaAccion(short _celda_id) => celda_id = _celda_id;
 
-        internal override Task<ResultadosAcciones> proceso(Cuenta cuenta)
+        internal override Task<ResultadosAcciones> proceso(Account cuenta)
         {
             Mapa mapa = cuenta.juego.mapa;
             Celda celda = mapa.get_Celda_Id(celda_id);

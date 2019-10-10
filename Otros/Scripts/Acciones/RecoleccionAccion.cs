@@ -9,7 +9,7 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts.Acciones
 
         public RecoleccionAccion(List<short> _elementos) => elementos = _elementos;
 
-        internal override Task<ResultadosAcciones> proceso(Cuenta cuenta)
+        internal override Task<ResultadosAcciones> proceso(Account cuenta)
         {
             if (cuenta.juego.manejador.recoleccion.get_Puede_Recolectar(elementos))
             {

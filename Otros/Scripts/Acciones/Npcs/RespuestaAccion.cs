@@ -11,7 +11,7 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts.Acciones.Npcs
 
         public RespuestaAccion(short _respuesta_id) => respuesta_id = _respuesta_id;
 
-        internal override Task<ResultadosAcciones> proceso(Cuenta cuenta)
+        internal override Task<ResultadosAcciones> proceso(Account cuenta)
         {
             if (!cuenta.esta_dialogando())
                 return resultado_fallado;

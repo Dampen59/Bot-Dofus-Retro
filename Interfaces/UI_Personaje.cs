@@ -15,15 +15,15 @@ namespace Bot_Dofus_1._29._1.Interfaces
 {
     public partial class UI_Personaje : UserControl
     {
-        private Cuenta cuenta;
+        private Account cuenta;
 
-        public UI_Personaje(Cuenta _cuenta)
+        public UI_Personaje(Account _cuenta)
         {
             InitializeComponent();
             cuenta = _cuenta;
 
-            ui_hechizos.set_Cuenta(cuenta);
-            ui_oficios.set_Cuenta(cuenta);
+            ui_hechizos.set_Account(cuenta);
+            ui_oficios.set_Account(cuenta);
 
             cuenta.juego.personaje.personaje_seleccionado += personaje_Seleccionado_Servidor_Juego;
             cuenta.juego.personaje.caracteristicas_actualizadas += personaje_Caracteristicas_Actualizadas;

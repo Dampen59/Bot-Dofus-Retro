@@ -14,9 +14,9 @@ namespace Bot_Dofus_1._29._1.Interfaces
 {
     public partial class UI_Pelea : UserControl
     {
-        private Cuenta cuenta;
+        private Account cuenta;
 
-        public UI_Pelea(Cuenta _cuenta)
+        public UI_Pelea(Account _cuenta)
         {
             InitializeComponent();
             cuenta = _cuenta;

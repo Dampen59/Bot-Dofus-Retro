@@ -28,7 +28,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
         [PaqueteAtributo("GM")]
         public async Task get_Movimientos_Personajes(ClienteTcp cliente, string paquete)
         {
-            Cuenta cuenta = cliente.cuenta;
+            Account cuenta = cliente.Account;
             string[] separador_jugadores = paquete.Substring(3).Split('|'), informaciones;
             string _loc6, nombre_template, tipo;
 
@@ -52,7 +52,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
                         {
                             case -1:
                             case -2:
-                                if (cuenta.Estado_Cuenta == EstadoCuenta.LUCHANDO)
+                                if (cuenta.Estado_Account == EstadoAccount.LUCHANDO)
                                 {
                                     int vida = int.Parse(informaciones[12]);
                                     byte pa = byte.Parse(informaciones[13]);
@@ -89,7 +89,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
                             break;
 
                             default:// jugador
-                                if (cuenta.Estado_Cuenta != EstadoCuenta.LUCHANDO)
+                                if (cuenta.Estado_Account != EstadoAccount.LUCHANDO)
                                 {
                                     if (cuenta.juego.personaje.id != id)
                                         cuenta.juego.mapa.entidades.TryAdd(id, new Personajes(id, nombre_template, byte.Parse(informaciones[7].ToString()), celda));
@@ -128,7 +128,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
                     }
                     else if (_loc6[0].Equals('-'))
                     {
-                        if (cuenta.Estado_Cuenta != EstadoCuenta.LUCHANDO)
+                        if (cuenta.Estado_Account != EstadoAccount.LUCHANDO)
                         {
                             int id = int.Parse(_loc6.Substring(1));
                             cuenta.juego.mapa.entidades.TryRemove(id, out Entidad entidad);
@@ -143,7 +143,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
         {
             string[] id_fin_accion = paquete.Substring(3).Split('|');
 
-            cliente.cuenta.conexion.enviar_Paquete("GKK" + id_fin_accion[0]);
+            cliente.Account.conexion.enviar_Paquete("GKK" + id_fin_accion[0]);
         }
 
         [PaqueteAtributo("GAS")]
@@ -154,7 +154,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
         {
             string[] separador = paquete.Substring(2).Split(';');
             int id_accion = int.Parse(separador[1]);
-            Cuenta cuenta = cliente.cuenta;
+            Account cuenta = cliente.Account;
             PersonajeJuego personaje = cuenta.juego.personaje;
 
             if (id_accion > 0)
@@ -326,7 +326,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
             foreach (string interactivo in paquete.Substring(4).Split('|'))
             {
                 string[] separador = interactivo.Split(';');
-                Cuenta cuenta = cliente.cuenta;
+                Account cuenta = cliente.Account;
                 short celda_id = short.Parse(separador[0]);
                 byte estado = byte.Parse(separador[1]);
 
@@ -353,12 +353,12 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
         }
 
         [PaqueteAtributo("GDM")]
-        public void get_Nuevo_Mapa(ClienteTcp cliente, string paquete) => cliente.cuenta.juego.mapa.get_Actualizar_Mapa(paquete.Substring(4));
+        public void get_Nuevo_Mapa(ClienteTcp cliente, string paquete) => cliente.Account.juego.mapa.get_Actualizar_Mapa(paquete.Substring(4));
 
         [PaqueteAtributo("GDK")]
-        public void get_Mapa_Cambiado(ClienteTcp cliente, string paquete) => cliente.cuenta.juego.mapa.get_Evento_Mapa_Cambiado();
+        public void get_Mapa_Cambiado(ClienteTcp cliente, string paquete) => cliente.Account.juego.mapa.get_Evento_Mapa_Cambiado();
 
         [PaqueteAtributo("GV")]
-        public void get_Reiniciar_Pantalla(ClienteTcp cliente, string paquete) => cliente.cuenta.conexion.enviar_Paquete("GC1");
+        public void get_Reiniciar_Pantalla(ClienteTcp cliente, string paquete) => cliente.Account.conexion.enviar_Paquete("GC1");
     }
 }

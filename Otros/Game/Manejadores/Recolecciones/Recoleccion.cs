@@ -23,7 +23,7 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Entidades.Manejadores.Recolecciones
 {
     public class Recoleccion : IDisposable
     {
-        private Cuenta cuenta;
+        private Account cuenta;
         private Mapa mapa;
         public ObjetoInteractivo interactivo_recolectando;
         private List<int> interactivos_no_utilizables;
@@ -36,7 +36,7 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Entidades.Manejadores.Recolecciones
 
         public static readonly int[] herramientas_pescar = { 8541, 6661, 596, 1866, 1865, 1864, 1867, 2188, 1863, 1862, 1868, 1861, 1860, 2366 };
         
-        public Recoleccion(Cuenta _cuenta, Movimiento movimientos, Mapa _mapa)
+        public Recoleccion(Account _cuenta, Movimiento movimientos, Mapa _mapa)
         {
             cuenta = _cuenta;
             interactivos_no_utilizables = new List<int>();
@@ -166,7 +166,7 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Entidades.Manejadores.Recolecciones
             }
             else
             {
-                cuenta.Estado_Cuenta = EstadoCuenta.RECOLECTANDO;
+                cuenta.Estado_Account = EstadoAccount.RECOLECTANDO;
                 recoleccion_iniciada?.Invoke();
                 await Task.Delay(tiempo_delay);
                 cuenta.conexion.enviar_Paquete("GKK" + tipo_gkk);
@@ -180,7 +180,7 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Entidades.Manejadores.Recolecciones
 
             robado = false;
             interactivo_recolectando = null;
-            cuenta.Estado_Cuenta = EstadoCuenta.CONECTADO_INACTIVO;
+            cuenta.Estado_Account = EstadoAccount.CONECTADO_INACTIVO;
             recoleccion_acabada?.Invoke(resultado);
         }
 

@@ -17,7 +17,7 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts.Manejadores
 {
     public class ManejadorAcciones : IDisposable
     {
-        private Cuenta cuenta;
+        private Account cuenta;
         public LuaManejadorScript manejador_script;
         private ConcurrentQueue<AccionesScript> fila_acciones;
         private AccionesScript accion_actual;
@@ -30,7 +30,7 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts.Manejadores
         public event Action<bool> evento_accion_normal;
         public event Action<bool> evento_accion_personalizada;
 
-        public ManejadorAcciones(Cuenta _cuenta, LuaManejadorScript _manejador_script)
+        public ManejadorAcciones(Account _cuenta, LuaManejadorScript _manejador_script)
         {
             cuenta = _cuenta;
             manejador_script = _manejador_script;
@@ -76,10 +76,10 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts.Manejadores
             {
                 if (es_correcto)
                 {
-                    for (int delay = 0; delay < 10000 && cuenta.Estado_Cuenta != EstadoCuenta.LUCHANDO; delay += 500)
+                    for (int delay = 0; delay < 10000 && cuenta.Estado_Account != EstadoAccount.LUCHANDO; delay += 500)
                         await Task.Delay(500);
 
-                    if (cuenta.Estado_Cuenta != EstadoCuenta.LUCHANDO)
+                    if (cuenta.Estado_Account != EstadoAccount.LUCHANDO)
                     {
                         cuenta.logger.log_Peligro("SCRIPT", "Error al lanzar la pelea, los monstruos pudieron haberse movido o sido robados!");
                         acciones_Salida(0);
@@ -154,7 +154,7 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts.Manejadores
 
             if (accion_actual is NpcBancoAccion nba)
             {
-                if (cuenta.Estado_Cuenta != EstadoCuenta.DIALOGANDO)
+                if (cuenta.Estado_Account != EstadoAccount.DIALOGANDO)
                     return;
 
                 IEnumerable<Npcs> npcs = cuenta.juego.mapa.lista_npcs();

@@ -32,7 +32,7 @@ namespace Bot_Dofus_1._29._1.Controles.ControlMapa
         private bool mapa_raton_abajo;
         private CeldaMapa celda_retenida;
         private CeldaMapa celda_abajo;
-        private Cuenta cuenta;
+        private Account cuenta;
         private ConcurrentDictionary<int, MovimientoAnimacion> animaciones;
         private System.Timers.Timer animaciones_timer;
         private bool mostrar_animaciones;
@@ -114,7 +114,7 @@ namespace Bot_Dofus_1._29._1.Controles.ControlMapa
             }
         }
 
-        public void set_Cuenta(Cuenta _cuenta) => cuenta = _cuenta;
+        public void set_Account(Account _cuenta) => cuenta = _cuenta;
 
         private void aplicar_Calidad_Mapa(Graphics g)
         {

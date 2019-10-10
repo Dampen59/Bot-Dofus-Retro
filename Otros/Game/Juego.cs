@@ -16,13 +16,13 @@ namespace Bot_Dofus_1._29._1.Otros.Game
         public Pelea pelea{ get; private set; }
         private bool disposed = false;
 
-        internal Juego(Cuenta cuenta)
+        internal Juego(Account account)
         {
             servidor = new ServidorJuego();
             mapa = new Mapa();
-            personaje = new PersonajeJuego(cuenta);
-            manejador = new Manejador(cuenta, mapa, personaje);
-            pelea = new Pelea(cuenta);
+            personaje = new PersonajeJuego(account);
+            manejador = new Manejador(account, mapa, personaje);
+            pelea = new Pelea(account);
         }
 
         #region Zona Dispose

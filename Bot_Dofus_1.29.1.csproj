@@ -288,15 +288,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Utilidades\Configuracion\GlobalConf.cs" />
-    <Compile Include="Utilidades\Configuracion\CuentaConf.cs" />
-    <Compile Include="Utilidades\Criptografia\Hash.cs" />
-    <Compile Include="Utilidades\Criptografia\Randomize.cs" />
-    <Compile Include="Utilidades\Extensiones\Extensiones.cs" />
-    <Compile Include="Utilidades\Logs\Logger.cs" />
-    <Compile Include="Utilidades\Logs\LogMensajes.cs" />
-    <Compile Include="Utilidades\Logs\LogTipos.cs" />
-    <Compile Include="Utilidades\TimerWrapper.cs" />
+    <Compile Include="Utility\Configuration\GlobalConf.cs" />
+    <Compile Include="Utility\Configuration\CuentaConf.cs" />
+    <Compile Include="Utility\Crypto\Hash.cs" />
+    <Compile Include="Utility\Crypto\Randomize.cs" />
+    <Compile Include="Utility\Extension\Extension.cs" />
+    <Compile Include="Utility\Logs\Logger.cs" />
+    <Compile Include="Utility\Logs\LogMensajes.cs" />
+    <Compile Include="Utility\Logs\LogTipos.cs" />
+    <Compile Include="Utility\TimerWrapper.cs" />
     <EmbeddedResource Include="Controles\ControlMapa\ControlMapa.resx">
       <DependentUpon>ControlMapa.cs</DependentUpon>
       <SubType>Designer</SubType>

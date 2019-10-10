@@ -164,7 +164,7 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Entidades.Manejadores.Movimientos
 
         private void enviar_Paquete_Movimiento()
         {
-            if (cuenta.Estado_Account == EstadoAccount.REGENERANDO)
+            if (cuenta.Estado_Account == StateAccount.REGENERATING)
                 cuenta.conexion.enviar_Paquete("eU1", true);
 
             string path_string = PathFinderUtil.get_Pathfinding_Limpio(actual_path);
@@ -174,14 +174,14 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Entidades.Manejadores.Movimientos
 
         public async Task evento_Movimiento_Finalizado(Celda celda_destino, byte tipo_gkk, bool correcto)
         {
-            cuenta.Estado_Account = EstadoAccount.MOVIMIENTO;
+            cuenta.Estado_Account = StateAccount.MOVING;
 
             if (correcto)
             {
                 await Task.Delay(PathFinderUtil.get_Tiempo_Desplazamiento_Mapa(personaje.celda, actual_path, personaje.esta_utilizando_dragopavo));
 
                 //por si en el delay el bot esta desconectado
-                if (cuenta == null || cuenta.Estado_Account == EstadoAccount.DESCONECTADO)
+                if (cuenta == null || cuenta.Estado_Account == StateAccount.DISCONNECTED)
                     return;
 
                 cuenta.conexion.enviar_Paquete("GKK" + tipo_gkk);
@@ -189,7 +189,7 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Entidades.Manejadores.Movimientos
             }
 
             actual_path = null;
-            cuenta.Estado_Account = EstadoAccount.CONECTADO_INACTIVO;
+            cuenta.Estado_Account = StateAccount.AWAY;
             movimiento_finalizado?.Invoke(correcto);
         }
 

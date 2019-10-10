@@ -23,7 +23,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.LoginAccount
         {
             Account cuenta = cliente.Account;
 
-            cuenta.Estado_Account = EstadoAccount.CONECTANDO;
+            cuenta.Estado_Account = StateAccount.CONNECTED;
             cuenta.key_bienvenida = paquete.Substring(2);
 
             cliente.enviar_Paquete("1.30");

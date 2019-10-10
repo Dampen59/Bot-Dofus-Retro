@@ -427,7 +427,7 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts
                 {
                     int tiempo_estimado = vida_para_regenerar / 2;
 
-                    if (Account.Estado_Account != EstadoAccount.REGENERANDO)
+                    if (Account.Estado_Account != StateAccount.REGENERATING)
                     {
                         if (Account.esta_ocupado())
                             return;
@@ -442,7 +442,7 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts
 
                     if (corriendo)
                     {
-                        if (Account.Estado_Account == EstadoAccount.REGENERANDO)
+                        if (Account.Estado_Account == StateAccount.REGENERATING)
                             Account.conexion.enviar_Paquete("eU1", true);
 
                         Account.logger.log_informacion("SCRIPTS", "Regeneración finalizada.");

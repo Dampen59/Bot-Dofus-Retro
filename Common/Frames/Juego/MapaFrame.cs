@@ -52,7 +52,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
                         {
                             case -1:
                             case -2:
-                                if (cuenta.Estado_Account == EstadoAccount.LUCHANDO)
+                                if (cuenta.Estado_Account == StateAccount.FIGHTING)
                                 {
                                     int vida = int.Parse(informaciones[12]);
                                     byte pa = byte.Parse(informaciones[13]);
@@ -89,7 +89,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
                             break;
 
                             default:// jugador
-                                if (cuenta.Estado_Account != EstadoAccount.LUCHANDO)
+                                if (cuenta.Estado_Account != StateAccount.FIGHTING)
                                 {
                                     if (cuenta.juego.personaje.id != id)
                                         cuenta.juego.mapa.entidades.TryAdd(id, new Personajes(id, nombre_template, byte.Parse(informaciones[7].ToString()), celda));
@@ -128,7 +128,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
                     }
                     else if (_loc6[0].Equals('-'))
                     {
-                        if (cuenta.Estado_Account != EstadoAccount.LUCHANDO)
+                        if (cuenta.Estado_Account != StateAccount.FIGHTING)
                         {
                             int id = int.Parse(_loc6.Substring(1));
                             cuenta.juego.mapa.entidades.TryRemove(id, out Entidad entidad);

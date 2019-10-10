@@ -132,11 +132,11 @@ namespace Bot_Dofus_1._29._1.Interfaces
         {
             switch (cuenta.Estado_Account)
             {
-                case EstadoAccount.DESCONECTADO:
+                case StateAccount.DISCONNECTED:
                     cambiar_Tab_Imagen(Properties.Resources.circulo_rojo);
                     break;
 
-                case EstadoAccount.CONECTANDO:
+                case StateAccount.CONNECTED:
                     cambiar_Tab_Imagen(Properties.Resources.circulo_naranja);
                     break;
 
@@ -181,7 +181,7 @@ namespace Bot_Dofus_1._29._1.Interfaces
 
         private void canal_Chat_Click(object sender, EventArgs e)
         {
-            if (cuenta?.Estado_Account != EstadoAccount.DESCONECTADO && cuenta?.Estado_Account != EstadoAccount.CONECTANDO)
+            if (cuenta?.Estado_Account != StateAccount.DISCONNECTED && cuenta?.Estado_Account != StateAccount.CONNECTED)
             {
                 string[] canales = { "i", "*", "#$p", "%", "!", "?", ":", "^" };
                 CheckBox control = sender as CheckBox;

@@ -76,10 +76,10 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts.Manejadores
             {
                 if (es_correcto)
                 {
-                    for (int delay = 0; delay < 10000 && cuenta.Estado_Account != EstadoAccount.LUCHANDO; delay += 500)
+                    for (int delay = 0; delay < 10000 && cuenta.Estado_Account != StateAccount.FIGHTING; delay += 500)
                         await Task.Delay(500);
 
-                    if (cuenta.Estado_Account != EstadoAccount.LUCHANDO)
+                    if (cuenta.Estado_Account != StateAccount.FIGHTING)
                     {
                         cuenta.logger.log_Peligro("SCRIPT", "Error al lanzar la pelea, los monstruos pudieron haberse movido o sido robados!");
                         acciones_Salida(0);
@@ -154,7 +154,7 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts.Manejadores
 
             if (accion_actual is NpcBancoAccion nba)
             {
-                if (cuenta.Estado_Account != EstadoAccount.DIALOGANDO)
+                if (cuenta.Estado_Account != StateAccount.DIALOG)
                     return;
 
                 IEnumerable<Npcs> npcs = cuenta.juego.mapa.lista_npcs();

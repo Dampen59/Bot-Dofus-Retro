@@ -30,7 +30,7 @@ namespace Bot_Dofus_1._29._1.Otros
         public ManejadorScript script { get; set; }
         public PeleaExtensiones pelea_extension { get; set; }
         public AccountConf configuracion { get; private set; }
-        private EstadoAccount estado_cuenta = EstadoAccount.DESCONECTADO;
+        private StateAccount estado_cuenta = StateAccount.DISCONNECTED;
         public bool puede_utilizar_dragopavo = false;
 
         public Grupo grupo { get; set; }
@@ -63,7 +63,7 @@ namespace Bot_Dofus_1._29._1.Otros
 
             script.detener_Script();
             juego.limpiar();
-            Estado_Account = EstadoAccount.DESCONECTADO;
+            Estado_Account = StateAccount.DISCONNECTED;
             cuenta_desconectada?.Invoke();
         }
 
@@ -73,7 +73,7 @@ namespace Bot_Dofus_1._29._1.Otros
             conexion.conexion_Servidor(IPAddress.Parse(ip), puerto);
         }
 
-        public EstadoAccount Estado_Account
+        public StateAccount Estado_Account
         {
             get => estado_cuenta;
             set
@@ -83,11 +83,11 @@ namespace Bot_Dofus_1._29._1.Otros
             }
         }
 
-        public bool esta_ocupado() => Estado_Account != EstadoAccount.CONECTADO_INACTIVO && Estado_Account != EstadoAccount.REGENERANDO;
-        public bool esta_dialogando() => Estado_Account == EstadoAccount.ALMACENAMIENTO || Estado_Account == EstadoAccount.DIALOGANDO || Estado_Account == EstadoAccount.INTERCAMBIO || Estado_Account == EstadoAccount.COMPRANDO || Estado_Account == EstadoAccount.VENDIENDO;
-        public bool esta_luchando() => Estado_Account == EstadoAccount.LUCHANDO;
-        public bool esta_recolectando() => Estado_Account == EstadoAccount.RECOLECTANDO;
-        public bool esta_desplazando() => Estado_Account == EstadoAccount.MOVIMIENTO;
+        public bool esta_ocupado() => Estado_Account != StateAccount.AWAY && Estado_Account != StateAccount.REGENERATING;
+        public bool esta_dialogando() => Estado_Account == StateAccount.BANKING || Estado_Account == StateAccount.DIALOG || Estado_Account == StateAccount.EXCHANGE || Estado_Account == StateAccount.BUYING || Estado_Account == StateAccount.SELLING;
+        public bool esta_luchando() => Estado_Account == StateAccount.FIGHTING;
+        public bool esta_recolectando() => Estado_Account == StateAccount.COLLECTING;
+        public bool esta_desplazando() => Estado_Account == StateAccount.MOVING;
 
         #region Zona Dispose
         public void Dispose() => Dispose(true);
@@ -103,7 +103,7 @@ namespace Bot_Dofus_1._29._1.Otros
                     conexion?.Dispose();
                     juego.Dispose();
                 }
-                Estado_Account = EstadoAccount.DESCONECTADO;
+                Estado_Account = StateAccount.DISCONNECTED;
                 script = null;
                 key_bienvenida = null;
                 conexion = null;

@@ -15,44 +15,44 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Autentificacion
     class Authentication : Frame
     {
         [PaqueteAtributo("AlEf")]
-        public void get_Error_Datos(ClienteTcp cliente, string paquete)
+        public void get_Error_Datos(ClienteTcp cliente, string package)
         {
             cliente.Account.logger.log_Error("LOGIN", "Connection rejected. Incorrect account name or password.");
             cliente.Account.disconnect();
         }
 
         [PaqueteAtributo("AlEa")]
-        public void get_Error_Ya_Conectado(ClienteTcp cliente, string paquete)
+        public void get_Error_Ya_Conectado(ClienteTcp cliente, string package)
         {
             cliente.Account.logger.log_Error("LOGIN", "Already connected. Try again.");
             cliente.Account.disconnect();
         }
 
         [PaqueteAtributo("AlEv")]
-        public void get_Error_Version(ClienteTcp cliente, string paquete)
+        public void get_Error_Version(ClienteTcp cliente, string package)
         {
             cliente.Account.logger.log_Error("LOGIN", "The %1 version of Dofus that you have installed is not compatible with this server. To play, install version %2. The DOFUS client will be closed.");
             cliente.Account.disconnect();
         }
 
         [PaqueteAtributo("AlEb")]
-        public void get_Error_Baneado(ClienteTcp cliente, string paquete)
+        public void get_Error_Baneado(ClienteTcp cliente, string package)
         {
             cliente.Account.logger.log_Error("LOGIN", "Connection rejected. Your account has been banned.");
             cliente.Account.disconnect();
         }
 
         [PaqueteAtributo("AlEd")]
-        public void get_Error_Conectado(ClienteTcp cliente, string paquete)
+        public void get_Error_Conectado(ClienteTcp cliente, string package)
         {
             cliente.Account.logger.log_Error("LOGIN", "This account is already connected to a game server. Please try again.");
             cliente.Account.disconnect();
         }
 
         [PaqueteAtributo("AlEk")]
-        public void get_Error_Baneado_Tiempo(ClienteTcp cliente, string paquete)
+        public void get_Error_Baneado_Tiempo(ClienteTcp cliente, string package)
         {
-            string[] informacion_ban = paquete.Substring(3).Split('|');
+            string[] informacion_ban = package.Substring(3).Split('|');
             int dias = int.Parse(informacion_ban[0].Substring(1)), horas = int.Parse(informacion_ban[1]), minutos = int.Parse(informacion_ban[2]);
             StringBuilder mensaje = new StringBuilder().Append("Your account will be invalid during ");
 

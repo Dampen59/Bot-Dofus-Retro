@@ -27,7 +27,7 @@ namespace Bot_Dofus_1._29._1.Interfaces
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UI_Principal));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.desconectarOconectarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.desConnectedOConnectedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eliminarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ScriptTituloStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cargarScriptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -80,7 +80,7 @@ namespace Bot_Dofus_1._29._1.Interfaces
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.desconectarOconectarToolStripMenuItem,
+            this.desConnectedOConnectedToolStripMenuItem,
             this.eliminarToolStripMenuItem,
             this.ScriptTituloStripMenuItem,
             this.cargarScriptToolStripMenuItem,
@@ -92,13 +92,13 @@ namespace Bot_Dofus_1._29._1.Interfaces
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
-            // desconectarOconectarToolStripMenuItem
+            // desConnectedOConnectedToolStripMenuItem
             // 
-            this.desconectarOconectarToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("desconectarOconectarToolStripMenuItem.Image")));
-            this.desconectarOconectarToolStripMenuItem.Name = "desconectarOconectarToolStripMenuItem";
-            this.desconectarOconectarToolStripMenuItem.Size = new System.Drawing.Size(100, 20);
-            this.desconectarOconectarToolStripMenuItem.Text = "Desconectar";
-            this.desconectarOconectarToolStripMenuItem.Click += new System.EventHandler(this.desconectarToolStripMenuItem_Click);
+            this.desConnectedOConnectedToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("desConnectedOConnectedToolStripMenuItem.Image")));
+            this.desConnectedOConnectedToolStripMenuItem.Name = "desConnectedOConnectedToolStripMenuItem";
+            this.desConnectedOConnectedToolStripMenuItem.Size = new System.Drawing.Size(100, 20);
+            this.desConnectedOConnectedToolStripMenuItem.Text = "DesConnected";
+            this.desConnectedOConnectedToolStripMenuItem.Click += new System.EventHandler(this.desConnectedToolStripMenuItem_Click);
             // 
             // eliminarToolStripMenuItem
             // 
@@ -597,7 +597,7 @@ namespace Bot_Dofus_1._29._1.Interfaces
         }
 
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem desconectarOconectarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem desConnectedOConnectedToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem eliminarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ScriptTituloStripMenuItem;
         private System.Windows.Forms.TabControl tabControl_principal;

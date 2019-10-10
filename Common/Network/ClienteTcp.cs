@@ -27,18 +27,18 @@ namespace Bot_Dofus_1._29._1.Comun.Network
         private SemaphoreSlim semaforo;
         private bool disposed;
 
-        public event Action<string> paquete_recibido;
-        public event Action<string> paquete_enviado;
+        public event Action<string> package_recibido;
+        public event Action<string> package_enviado;
         public event Action<string> socket_informacion;
 
         /** ping **/
-        private bool esta_esperando_paquete = false;
+        private bool esta_esperando_package = false;
         private int ticks;
         private List<int> pings;
 
         public ClienteTcp(Account _account) => Account = _account;
 
-        public void conexion_Servidor(IPAddress ip, int puerto)
+        public void ConnexionServer(IPAddress ip, int puerto)
         {
             try
             {
@@ -46,45 +46,45 @@ namespace Bot_Dofus_1._29._1.Comun.Network
                 buffer = new byte[socket.ReceiveBufferSize];
                 semaforo = new SemaphoreSlim(1);
                 pings = new List<int>(50);
-                socket.BeginConnect(ip, puerto, new AsyncCallback(conectar_CallBack), socket);
+                socket.BeginConnect(ip, puerto, new AsyncCallback(Connected_CallBack), socket);
             }
             catch (Exception ex)
             {
                 socket_informacion?.Invoke(ex.ToString());
-                get_Desconectar_Socket();
+                DisconnectSocket();
             }
         }
 
-        private void conectar_CallBack(IAsyncResult ar)
+        private void Connected_CallBack(IAsyncResult ar)
         {
             try
             {
-                if (esta_Conectado())
+                if (isConnected())
                 {
                     socket = ar.AsyncState as Socket;
                     socket.EndConnect(ar);
 
-                    socket.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, new AsyncCallback(recibir_CallBack), socket);
+                    socket.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, new AsyncCallback(Receive_CallBack), socket);
                     socket_informacion?.Invoke("Socket conectado correctamente");
                 }
                 else
                 {
-                    get_Desconectar_Socket();
+                    DisconnectSocket();
                     socket_informacion?.Invoke("Impossible enviar el socket con el host");
                 }
             }
             catch (Exception ex)
             {
                 socket_informacion?.Invoke(ex.ToString());
-                get_Desconectar_Socket();
+                DisconnectSocket();
             }
         }
 
-        public void recibir_CallBack(IAsyncResult ar)
+        public void Receive_CallBack(IAsyncResult ar)
         {
-            if (!esta_Conectado() || disposed)
+            if (!isConnected() || disposed)
             {
-                get_Desconectar_Socket();
+                DisconnectSocket();
                 return;
             }
 
@@ -94,65 +94,65 @@ namespace Bot_Dofus_1._29._1.Comun.Network
             {
                 string datos = Encoding.UTF8.GetString(buffer, 0, bytes_leidos);
 
-                foreach (string paquete in datos.Replace("\x0a", string.Empty).Split('\0').Where(x => x != string.Empty))
+                foreach (string package in datos.Replace("\x0a", string.Empty).Split('\0').Where(x => x != string.Empty))
                 {
-                    paquete_recibido?.Invoke(paquete);
+                    package_recibido?.Invoke(package);
 
-                    if (esta_esperando_paquete)
+                    if (esta_esperando_package)
                     {
                         pings.Add(Environment.TickCount - ticks);
 
                         if (pings.Count > 48)
                             pings.RemoveAt(1);
 
-                        esta_esperando_paquete = false;
+                        esta_esperando_package = false;
                     }
 
-                    PaqueteRecibido.Recibir(this, paquete);
+                    PaqueteRecibido.Recibir(this, package);
                 }
 
-                if (esta_Conectado())
-                    socket.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, new AsyncCallback(recibir_CallBack), socket);
+                if (isConnected())
+                    socket.BeginReceive(buffer, 0, buffer.Length, SocketFlags.None, new AsyncCallback(Receive_CallBack), socket);
             }
             else
                 Account.disconnect();
         }
 
-        public async Task enviar_Paquete_Async(string paquete, bool necesita_respuesta)
+        public async Task SendPackage_Async(string package, bool need_response)
         {
             try
             {
-                if (!esta_Conectado())
+                if (!isConnected())
                     return;
 
-                paquete += "\n\x00";
-                byte[] byte_paquete = Encoding.UTF8.GetBytes(paquete);
+                package += "\n\x00";
+                byte[] byte_package = Encoding.UTF8.GetBytes(package);
 
                 await semaforo.WaitAsync().ConfigureAwait(false);
 
-                if (necesita_respuesta)
-                    esta_esperando_paquete = true;
+                if (need_response)
+                    esta_esperando_package = true;
 
-                socket.Send(byte_paquete);
+                socket.Send(byte_package);
 
-                if (necesita_respuesta)
+                if (need_response)
                     ticks = Environment.TickCount;
 
-                paquete_enviado?.Invoke(paquete);
+                package_enviado?.Invoke(package);
                 semaforo.Release();
             }
             catch (Exception ex)
             {
                 socket_informacion?.Invoke(ex.ToString());
-                get_Desconectar_Socket();
+                DisconnectSocket();
             };
         }
 
-        public void enviar_Paquete(string paquete, bool necesita_respuesta = false) => enviar_Paquete_Async(paquete, necesita_respuesta).Wait();
+        public void SendPackage(string package, bool need_response = false) => SendPackage_Async(package, need_response).Wait();
 
-        public void get_Desconectar_Socket()
+        public void DisconnectSocket()
         {
-            if (esta_Conectado())
+            if (isConnected())
             {
                 if (socket != null && socket.Connected)
                 {
@@ -165,7 +165,7 @@ namespace Bot_Dofus_1._29._1.Comun.Network
             }
         }
 
-        public bool esta_Conectado()
+        public bool isConnected()
         {
             try
             {
@@ -182,7 +182,7 @@ namespace Bot_Dofus_1._29._1.Comun.Network
         }
 
         public int get_Total_Pings() => pings.Count();
-        public int get_Promedio_Pings() => (int)pings.Average();
+        public int GetAveragePings() => (int)pings.Average();
         public int get_Actual_Ping() => Environment.TickCount - ticks;
 
         #region Zona Dispose
@@ -210,8 +210,8 @@ namespace Bot_Dofus_1._29._1.Comun.Network
                 Account = null;
                 socket = null;
                 buffer = null;
-                paquete_recibido = null;
-                paquete_enviado = null;
+                package_recibido = null;
+                package_enviado = null;
                 disposed = true;
             }
         }

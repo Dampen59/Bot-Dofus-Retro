@@ -50,10 +50,10 @@ namespace Bot_Dofus_1._29._1.Otros
             script = new ManejadorScript(this);
         }
 
-        public void conectar()
+        public void Connected()
         {
             conexion = new ClienteTcp(this);
-            conexion.conexion_Servidor(IPAddress.Parse(GlobalConf.ip_conexion), GlobalConf.puerto_conexion);
+            conexion.ConnexionServer(IPAddress.Parse(GlobalConf.ip_conexion), GlobalConf.puerto_conexion);
         }
 
         public void disconnect()
@@ -67,10 +67,10 @@ namespace Bot_Dofus_1._29._1.Otros
             cuenta_desconectada?.Invoke();
         }
 
-        public void cambiando_Al_Servidor_Juego(string ip, int puerto)
+        public void ChangingToGameServer(string ip, int puerto)
         {
-            conexion.get_Desconectar_Socket();
-            conexion.conexion_Servidor(IPAddress.Parse(ip), puerto);
+            conexion.DisconnectSocket();
+            conexion.ConnexionServer(IPAddress.Parse(ip), puerto);
         }
 
         public StateAccount Estado_Account
@@ -85,9 +85,9 @@ namespace Bot_Dofus_1._29._1.Otros
 
         public bool isOccupied() => Estado_Account != StateAccount.AWAY && Estado_Account != StateAccount.REGENERATING;
         public bool isTalking() => Estado_Account == StateAccount.BANKING || Estado_Account == StateAccount.DIALOG || Estado_Account == StateAccount.EXCHANGE || Estado_Account == StateAccount.BUYING || Estado_Account == StateAccount.SELLING;
-        public bool esta_luchando() => Estado_Account == StateAccount.FIGHTING;
-        public bool esta_recolectando() => Estado_Account == StateAccount.COLLECTING;
-        public bool esta_desplazando() => Estado_Account == StateAccount.MOVING;
+        public bool isFighting() => Estado_Account == StateAccount.FIGHTING;
+        public bool isCollecting() => Estado_Account == StateAccount.COLLECTING;
+        public bool isMoving() => Estado_Account == StateAccount.MOVING;
 
         #region Zona Dispose
         public void Dispose() => Dispose(true);

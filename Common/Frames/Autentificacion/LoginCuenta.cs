@@ -19,29 +19,29 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.LoginAccount
     public class LoginAccount : Frame
     {
         [PaqueteAtributo("HC")]
-        public void get_Key_BienvenidaAsync(ClienteTcp cliente, string paquete)
+        public void get_Key_BienvenidaAsync(ClienteTcp cliente, string package)
         {
             Account cuenta = cliente.Account;
 
             cuenta.Estado_Account = StateAccount.CONNECTED;
-            cuenta.key_bienvenida = paquete.Substring(2);
+            cuenta.key_bienvenida = package.Substring(2);
 
-            cliente.enviar_Paquete("1.30");
-            cliente.enviar_Paquete(cliente.Account.configuracion.nombre_cuenta + "\n" + Hash.encriptar_Password(cliente.Account.configuracion.password, cliente.Account.key_bienvenida));
-            cliente.enviar_Paquete("Af");
+            cliente.SendPackage("1.30");
+            cliente.SendPackage(cliente.Account.configuracion.nombre_cuenta + "\n" + Hash.encriptar_Password(cliente.Account.configuracion.password, cliente.Account.key_bienvenida));
+            cliente.SendPackage("Af");
         }
 
         [PaqueteAtributo("Ad")]
-        public void get_Apodo(ClienteTcp cliente, string paquete) => cliente.Account.apodo = paquete.Substring(2);
+        public void get_Apodo(ClienteTcp cliente, string package) => cliente.Account.apodo = package.Substring(2);
 
         [PaqueteAtributo("Af")]
-        public void get_Fila_Espera_Login(ClienteTcp cliente, string paquete) => cliente.Account.logger.log_informacion("FILA DE ESPERA", "Posición " + paquete[2] + "/" + paquete[4]);
+        public void get_Fila_Espera_Login(ClienteTcp cliente, string package) => cliente.Account.logger.log_informacion("FILA DE ESPERA", "Posición " + package[2] + "/" + package[4]);
 
         [PaqueteAtributo("AH")]
-        public void get_Servidor_Estado(ClienteTcp cliente, string paquete)
+        public void get_Servidor_Estado(ClienteTcp cliente, string package)
         {
             Account cuenta = cliente.Account;
-            string[] separado_servidores = paquete.Substring(2).Split('|');
+            string[] separado_servidores = package.Substring(2).Split('|');
             ServidorJuego servidor = cuenta.juego.servidor;
             bool primera_vez = true;
 
@@ -64,21 +64,21 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.LoginAccount
             }
 
             if(!primera_vez  && servidor.estado == EstadosServidor.CONECTADO)
-                cliente.enviar_Paquete("Ax");
+                cliente.SendPackage("Ax");
         }
 
         [PaqueteAtributo("AQ")]
-        public void get_Pregunta_Secreta(ClienteTcp cliente, string paquete)
+        public void get_Pregunta_Secreta(ClienteTcp cliente, string package)
         {
             if (cliente.Account.juego.servidor.estado == EstadosServidor.CONECTADO)
-                cliente.enviar_Paquete("Ax", true);
+                cliente.SendPackage("Ax", true);
         }
 
         [PaqueteAtributo("AxK")]
-        public void get_Servidores_Lista(ClienteTcp cliente, string paquete)
+        public void get_Servidores_Lista(ClienteTcp cliente, string package)
         {
             Account cuenta = cliente.Account;
-            string[] loc5 = paquete.Substring(3).Split('|');
+            string[] loc5 = package.Substring(3).Split('|');
             int contador = 1;
             bool seleccionado = false;
 
@@ -95,20 +95,20 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.LoginAccount
                         cuenta.juego.personaje.evento_Servidor_Seleccionado();
                     }
                     else
-                        cuenta.logger.log_Error("LOGIN", "Servidor no accesible cuando este accesible se re-conectara");
+                        cuenta.logger.log_Error("LOGIN", "Servidor no accesible cuando este accesible se re-Connecteda");
                 }
                 contador++;
             }
 
             if(seleccionado)
-                cliente.enviar_Paquete($"AX{cuenta.juego.servidor.id}", true);
+                cliente.SendPackage($"AX{cuenta.juego.servidor.id}", true);
         }
 
         [PaqueteAtributo("AXK")]
-        public void get_Seleccion_Servidor(ClienteTcp cliente, string paquete)
+        public void get_Seleccion_Servidor(ClienteTcp cliente, string package)
         {
-            cliente.Account.tiquet_game = paquete.Substring(14);
-            cliente.Account.cambiando_Al_Servidor_Juego(Hash.desencriptar_Ip(paquete.Substring(3, 8)), Hash.desencriptar_Puerto(paquete.Substring(11, 3).ToCharArray()));
+            cliente.Account.tiquet_game = package.Substring(14);
+            cliente.Account.ChangingToGameServer(Hash.desencriptar_Ip(package.Substring(3, 8)), Hash.desencriptar_Puerto(package.Substring(11, 3).ToCharArray()));
         }
     }
 }

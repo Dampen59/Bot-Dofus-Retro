@@ -99,9 +99,9 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Personaje
         public void evento_Dialogo_Acabado() => dialogo_npc_acabado?.Invoke();
         #endregion
 
-        public void actualizar_Caracteristicas(string paquete)
+        public void actualizar_Caracteristicas(string package)
         {
-            string[] _loc3 = paquete.Substring(2).Split('|');
+            string[] _loc3 = package.Substring(2).Split('|');
             string[] _loc5 = _loc3[0].Split(',');
 
             caracteristicas.experiencia_actual = double.Parse(_loc5[0]);
@@ -182,11 +182,11 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Personaje
             caracteristicas_actualizadas?.Invoke();
         }
 
-        public void actualizar_Hechizos(string paquete)
+        public void actualizar_Hechizos(string package)
         {
             hechizos.Clear();
 
-            string[] limitador = paquete.Split(';'), separador;
+            string[] limitador = package.Split(';'), separador;
             Hechizo hechizo;
             short hechizo_id;
 
@@ -227,7 +227,7 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Personaje
             try
             {
                 if(cuenta.Estado_Account != StateAccount.DISCONNECTED)
-                    cuenta.conexion.enviar_Paquete("ping");
+                    cuenta.conexion.SendPackage("ping");
             }
             catch (Exception e)
             {

@@ -99,7 +99,7 @@ namespace Bot_Dofus_1._29._1.Forms
             }
         }
 
-        private void conectarToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ConnectedToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (listViewAccounts.SelectedItems.Count > 0 && listViewAccounts.FocusedItem != null)
             {
@@ -112,7 +112,7 @@ namespace Bot_Dofus_1._29._1.Forms
         }
 
         public List<AccountConf> get_Accounts_Cargadas() => cuentas_cargadas;
-        private void listViewAccounts_MouseDoubleClick(object sender, MouseEventArgs e) => conectarToolStripMenuItem.PerformClick();
+        private void listViewAccounts_MouseDoubleClick(object sender, MouseEventArgs e) => ConnectedToolStripMenuItem.PerformClick();
 
         private void modificar_Account(object sender, EventArgs e)
         {

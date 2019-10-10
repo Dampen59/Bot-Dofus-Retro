@@ -42,12 +42,12 @@ namespace Bot_Dofus_1._29._1.Otros.Mapas
             interactivos = new ConcurrentDictionary<int, ObjetoInteractivo>();
         }
 
-        public void get_Actualizar_Mapa(string paquete)
+        public void get_Actualizar_Mapa(string package)
         {
             entidades.Clear();
             interactivos.Clear();
 
-            string[] _loc3 = paquete.Split('|');
+            string[] _loc3 = package.Split('|');
             id = int.Parse(_loc3[0]);
 
             FileInfo mapa_archivo = new FileInfo("mapas/" + id + ".xml");

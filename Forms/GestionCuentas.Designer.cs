@@ -41,7 +41,7 @@
             this.ColumnaNombreServidor = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ColumnaNombrePersonaje = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.contextMenuStripFormAccounts = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.conectarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ConnectedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.modificarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cuentaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contraseñaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -167,8 +167,8 @@
             this.label_informacionClickAccounts.Name = "label_informacionClickAccounts";
             this.label_informacionClickAccounts.Size = new System.Drawing.Size(393, 40);
             this.label_informacionClickAccounts.TabIndex = 1;
-            this.label_informacionClickAccounts.Text = "Haz clic derecho para conectar/modificar/eliminar una cuenta\r\nDoble clic encima d" +
-    "e una cuenta para conectarla";
+            this.label_informacionClickAccounts.Text = "Haz clic derecho para Connected/modificar/eliminar una cuenta\r\nDoble clic encima d" +
+    "e una cuenta para Connectedla";
             this.label_informacionClickAccounts.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // listViewAccounts
@@ -210,19 +210,19 @@
             // contextMenuStripFormAccounts
             // 
             this.contextMenuStripFormAccounts.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.conectarToolStripMenuItem,
+            this.ConnectedToolStripMenuItem,
             this.modificarToolStripMenuItem,
             this.eliminarToolStripMenuItem});
             this.contextMenuStripFormAccounts.Name = "contextMenuStripFormAccounts";
             this.contextMenuStripFormAccounts.Size = new System.Drawing.Size(126, 70);
             // 
-            // conectarToolStripMenuItem
+            // ConnectedToolStripMenuItem
             // 
-            this.conectarToolStripMenuItem.Image = global::Bot_Dofus_1._29._1.Properties.Resources.flecha_direccion_izquierda;
-            this.conectarToolStripMenuItem.Name = "conectarToolStripMenuItem";
-            this.conectarToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
-            this.conectarToolStripMenuItem.Text = "Conectar";
-            this.conectarToolStripMenuItem.Click += new System.EventHandler(this.conectarToolStripMenuItem_Click);
+            this.ConnectedToolStripMenuItem.Image = global::Bot_Dofus_1._29._1.Properties.Resources.flecha_direccion_izquierda;
+            this.ConnectedToolStripMenuItem.Name = "ConnectedToolStripMenuItem";
+            this.ConnectedToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.ConnectedToolStripMenuItem.Text = "Conectar";
+            this.ConnectedToolStripMenuItem.Click += new System.EventHandler(this.ConnectedToolStripMenuItem_Click);
             // 
             // modificarToolStripMenuItem
             // 
@@ -649,7 +649,7 @@
         private System.Windows.Forms.ColumnHeader ColumnaNombreAccount;
         private System.Windows.Forms.ColumnHeader ColumnaNombreServidor;
         private System.Windows.Forms.ColumnHeader ColumnaNombrePersonaje;
-        private System.Windows.Forms.ToolStripMenuItem conectarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ConnectedToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem eliminarToolStripMenuItem;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.ToolStripMenuItem modificarToolStripMenuItem;

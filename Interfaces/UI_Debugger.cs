@@ -16,25 +16,25 @@ namespace Bot_Dofus_1._29._1.Interfaces
 {
     public partial class UI_Debugger : UserControl
     {
-        private List<string> lista_paquetes;
+        private List<string> lista_packages;
 
         public UI_Debugger()
         {
             InitializeComponent();
-            lista_paquetes = new List<string>();
+            lista_packages = new List<string>();
         }
 
-        public void paquete_Recibido(string paquete)
+        public void package_Recibido(string package)
         {
-            agregar_Nuevo_Paquete(paquete, false);
+            agregar_Nuevo_Paquete(package, false);
         }
 
-        public void paquete_Enviado(string paquete)
+        public void package_Enviado(string package)
         {
-            agregar_Nuevo_Paquete(paquete, true);
+            agregar_Nuevo_Paquete(package, true);
         }
 
-        private void agregar_Nuevo_Paquete(string paquete, bool enviado)
+        private void agregar_Nuevo_Paquete(string package, bool enviado)
         {
             if (!checkbox_debugger.Checked)
                 return;
@@ -43,17 +43,17 @@ namespace Bot_Dofus_1._29._1.Interfaces
             {
                 BeginInvoke((Action)(() =>
                 {
-                    if (lista_paquetes.Count == 200)
+                    if (lista_packages.Count == 200)
                     {
-                        lista_paquetes.RemoveAt(0);
+                        lista_packages.RemoveAt(0);
                         listView.Items.RemoveAt(0);
                     }
 
-                    lista_paquetes.Add(paquete);
+                    lista_packages.Add(package);
 
                     ListViewItem objeto_lista = listView.Items.Add(DateTime.Now.ToString("HH:mm:ss"));
                     objeto_lista.BackColor = enviado ? Color.FromArgb(242, 174, 138) : Color.FromArgb(170, 196, 237);
-                    objeto_lista.SubItems.Add(paquete);
+                    objeto_lista.SubItems.Add(package);
                 }));
             }
             catch { }
@@ -65,7 +65,7 @@ namespace Bot_Dofus_1._29._1.Interfaces
             if (listView.FocusedItem?.Index == -1 || listView.SelectedItems.Count == 0)
                 return;
 
-            string paquete = lista_paquetes[listView.FocusedItem.Index];
+            string package = lista_packages[listView.FocusedItem.Index];
             treeView.Nodes.Clear();
 
             if (PaqueteRecibido.metodos.Count == 0)
@@ -73,10 +73,10 @@ namespace Bot_Dofus_1._29._1.Interfaces
 
             foreach (PaqueteDatos metodo in PaqueteRecibido.metodos)
             {
-                if (paquete.StartsWith(metodo.nombre_paquete))
+                if (package.StartsWith(metodo.nombre_package))
                 {
-                    treeView.Nodes.Add(metodo.nombre_paquete);
-                    treeView.Nodes[0].Nodes.Add(paquete.Remove(0, metodo.nombre_paquete.Length));
+                    treeView.Nodes.Add(metodo.nombre_package);
+                    treeView.Nodes[0].Nodes.Add(package.Remove(0, metodo.nombre_package.Length));
                     treeView.Nodes[0].Expand();
                     break;
                 }
@@ -91,7 +91,7 @@ namespace Bot_Dofus_1._29._1.Interfaces
 
         private void button_limpiar_logs_debugger_Click(object sender, EventArgs e)
         {
-            lista_paquetes.Clear();
+            lista_packages.Clear();
             listView.Items.Clear();
         }
     }

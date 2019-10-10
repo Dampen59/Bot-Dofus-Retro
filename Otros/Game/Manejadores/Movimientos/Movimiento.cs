@@ -125,13 +125,13 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Entidades.Manejadores.Movimientos
                 return ResultadoMovimientos.MISMA_CELDA;
 
             actual_path = path_temporal;
-            enviar_Paquete_Movimiento();
+            SendPackage_Movimiento();
             return ResultadoMovimientos.EXITO;
         }
 
         public async Task get_Mover_Celda_Pelea(KeyValuePair<short, MovimientoNodo>? nodo)
         {
-            if (!cuenta.esta_luchando())
+            if (!cuenta.isFighting())
                 return;
 
             if (nodo == null || nodo.Value.Value.camino.celdas_accesibles.Count == 0)
@@ -143,7 +143,7 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Entidades.Manejadores.Movimientos
             nodo.Value.Value.camino.celdas_accesibles.Insert(0, cuenta.juego.pelea.jugador_luchador.celda.id);
             List<Celda> lista_celdas = nodo.Value.Value.camino.celdas_accesibles.Select(c => mapa.get_Celda_Id(c)).ToList();
 
-            await cuenta.conexion.enviar_Paquete_Async("GA001" + PathFinderUtil.get_Pathfinding_Limpio(lista_celdas), false);
+            await cuenta.conexion.SendPackage_Async("GA001" + PathFinderUtil.get_Pathfinding_Limpio(lista_celdas), false);
             personaje.evento_Personaje_Pathfinding_Minimapa(lista_celdas);
         }
 
@@ -162,13 +162,13 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Entidades.Manejadores.Movimientos
             }
         }
 
-        private void enviar_Paquete_Movimiento()
+        private void SendPackage_Movimiento()
         {
             if (cuenta.Estado_Account == StateAccount.REGENERATING)
-                cuenta.conexion.enviar_Paquete("eU1", true);
+                cuenta.conexion.SendPackage("eU1", true);
 
             string path_string = PathFinderUtil.get_Pathfinding_Limpio(actual_path);
-            cuenta.conexion.enviar_Paquete("GA001" + path_string, true);
+            cuenta.conexion.SendPackage("GA001" + path_string, true);
             personaje.evento_Personaje_Pathfinding_Minimapa(actual_path);
         }
 
@@ -184,7 +184,7 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Entidades.Manejadores.Movimientos
                 if (cuenta == null || cuenta.Estado_Account == StateAccount.DISCONNECTED)
                     return;
 
-                cuenta.conexion.enviar_Paquete("GKK" + tipo_gkk);
+                cuenta.conexion.SendPackage("GKK" + tipo_gkk);
                 personaje.celda = celda_destino;
             }
 

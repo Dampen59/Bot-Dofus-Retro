@@ -70,7 +70,7 @@ namespace Bot_Dofus_1._29._1.Otros.Peleas
 
         private async Task get_Procesar_hechizo()
         {
-            if (Account?.esta_luchando() == false || configuracion == null)
+            if (Account?.isFighting() == false || configuracion == null)
                 return;
 
             if (hechizo_lanzado_index >= configuracion.hechizos.Count)
@@ -148,7 +148,7 @@ namespace Bot_Dofus_1._29._1.Otros.Peleas
 
         private async Task get_Procesar_Siguiente_Hechizo(HechizoPelea hechizo_actual)
         {
-            if (Account?.esta_luchando() == false)
+            if (Account?.isFighting() == false)
                 return;
 
             hechizo_actual.lanzamientos_restantes = hechizo_actual.lanzamientos_x_turno;
@@ -166,7 +166,7 @@ namespace Bot_Dofus_1._29._1.Otros.Peleas
                 await get_Mover(false, pelea.get_Obtener_Enemigo_Mas_Cercano());
 
             pelea.get_Turno_Acabado();
-            Account.conexion.enviar_Paquete("Gt");
+            Account.conexion.SendPackage("Gt");
         }
 
         public async Task get_Mover(bool cercano, Luchadores enemigo)

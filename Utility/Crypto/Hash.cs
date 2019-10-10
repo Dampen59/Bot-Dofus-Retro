@@ -29,14 +29,14 @@ namespace Bot_Dofus_1._29._1.Utilidades.Criptografia
             return str.ToString();
         }
 
-        public static string desencriptar_Ip(string paquete)
+        public static string desencriptar_Ip(string package)
         {
             StringBuilder ip = new StringBuilder();
 
             for (int i = 0; i < 8; i += 2)
             {
-                int ascii1 = paquete[i] - 48;
-                int ascii2 = paquete[i + 1] - 48;
+                int ascii1 = package[i] - 48;
+                int ascii2 = package[i + 1] - 48;
                 
                 if (i != 0)
                     ip.Append('.');

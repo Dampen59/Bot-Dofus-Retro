@@ -19,16 +19,16 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
     class NPCFrame : Frame
     {
         [PaqueteAtributo("DCK")]
-        public void get_Dialogo_Creado(ClienteTcp cliente, string paquete)
+        public void get_Dialogo_Creado(ClienteTcp cliente, string package)
         {
             Account cuenta = cliente.Account;
 
             cuenta.Estado_Account = StateAccount.DIALOG;
-            cuenta.juego.personaje.hablando_npc_id = sbyte.Parse(paquete.Substring(3));
+            cuenta.juego.personaje.hablando_npc_id = sbyte.Parse(package.Substring(3));
         }
 
         [PaqueteAtributo("DQ")]
-        public void get_Lista_Respuestas(ClienteTcp cliente, string paquete)
+        public void get_Lista_Respuestas(ClienteTcp cliente, string package)
         {
             Account cuenta = cliente.Account;
 
@@ -40,7 +40,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
 
             if (npc != null)
             {
-                string[] pregunta_separada = paquete.Substring(2).Split('|');
+                string[] pregunta_separada = package.Substring(2).Split('|');
                 string[] respuestas_disponibles = pregunta_separada[1].Split(';');
 
                 npc.pregunta = short.Parse(pregunta_separada[0].Split(';')[0]);

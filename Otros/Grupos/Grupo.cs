@@ -38,15 +38,15 @@ namespace Bot_Dofus_1._29._1.Otros.Grupos
 
         public void eliminar_Miembro(Account miembro) => miembros.Remove(miembro);
 
-        public void conectar_Accounts()
+        public void Connected_Accounts()
         {
-            lider.conectar();
+            lider.Connected();
 
             foreach (Account miembro in miembros)
-                miembro.conectar();
+                miembro.Connected();
         }
 
-        public void desconectar_Accounts()
+        public void desConnected_Accounts()
         {
             foreach (Account miembro in miembros)
                 miembro.disconnect();

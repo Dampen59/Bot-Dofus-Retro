@@ -27,16 +27,16 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Transporte
                 Type tipo_string = Type.GetType(tipo.DeclaringType.FullName);
 
                 object instancia = Activator.CreateInstance(tipo_string, null);
-                metodos.Add(new PaqueteDatos(instancia, atributo.paquete, tipo));
+                metodos.Add(new PaqueteDatos(instancia, atributo.package, tipo));
             }
         }
 
-        public static void Recibir(ClienteTcp cliente, string paquete)
+        public static void Recibir(ClienteTcp cliente, string package)
         {
-            PaqueteDatos metodo = metodos.Find(m => paquete.StartsWith(m.nombre_paquete));
+            PaqueteDatos metodo = metodos.Find(m => package.StartsWith(m.nombre_package));
 
             if (metodo != null)
-                metodo.informacion.Invoke(metodo.instancia, new object[2] { cliente, paquete });
+                metodo.informacion.Invoke(metodo.instancia, new object[2] { cliente, package });
         }
     }
 }

@@ -36,7 +36,7 @@
             this.treeView = new System.Windows.Forms.TreeView();
             this.listView = new System.Windows.Forms.ListView();
             this.fecha = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.paquete = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.package = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -135,7 +135,7 @@
             // 
             this.listView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.fecha,
-            this.paquete});
+            this.package});
             this.listView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listView.FullRowSelect = true;
             this.listView.Location = new System.Drawing.Point(3, 53);
@@ -153,10 +153,10 @@
             this.fecha.Text = "Fecha";
             this.fecha.Width = 70;
             // 
-            // paquete
+            // package
             // 
-            this.paquete.Text = "Paquete";
-            this.paquete.Width = 260;
+            this.package.Text = "Paquete";
+            this.package.Width = 260;
             // 
             // UI_Debugger
             // 
@@ -190,6 +190,6 @@
         private System.Windows.Forms.TreeView treeView;
         private System.Windows.Forms.ListView listView;
         private System.Windows.Forms.ColumnHeader fecha;
-        private System.Windows.Forms.ColumnHeader paquete;
+        private System.Windows.Forms.ColumnHeader package;
     }
 }

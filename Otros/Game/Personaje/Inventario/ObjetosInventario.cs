@@ -27,9 +27,9 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Personaje.Inventario
         public TipoObjetosInventario tipo_inventario { get; private set; } = TipoObjetosInventario.DESCONOCIDO;
         private readonly XElement archivo_objeto;
 
-        public ObjetosInventario(string paquete)
+        public ObjetosInventario(string package)
         {
-            string[] separador = paquete.Split('~');
+            string[] separador = package.Split('~');
 
             id_inventario = Convert.ToUInt32(separador[0], 16);
             id_modelo = Convert.ToInt32(separador[1], 16);

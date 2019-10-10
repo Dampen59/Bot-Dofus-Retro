@@ -77,15 +77,15 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts
             manejador_script.Set_Global("api", api);
 
             //no necesita coroutines
-            manejador_script.Set_Global("personaje", api.personaje);
+            manejador_script.Set_Global("character", api.personaje);
 
-            manejador_script.Set_Global("mensaje", new Action<string>((mensaje) => Account.logger.log_informacion("SCRIPT", mensaje)));
-            manejador_script.Set_Global("mensajeError", new Action<string>((mensaje) => Account.logger.log_Error("SCRIPT", mensaje)));
+            manejador_script.Set_Global("message", new Action<string>((mensaje) => Account.logger.log_informacion("SCRIPT", mensaje)));
+            manejador_script.Set_Global("[Error]", new Action<string>((mensaje) => Account.logger.log_Error("SCRIPT", mensaje)));
             manejador_script.Set_Global("detenerScript", new Action(() => detener_Script()));
-            manejador_script.Set_Global("delayFuncion", new Action<int>((ms) => manejar_acciones.enqueue_Accion(new DelayAccion(ms), true)));
+            manejador_script.Set_Global("delayFunction", new Action<int>((ms) => manejar_acciones.enqueue_Accion(new DelayAccion(ms), true)));
 
-            manejador_script.Set_Global("estaRecolectando", (Func<bool>)Account.esta_recolectando);
-            manejador_script.Set_Global("estaDialogando", (Func<bool>)Account.esta_dialogando);
+            manejador_script.Set_Global("isCollecting", (Func<bool>)Account.isCollecting);
+            manejador_script.Set_Global("isTalking", (Func<bool>)Account.isTalking);
 
             manejador_script.script.DoString(Properties.Resources.api_ayuda);
         }

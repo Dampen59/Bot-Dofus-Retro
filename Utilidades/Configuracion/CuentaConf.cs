@@ -46,6 +46,35 @@ namespace Bot_Dofus_1._29._1.Utilidades.Configuracion
             }
         }
 
-        public int get_Servidor_Id() => servidor.Equals("Eratz") ? 601 : 602;
+        public int get_Servidor_Id()
+        {
+            switch (servidor)
+            {
+                case "Eratz":
+                    return 601;
+                case "Henual":
+                    return 602;
+                case "Nabur":
+                    return 603;
+                case "Arty":
+                    return 604;
+                case "Algathe":
+                    return 605;
+                case "Hogmeiser":
+                    return 606;
+                case "Droupik":
+                    return 607;
+                case "Ayuto":
+                    return 608;
+                case "Bilby":
+                    return 609;
+                case "Clustus":
+                    return 610;
+                default:
+                    return 601;
+                    break;
+            }
+        }
+        //603: 'Nabur', 604: 'Arty', 605: 'Algathe', 606: 'Hogmeiser', 607: 'Droupik', 608: 'Ayuto', 609: 'Bilby', 610: 'Clustus'
     }
 }

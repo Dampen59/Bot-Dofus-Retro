@@ -480,7 +480,15 @@
             this.comboBox_Servidor.FormattingEnabled = true;
             this.comboBox_Servidor.Items.AddRange(new object[] {
             "Eratz",
-            "Henual"});
+            "Henual",
+            "Clustus",
+            "Nabur",
+            "Arty",
+            "Agathe",
+            "Hogmeiser",
+            "Droupik",
+            "Bilby",
+            "Ayuto"});
             this.comboBox_Servidor.Location = new System.Drawing.Point(3, 16);
             this.comboBox_Servidor.Name = "comboBox_Servidor";
             this.comboBox_Servidor.Size = new System.Drawing.Size(299, 25);

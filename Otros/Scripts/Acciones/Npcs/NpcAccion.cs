@@ -24,7 +24,7 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts.Acciones.Npcs
 
         internal override Task<ResultadosAcciones> proceso(Account cuenta)
         {
-            if (cuenta.esta_ocupado())
+            if (cuenta.isOccupied())
                 return resultado_fallado;
 
             Otros.Mapas.Entidades.Npcs npc = null;

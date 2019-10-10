@@ -92,7 +92,7 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts
 
         public void activar_Script()
         {
-            if (activado || Account.esta_ocupado())
+            if (activado || Account.isOccupied())
                 return;
 
             activado = true;
@@ -429,7 +429,7 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts
 
                     if (Account.Estado_Account != StateAccount.REGENERATING)
                     {
-                        if (Account.esta_ocupado())
+                        if (Account.isOccupied())
                             return;
 
                         Account.conexion.enviar_Paquete("eU1", true);

@@ -112,7 +112,7 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Personaje.Inventario
 
         public bool equipar_Objeto(ObjetosInventario objeto)
         {
-            if (objeto == null || objeto.cantidad == 0 || cuenta.esta_ocupado())
+            if (objeto == null || objeto.cantidad == 0 || cuenta.isOccupied())
             {
                 cuenta.logger.log_Error("INVENTARIO", $"El objeto {objeto.nombre} no se puede equipar");
                 return false;

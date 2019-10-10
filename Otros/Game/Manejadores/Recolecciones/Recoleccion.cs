@@ -52,7 +52,7 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Entidades.Manejadores.Recolecciones
 
         public bool get_Recolectar(List<short> elementos)
         {
-            if (cuenta.esta_ocupado() || interactivo_recolectando != null)
+            if (cuenta.isOccupied() || interactivo_recolectando != null)
                 return false;
 
             foreach (KeyValuePair<short, ObjetoInteractivo> kvp in get_Interactivos_Utilizables(elementos))

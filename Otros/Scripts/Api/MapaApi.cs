@@ -21,7 +21,7 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts.Api
 
         public bool cambiarMapa(string posicion)
         {
-            if (cuenta.esta_ocupado())
+            if (cuenta.isOccupied())
                 return false;
 
             if (!CambiarMapaAccion.TryParse(posicion, out CambiarMapaAccion accion))

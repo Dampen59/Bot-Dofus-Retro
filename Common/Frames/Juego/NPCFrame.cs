@@ -32,7 +32,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
         {
             Account cuenta = cliente.Account;
 
-            if (!cuenta.esta_dialogando())
+            if (!cuenta.isTalking())
                 return;
 
             IEnumerable<Npcs> npcs = cuenta.juego.mapa.lista_npcs();

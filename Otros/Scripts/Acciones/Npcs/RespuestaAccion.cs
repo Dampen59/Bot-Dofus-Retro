@@ -13,7 +13,7 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts.Acciones.Npcs
 
         internal override Task<ResultadosAcciones> proceso(Account cuenta)
         {
-            if (!cuenta.esta_dialogando())
+            if (!cuenta.isTalking())
                 return resultado_fallado;
 
             IEnumerable<Otros.Mapas.Entidades.Npcs> npcs = cuenta.juego.mapa.lista_npcs();

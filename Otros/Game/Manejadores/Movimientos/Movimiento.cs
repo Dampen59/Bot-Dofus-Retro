@@ -63,7 +63,7 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Entidades.Manejadores.Movimientos
 
         public bool get_Cambiar_Mapa(MapaTeleportCeldas direccion, Celda celda)
         {
-            if (cuenta.esta_ocupado() || personaje.inventario.porcentaje_pods >= 100)
+            if (cuenta.isOccupied() || personaje.inventario.porcentaje_pods >= 100)
                 return false;
 
             if (!get_Puede_Cambiar_Mapa(direccion, celda))
@@ -74,7 +74,7 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Entidades.Manejadores.Movimientos
 
         public bool get_Cambiar_Mapa(MapaTeleportCeldas direccion)
         {
-            if (cuenta.esta_ocupado())
+            if (cuenta.isOccupied())
                 return false;
 
             List<Celda> celdas_teleport = cuenta.juego.mapa.celdas.Where(celda => celda.tipo == TipoCelda.CELDA_TELEPORT).Select(celda => celda).ToList();
@@ -98,7 +98,7 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Entidades.Manejadores.Movimientos
             if (celda_destino.id < 0 || celda_destino.id > mapa.celdas.Length)
                 return ResultadoMovimientos.FALLO;
 
-            if (cuenta.esta_ocupado() || actual_path != null || personaje.inventario.porcentaje_pods >= 100)
+            if (cuenta.isOccupied() || actual_path != null || personaje.inventario.porcentaje_pods >= 100)
                 return ResultadoMovimientos.FALLO;
 
             if (celda_destino.id == personaje.celda.id)

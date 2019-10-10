@@ -4,4 +4,6 @@
 
 /obj/Debug
 /.vs/Bot_Dofus_1.29.1/v16/Server/sqlite3
-/.vs/Bot_Dofus_1.29.1/v16/.suo
+/bin/Debug/peleas
+/.vs
+/bin/Debug

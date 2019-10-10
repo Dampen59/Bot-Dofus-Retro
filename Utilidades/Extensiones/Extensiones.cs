@@ -5,33 +5,33 @@ namespace Bot_Dofus_1._29._1.Utilidades.Extensiones
 {
     public static class Extensiones
     {
-        public static string cadena_Amigable(this EstadoCuenta estado)
+        public static string cadena_Amigable(this AccountStatus estado)
         {
             switch (estado)
             {
-                case EstadoCuenta.CONECTANDO:
+                case AccountStatus.CONECTANDO:
                     return "Conectando";
-                case EstadoCuenta.DESCONECTADO:
+                case AccountStatus.Disconnected:
                     return "Desconectado";
-                case EstadoCuenta.INTERCAMBIO:
+                case AccountStatus.Exchanging:
                     return "Intercambiando";
-                case EstadoCuenta.LUCHANDO:
+                case AccountStatus.Fighting:
                     return "Combate";
-                case EstadoCuenta.RECOLECTANDO:
+                case AccountStatus.Collecting:
                     return "Recolectando";
-                case EstadoCuenta.MOVIMIENTO:
+                case AccountStatus.Moving:
                     return "Desplazando";
-                case EstadoCuenta.CONECTADO_INACTIVO:
+                case AccountStatus.ConnectedInactive:
                     return "Inactivo";
-                case EstadoCuenta.ALMACENAMIENTO:
+                case AccountStatus.Storing:
                     return "Almacenamiento";
-                case EstadoCuenta.DIALOGANDO:
+                case AccountStatus.Dialoguing:
                     return "Dialogando";
-                case EstadoCuenta.COMPRANDO:
+                case AccountStatus.Buying:
                     return "Comprando";
-                case EstadoCuenta.VENDIENDO:
+                case AccountStatus.Selling:
                     return "Vendiendo";
-                case EstadoCuenta.REGENERANDO:
+                case AccountStatus.Regenerating:
                     return "Regenerando Vida";
                 default:
                     return "-";

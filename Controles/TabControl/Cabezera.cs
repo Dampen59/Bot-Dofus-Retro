@@ -10,7 +10,7 @@ namespace Bot_Dofus_1._29._1.Controles.TabControl
         public Image imagen;
         public bool esta_seleccionada;
 
-        public string propiedad_Cuenta
+        public string propiedad_Account
         {
             get => cuenta;
             set

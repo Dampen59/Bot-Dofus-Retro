@@ -26,9 +26,9 @@ using System.Threading.Tasks;
 
 namespace Bot_Dofus_1._29._1.Otros.Scripts
 {
-    public class ScriptHandler : IDisposable
+    public class ManejadorScript : IDisposable
     {
-        private Account Account;
+        private Cuenta cuenta;
         private LuaManejadorScript manejador_script;
         public ManejadorAcciones manejar_acciones { get; private set; }
         private EstadoScript estado_script;
@@ -46,18 +46,18 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts
         public event Action evento_script_iniciado;
         public event Action<string> evento_script_detenido;
 
-        public ScriptHandler(Account _account)
+        public ManejadorScript(Cuenta _cuenta)
         {
-            Account = _account;
+            cuenta = _cuenta;
             manejador_script = new LuaManejadorScript();
-            manejar_acciones = new ManejadorAcciones(_account, manejador_script);
+            manejar_acciones = new ManejadorAcciones(cuenta, manejador_script);
             banderas = new List<Bandera>();
-            api = new API(_account, manejar_acciones);
+            api = new API(cuenta, manejar_acciones);
 
             manejar_acciones.evento_accion_normal += get_Accion_Finalizada;
             manejar_acciones.evento_accion_personalizada += get_Accion_Personalizada_Finalizada;
-            Account.Game.Fight.pelea_creada += get_Pelea_Creada;
-            Account.Game.Fight.pelea_acabada += get_Pelea_Acabada;
+            cuenta.juego.pelea.pelea_creada += get_Pelea_Creada;
+            cuenta.juego.pelea.pelea_acabada += get_Pelea_Acabada;
         }
 
         public void get_Desde_Archivo(string ruta_archivo)
@@ -77,22 +77,22 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts
             manejador_script.Set_Global("api", api);
 
             //no necesita coroutines
-            manejador_script.Set_Global("Character", api.personaje);
+            manejador_script.Set_Global("personaje", api.personaje);
 
-            manejador_script.Set_Global("mensaje", new Action<string>((mensaje) => Account.Logger.log_informacion("SCRIPT", mensaje)));
-            manejador_script.Set_Global("mensajeError", new Action<string>((mensaje) => Account.Logger.log_Error("SCRIPT", mensaje)));
-            manejador_script.Set_Global("detenerScript", new Action(() => StopScript()));
+            manejador_script.Set_Global("mensaje", new Action<string>((mensaje) => cuenta.logger.log_informacion("SCRIPT", mensaje)));
+            manejador_script.Set_Global("mensajeError", new Action<string>((mensaje) => cuenta.logger.log_Error("SCRIPT", mensaje)));
+            manejador_script.Set_Global("detenerScript", new Action(() => detener_Script()));
             manejador_script.Set_Global("delayFuncion", new Action<int>((ms) => manejar_acciones.enqueue_Accion(new DelayAccion(ms), true)));
 
-            manejador_script.Set_Global("estaRecolectando", (Func<bool>)Account.IsCollecting);
-            manejador_script.Set_Global("estaDialogando", (Func<bool>)Account.IsDialoguing);
+            manejador_script.Set_Global("estaRecolectando", (Func<bool>)cuenta.esta_recolectando);
+            manejador_script.Set_Global("estaDialogando", (Func<bool>)cuenta.esta_dialogando);
 
             manejador_script.script.DoString(Properties.Resources.api_ayuda);
         }
 
         public void activar_Script()
         {
-            if (activado || Account.IsBusy())
+            if (activado || cuenta.esta_ocupado())
                 return;
 
             activado = true;
@@ -101,7 +101,7 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts
             iniciar_Script();
         }
 
-        public void StopScript(string mensaje = "script pausado")
+        public void detener_Script(string mensaje = "script pausado")
         {
             if (!activado)
                 return;
@@ -127,7 +127,7 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts
                 {
                     IEnumerable<int> test = mapas_dung.Values.Where(m => m.Type == DataType.Number).Select(n => (int)n.Number);
 
-                    if (test.Contains(Account.Game.Map.id))
+                    if (test.Contains(cuenta.juego.mapa.id))
                         es_dung = true;
                 }
 
@@ -139,16 +139,16 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts
                 IEnumerable<Table> entradas = manejador_script.get_Entradas_Funciones(estado_script.ToString().ToLower());
                 if (entradas == null)
                 {
-                    StopScript($"La función {estado_script.ToString().ToLower()} no existe");
+                    detener_Script($"La función {estado_script.ToString().ToLower()} no existe");
                     return;
                 }
 
                 foreach (Table entrada in entradas)
                 {
-                    if (entrada["Map"] == null)
+                    if (entrada["mapa"] == null)
                         continue;
 
-                    if (!Account.Game.Map.esta_En_Mapa(entrada["Map"].ToString()))
+                    if (!cuenta.juego.mapa.esta_En_Mapa(entrada["mapa"].ToString()))
                         continue;
 
                     procesar_Entradas(entrada);
@@ -156,12 +156,12 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts
                     return;
                 }
 
-                StopScript("Ninguna acción mas encontrada en el script");
+                detener_Script("Ninguna acción mas encontrada en el script");
             }
             catch (Exception ex)
             {
-                Account.Logger.log_Error("SCRIPT", ex.ToString());
-                StopScript();
+                cuenta.logger.log_Error("SCRIPT", ex.ToString());
+                detener_Script();
             }
         });
 
@@ -192,9 +192,9 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts
 
         private async Task verificar_Muerte()
         {
-            if (Account.Game.Character.caracteristicas.energia_actual == 0)
+            if (cuenta.juego.personaje.caracteristicas.energia_actual == 0)
             {
-                Account.Logger.log_informacion("SCRIPT", "El Character esta muerto, pasando a modo fenix");
+                cuenta.logger.log_informacion("SCRIPT", "El personaje esta muerto, pasando a modo fenix");
                 estado_script = EstadoScript.FENIX;
             }
             await Task.Delay(50);
@@ -202,7 +202,7 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts
 
         private void verificar_Maximos_Pods()
         {
-            if (!get_Maximos_Pods())//si no tiene el limite de pods no verificada por cada Map
+            if (!get_Maximos_Pods())//si no tiene el limite de pods no verificada por cada mapa
                 return;
 
             if (!es_dung && estado_script != EstadoScript.BANCO)
@@ -210,7 +210,7 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts
                 if (!corriendo)
                     return;
 
-                Account.Logger.log_informacion("SCRIPT", "Inventario lleno, pasando al modo banco");
+                cuenta.logger.log_informacion("SCRIPT", "Inventario lleno, pasando al modo banco");
                 estado_script = EstadoScript.BANCO;
             }
         }
@@ -218,7 +218,7 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts
         private bool get_Maximos_Pods()
         {
             int maxPods = manejador_script.get_Global_Or("MAXIMOS_PODS", DataType.Number, 90);
-            return Account.Game.Character.inventario.porcentaje_pods >= maxPods;
+            return cuenta.juego.personaje.inventario.porcentaje_pods >= maxPods;
         }
 
         private void procesar_Entradas(Table valor)
@@ -253,7 +253,7 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts
                 banderas.Add(new CambiarMapa(bandera.String));
 
             if (banderas.Count == 0)
-                StopScript("no se ha encontrado ninguna acción en este Map");
+                detener_Script("no se ha encontrado ninguna acción en este mapa");
         }
 
         private void procesar_Actual_Entrada(AccionesScript tiene_accion_disponible = null)
@@ -294,7 +294,7 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts
             if (accion == null)
                 return;
 
-            if (Account.Game.Handler.recoleccion.get_Puede_Recolectar(accion.elementos))
+            if (cuenta.juego.manejador.recoleccion.get_Puede_Recolectar(accion.elementos))
                 manejar_acciones.enqueue_Accion(accion, true);
             else
                 procesar_Actual_Bandera();
@@ -312,17 +312,17 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts
                     if (etg.Type != DataType.Number)
                         continue;
 
-                    if (Account.Game.Character.get_Tiene_Skill_Id((int)etg.Number))
+                    if (cuenta.juego.personaje.get_Tiene_Skill_Id((int)etg.Number))
                         recursos_id.Add((short)etg.Number);
                 }
             }
 
             if (recursos_id.Count == 0)
-                recursos_id.AddRange(Account.Game.Character.get_Skills_Recoleccion_Disponibles());
+                recursos_id.AddRange(cuenta.juego.personaje.get_Skills_Recoleccion_Disponibles());
 
             if (recursos_id.Count == 0)
             {
-                Account.ScriptHandler.StopScript("Lista de recursos vacia, o no tienes oficios disponibles");
+                cuenta.script.detener_Script("Lista de recursos vacia, o no tienes oficios disponibles");
                 return null;
             }
 
@@ -362,7 +362,7 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts
             if (CambiarMapaAccion.TryParse(mapa.celda_id, out CambiarMapaAccion accion))
                 manejar_acciones.enqueue_Accion(accion, true);
             else
-                StopScript("La celda es invalida para cambiar el Map");
+                detener_Script("La celda es invalida para cambiar el mapa");
         }
 
         private async Task get_Verificar_Sacos()
@@ -370,7 +370,7 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts
             if (!manejador_script.get_Global_Or("ABRIR_SACOS", DataType.Boolean, false))
                 return;
 
-            GameCharacter personaje = Account.Game.Character;
+            PersonajeJuego personaje = cuenta.juego.personaje;
             List<ObjetosInventario> sacos = personaje.inventario.objetos.Where(o => o.tipo == 100).ToList();
 
             if (sacos.Count > 0)
@@ -381,7 +381,7 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts
                     await Task.Delay(500);
                 }
 
-                Account.Logger.log_informacion("SCRIPT", $"{sacos.Count} saco(s) abierto(s).");
+                cuenta.logger.log_informacion("SCRIPT", $"{sacos.Count} saco(s) abierto(s).");
             }
         }
 
@@ -392,19 +392,19 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts
             int maximas_peleas_mapa = manejador_script.get_Global_Or("PELEAS_POR_MAPA", DataType.Number, -1);
             if (maximas_peleas_mapa != -1 && manejar_acciones.contador_peleas_mapa >= maximas_peleas_mapa)
             {
-                Account.Logger.log_informacion("SCRIPT", "Alcanzado el limite de peleas en este Map");
+                cuenta.logger.log_informacion("SCRIPT", "Alcanzado el limite de peleas en este mapa");
                 procesar_Actual_Bandera();
                 return;
             }
 
-            if (!es_dung && !Account.Game.Map.get_Puede_Luchar_Contra_Grupo_Monstruos(accion.monstruos_minimos, accion.monstruos_maximos, accion.monstruo_nivel_minimo, accion.monstruo_nivel_maximo, accion.monstruos_prohibidos, accion.monstruos_obligatorios))
+            if (!es_dung && !cuenta.juego.mapa.get_Puede_Luchar_Contra_Grupo_Monstruos(accion.monstruos_minimos, accion.monstruos_maximos, accion.monstruo_nivel_minimo, accion.monstruo_nivel_maximo, accion.monstruos_prohibidos, accion.monstruos_obligatorios))
             {
-                Account.Logger.log_informacion("SCRIPT", "Ningún grupo de monstruos disponibles en este Map");
+                cuenta.logger.log_informacion("SCRIPT", "Ningún grupo de monstruos disponibles en este mapa");
                 procesar_Actual_Bandera();
                 return;
             }
 
-            while (es_dung && !Account.Game.Map.get_Puede_Luchar_Contra_Grupo_Monstruos(accion.monstruos_minimos, accion.monstruos_maximos, accion.monstruo_nivel_minimo, accion.monstruo_nivel_maximo, accion.monstruos_prohibidos, accion.monstruos_obligatorios))
+            while (es_dung && !cuenta.juego.mapa.get_Puede_Luchar_Contra_Grupo_Monstruos(accion.monstruos_minimos, accion.monstruos_maximos, accion.monstruo_nivel_minimo, accion.monstruo_nivel_maximo, accion.monstruos_prohibidos, accion.monstruos_obligatorios))
                 accion = get_Crear_Pelea_Accion();
 
             manejar_acciones.enqueue_Accion(accion, true);
@@ -412,40 +412,40 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts
 
         private async Task get_Verificar_Regeneracion()
         {
-            if (Account.CombatExtensions.configuracion.iniciar_regeneracion == 0)
+            if (cuenta.pelea_extension.configuracion.iniciar_regeneracion == 0)
                 return;
 
-            if (Account.CombatExtensions.configuracion.detener_regeneracion <= Account.CombatExtensions.configuracion.iniciar_regeneracion)
+            if (cuenta.pelea_extension.configuracion.detener_regeneracion <= cuenta.pelea_extension.configuracion.iniciar_regeneracion)
                 return;
 
-            if (Account.Game.Character.caracteristicas.porcentaje_vida <= Account.CombatExtensions.configuracion.iniciar_regeneracion)
+            if (cuenta.juego.personaje.caracteristicas.porcentaje_vida <= cuenta.pelea_extension.configuracion.iniciar_regeneracion)
             {
-                int vida_final = Account.CombatExtensions.configuracion.detener_regeneracion * Account.Game.Character.caracteristicas.vitalidad_maxima / 100;
-                int vida_para_regenerar = vida_final - Account.Game.Character.caracteristicas.vitalidad_actual;
+                int vida_final = cuenta.pelea_extension.configuracion.detener_regeneracion * cuenta.juego.personaje.caracteristicas.vitalidad_maxima / 100;
+                int vida_para_regenerar = vida_final - cuenta.juego.personaje.caracteristicas.vitalidad_actual;
 
                 if (vida_para_regenerar > 0)
                 {
                     int tiempo_estimado = vida_para_regenerar / 2;
 
-                    if (Account.AccountStatus != AccountStatus.Regenerating)
+                    if (cuenta.Estado_Cuenta != EstadoCuenta.REGENERANDO)
                     {
-                        if (Account.IsBusy())
+                        if (cuenta.esta_ocupado())
                             return;
 
-                        Account.Connection.enviar_Paquete("eU1", true);
+                        cuenta.conexion.enviar_Paquete("eU1", true);
                     }
 
-                    Account.Logger.log_informacion("SCRIPTS", $"Regeneración comenzada, puntos de vida a recuperar: {vida_para_regenerar}, tiempo: {tiempo_estimado} segundos.");
+                    cuenta.logger.log_informacion("SCRIPTS", $"Regeneración comenzada, puntos de vida a recuperar: {vida_para_regenerar}, tiempo: {tiempo_estimado} segundos.");
 
-                    for (int i = 0; i < tiempo_estimado && Account.Game.Character.caracteristicas.porcentaje_vida <= Account.CombatExtensions.configuracion.detener_regeneracion && corriendo; i++)
+                    for (int i = 0; i < tiempo_estimado && cuenta.juego.personaje.caracteristicas.porcentaje_vida <= cuenta.pelea_extension.configuracion.detener_regeneracion && corriendo; i++)
                         await Task.Delay(1000);
 
                     if (corriendo)
                     {
-                        if (Account.AccountStatus == AccountStatus.Regenerating)
-                            Account.Connection.enviar_Paquete("eU1", true);
+                        if (cuenta.Estado_Cuenta == EstadoCuenta.REGENERANDO)
+                            cuenta.conexion.enviar_Paquete("eU1", true);
 
-                        Account.Logger.log_informacion("SCRIPTS", "Regeneración finalizada.");
+                        cuenta.logger.log_informacion("SCRIPTS", "Regeneración finalizada.");
                     }
                 }
             }
@@ -458,7 +458,7 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts
             if (auto_regeneracion == null)
                 return;
 
-            GameCharacter personaje = Account.Game.Character;
+            PersonajeJuego personaje = cuenta.juego.personaje;
             int vida_minima = auto_regeneracion.get_Or("VIDA_MINIMA", DataType.Number, 0);
             int vida_maxima = auto_regeneracion.get_Or("VIDA_MAXIMA", DataType.Number, 100);
 
@@ -512,7 +512,7 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts
                 case RecoleccionBandera _:
                     RecoleccionAccion accion_recoleccion = crear_Accion_Recoleccion();
 
-                    if (Account.Game.Handler.recoleccion.get_Puede_Recolectar(accion_recoleccion.elementos))
+                    if (cuenta.juego.manejador.recoleccion.get_Puede_Recolectar(accion_recoleccion.elementos))
                     {
                         procesar_Actual_Entrada(accion_recoleccion);
                         return;
@@ -522,7 +522,7 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts
                 case PeleaBandera _:
                     PeleasAccion accion_pelea = get_Crear_Pelea_Accion();
 
-                    if (Account.Game.Map.get_Puede_Luchar_Contra_Grupo_Monstruos(accion_pelea.monstruos_minimos, accion_pelea.monstruos_maximos, accion_pelea.monstruo_nivel_minimo, accion_pelea.monstruo_nivel_maximo, accion_pelea.monstruos_prohibidos, accion_pelea.monstruos_obligatorios))
+                    if (cuenta.juego.mapa.get_Puede_Luchar_Contra_Grupo_Monstruos(accion_pelea.monstruos_minimos, accion_pelea.monstruos_maximos, accion_pelea.monstruo_nivel_minimo, accion_pelea.monstruo_nivel_maximo, accion_pelea.monstruos_prohibidos, accion_pelea.monstruos_obligatorios))
                     {
                         procesar_Actual_Entrada(accion_pelea);
                         return;
@@ -532,7 +532,7 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts
 
             bandera_id++;
             if (bandera_id == banderas.Count)
-                StopScript("No se encontro ninguna acción en este Map");
+                detener_Script("No se encontro ninguna acción en este mapa");
             else
                 procesar_Actual_Entrada();
         }
@@ -612,7 +612,7 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts
                 return;
 
             pausado = true;
-            Account.Game.Handler.recoleccion.get_Cancelar_Interactivo();
+            cuenta.juego.manejador.recoleccion.get_Cancelar_Interactivo();
         }
 
         private void get_Pelea_Acabada()
@@ -626,7 +626,7 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts
 
         #region Zona Dispose
         public void Dispose() => Dispose(true);
-        ~ScriptHandler() => Dispose(false);
+        ~ManejadorScript() => Dispose(false);
 
         public virtual void Dispose(bool disposing)
         {
@@ -644,7 +644,7 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts
                 api = null;
                 activado = false;
                 pausado = false;
-                Account = null;
+                cuenta = null;
                 disposed = true;
             }
         }

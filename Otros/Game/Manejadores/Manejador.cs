@@ -6,26 +6,26 @@ using System;
 
 namespace Bot_Dofus_1._29._1.Otros.Game.Entidades.Manejadores
 {
-    public class Handler : IEliminable, IDisposable
+    public class Manejador : IEliminable, IDisposable
     {
         public Movimiento movimientos { get; private set; }
         public Recoleccion recoleccion { get; private set; }
         private bool disposed;
 
-        public Handler(Account cuenta, Map map, GameCharacter personaje)
+        public Manejador(Cuenta cuenta, Mapa mapa, PersonajeJuego personaje)
         {
-            movimientos = new Movimiento(cuenta, map, personaje);
-            recoleccion = new Recoleccion(cuenta, movimientos, map);
+            movimientos = new Movimiento(cuenta, mapa, personaje);
+            recoleccion = new Recoleccion(cuenta, movimientos, mapa);
         }
 
-        public void Clean()
+        public void limpiar()
         {
             movimientos.limpiar();
             recoleccion.limpiar();
         }
 
         #region Zona Dispose
-        ~Handler() => Dispose(false);
+        ~Manejador() => Dispose(false);
         public void Dispose() => Dispose(true);
 
         protected virtual void Dispose(bool disposing)

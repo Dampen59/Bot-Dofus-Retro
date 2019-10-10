@@ -3,14 +3,14 @@ using System;
 
 namespace Bot_Dofus_1._29._1.Otros.Game.Servidor
 {
-    public class GameServer : IEliminable, IDisposable
+    public class ServidorJuego : IEliminable, IDisposable
     {
         public int id;
         public string nombre;
         public EstadosServidor estado;
         private bool disposed = false;
 
-        public GameServer() => actualizar_Datos(0, "UNDEFINED", EstadosServidor.APAGADO);
+        public ServidorJuego() => actualizar_Datos(0, "UNDEFINED", EstadosServidor.APAGADO);
 
         public void actualizar_Datos(int _id, string _nombre, EstadosServidor _estado)
         {
@@ -21,9 +21,9 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Servidor
 
         #region Zona Dispose
         public void Dispose() => Dispose(true);
-        ~GameServer() => Dispose(false);
+        ~ServidorJuego() => Dispose(false);
 
-        public void Clean()
+        public void limpiar()
         {
             id = 0;
             nombre = null;

@@ -25,29 +25,29 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts.Acciones
             monstruos_obligatorios = _monstruos_obligatorios;
         }
 
-        internal override Task<ResultadosAcciones> proceso(Account cuenta)
+        internal override Task<ResultadosAcciones> proceso(Cuenta cuenta)
         {
-            Map map = cuenta.Game.Map;
-            List<Monstruos> grupos_disponibles = map.get_Grupo_Monstruos(monstruos_minimos, monstruos_maximos, monstruo_nivel_minimo, monstruo_nivel_maximo, monstruos_prohibidos, monstruos_obligatorios);
+            Mapa mapa = cuenta.juego.mapa;
+            List<Monstruos> grupos_disponibles = mapa.get_Grupo_Monstruos(monstruos_minimos, monstruos_maximos, monstruo_nivel_minimo, monstruo_nivel_maximo, monstruos_prohibidos, monstruos_obligatorios);
 
             if (grupos_disponibles.Count > 0)
             {
                 foreach (Monstruos grupo_monstruo in grupos_disponibles)
                 {
-                    var test = cuenta.Game.Handler.movimientos.get_Mover_A_Celda(grupo_monstruo.celda, new List<Celda>());
+                    var test = cuenta.juego.manejador.movimientos.get_Mover_A_Celda(grupo_monstruo.celda, new List<Celda>());
                     switch (test)
                     {
                         case ResultadoMovimientos.EXITO:
-                            cuenta.Logger.log_informacion("SCRIPT", $"Movimiento hacia un grupo de monstruos celda: {grupo_monstruo.celda.id}, total de monstruos: {grupo_monstruo.get_Total_Monstruos}, nivel total del grupo: {grupo_monstruo.get_Total_Nivel_Grupo}");
+                            cuenta.logger.log_informacion("SCRIPT", $"Movimiento hacia un grupo de monstruos celda: {grupo_monstruo.celda.id}, total de monstruos: {grupo_monstruo.get_Total_Monstruos}, nivel total del grupo: {grupo_monstruo.get_Total_Nivel_Grupo}");
                         return resultado_procesado;
                             
                         case ResultadoMovimientos.PATHFINDING_ERROR:
                         case ResultadoMovimientos.MISMA_CELDA:
-                            cuenta.Logger.log_Peligro("SCRIPT", "El camino hacia el grupo de monstruos está bloqueado");
+                            cuenta.logger.log_Peligro("SCRIPT", "El camino hacia el grupo de monstruos está bloqueado");
                         continue;
 
                         default:
-                            cuenta.ScriptHandler.StopScript("Movimiento hacia el grupo de monstruos erróneo" + test);
+                            cuenta.script.detener_Script("Movimiento hacia el grupo de monstruos erróneo" + test);
                         return resultado_fallado;
                     }
                 }

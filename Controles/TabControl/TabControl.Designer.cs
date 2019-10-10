@@ -18,39 +18,39 @@ namespace Bot_Dofus_1._29._1.Controles.TabControl
 
         private void InitializeComponent()
         {
-            this.panelCabezeraAccounts = new FlowLayoutPanelBuffered();
-            this.panelContenidoAccount = new System.Windows.Forms.Panel();
+            this.panelCabezeraCuentas = new FlowLayoutPanelBuffered();
+            this.panelContenidoCuenta = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
-            // panelCabezeraAccounts
+            // panelCabezeraCuentas
             // 
-            this.panelCabezeraAccounts.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panelCabezeraAccounts.Location = new System.Drawing.Point(0, 0);
-            this.panelCabezeraAccounts.Name = "panelCabezeraAccounts";
-            this.panelCabezeraAccounts.Size = new System.Drawing.Size(174, 540);
-            this.panelCabezeraAccounts.TabIndex = 0;
+            this.panelCabezeraCuentas.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panelCabezeraCuentas.Location = new System.Drawing.Point(0, 0);
+            this.panelCabezeraCuentas.Name = "panelCabezeraCuentas";
+            this.panelCabezeraCuentas.Size = new System.Drawing.Size(174, 540);
+            this.panelCabezeraCuentas.TabIndex = 0;
             // 
-            // panelContenidoAccount
+            // panelContenidoCuenta
             // 
-            this.panelContenidoAccount.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelContenidoAccount.Location = new System.Drawing.Point(174, 0);
-            this.panelContenidoAccount.Name = "panelContenidoAccount";
-            this.panelContenidoAccount.Size = new System.Drawing.Size(734, 540);
-            this.panelContenidoAccount.TabIndex = 0;
+            this.panelContenidoCuenta.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelContenidoCuenta.Location = new System.Drawing.Point(174, 0);
+            this.panelContenidoCuenta.Name = "panelContenidoCuenta";
+            this.panelContenidoCuenta.Size = new System.Drawing.Size(734, 540);
+            this.panelContenidoCuenta.TabIndex = 0;
             // 
             // TabControl_Horizontal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.panelContenidoAccount);
-            this.Controls.Add(this.panelCabezeraAccounts);
+            this.Controls.Add(this.panelContenidoCuenta);
+            this.Controls.Add(this.panelCabezeraCuentas);
             this.Name = "TabControl_Horizontal";
             this.Size = new System.Drawing.Size(908, 540);
             this.ResumeLayout(false);
 
         }
 
-        private FlowLayoutPanelBuffered panelCabezeraAccounts;
-        private Panel panelContenidoAccount;
+        private FlowLayoutPanelBuffered panelCabezeraCuentas;
+        private Panel panelContenidoCuenta;
     }
 }

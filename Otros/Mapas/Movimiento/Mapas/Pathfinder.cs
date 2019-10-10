@@ -15,13 +15,13 @@ namespace Bot_Dofus_1._29._1.Otros.Mapas.Movimiento.Mapas
     public class Pathfinder : IDisposable
     {
         private Celda[] celdas { get; set; }
-        private Map Map { get; set; }
+        private Mapa mapa { get; set; }
         private bool disposed;
 
-        public void set_Mapa(Map map)
+        public void set_Mapa(Mapa _mapa)
         {
-            Map = map;
-            celdas = Map.celdas;
+            mapa = _mapa;
+            celdas = mapa.celdas;
         }
 
         public List<Celda> get_Path(Celda celda_inicio, Celda celda_final, List<Celda> celdas_no_permitidas, bool detener_delante, byte distancia_detener)
@@ -152,7 +152,7 @@ namespace Bot_Dofus_1._29._1.Otros.Mapas.Movimiento.Mapas
             if (!disposed)
             {
                 celdas = null;
-                Map = null;
+                mapa = null;
                 disposed = true;
             }
         }

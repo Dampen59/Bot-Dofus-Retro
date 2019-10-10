@@ -39,19 +39,19 @@ namespace Bot_Dofus_1._29._1.Controles.TabControl
             if (paginas.ContainsKey(titulo))
                 throw new InvalidOperationException("Ya existe una cuenta cargada con este nombre");
 
-            if (panelCabezeraAccounts.Controls.Count > 0)
+            if (panelCabezeraCuentas.Controls.Count > 0)
             {
-                panelCabezeraAccounts.Controls[panelCabezeraAccounts.Controls.Count - 1].Margin = new Padding(2, 0, 2, 0);
+                panelCabezeraCuentas.Controls[panelCabezeraCuentas.Controls.Count - 1].Margin = new Padding(2, 0, 2, 0);
             }
 
             Pagina pagina = new Pagina(titulo, anchura_cabezera);
             paginas.Add(titulo, pagina);
 
-            pagina.cabezera.Click += (s, e) => seleccionar_Pagina((s as Cabezera).propiedad_Account);
-            pagina.contenido.Disposed += (s, e) => eliminar_Pagina(pagina.cabezera.propiedad_Account);
+            pagina.cabezera.Click += (s, e) => seleccionar_Pagina((s as Cabezera).propiedad_Cuenta);
+            pagina.contenido.Disposed += (s, e) => eliminar_Pagina(pagina.cabezera.propiedad_Cuenta);
 
-            panelCabezeraAccounts.Controls.Add(pagina.cabezera);
-            panelContenidoAccount.Controls.Add(pagina.contenido);
+            panelCabezeraCuentas.Controls.Add(pagina.cabezera);
+            panelContenidoCuenta.Controls.Add(pagina.contenido);
 
             ajustar_Cabezera_Anchura();
             seleccionar_Pagina(titulo);
@@ -64,8 +64,8 @@ namespace Bot_Dofus_1._29._1.Controles.TabControl
             {
                 Pagina pagina = paginas[titulo];
 
-                panelCabezeraAccounts.Controls.Remove(pagina.cabezera);
-                panelContenidoAccount.Controls.Remove(pagina.contenido);
+                panelCabezeraCuentas.Controls.Remove(pagina.cabezera);
+                panelContenidoCuenta.Controls.Remove(pagina.contenido);
 
                 pagina.cabezera.Dispose();
                 pagina.contenido.Dispose();
@@ -90,27 +90,27 @@ namespace Bot_Dofus_1._29._1.Controles.TabControl
 
         private void ajustar_Cabezera_Anchura()
         {
-            if (anchura_cabezera == 164 && panelCabezeraAccounts.VerticalScroll.Visible)
+            if (anchura_cabezera == 164 && panelCabezeraCuentas.VerticalScroll.Visible)
             {
                 anchura_cabezera = 150;
 
-                panelCabezeraAccounts.SuspendLayout();
-                for (int i = 0; i < panelCabezeraAccounts.Controls.Count; i++)
+                panelCabezeraCuentas.SuspendLayout();
+                for (int i = 0; i < panelCabezeraCuentas.Controls.Count; i++)
                 {
-                    panelCabezeraAccounts.Controls[i].Size = new Size(anchura_cabezera, 40);
+                    panelCabezeraCuentas.Controls[i].Size = new Size(anchura_cabezera, 40);
                 }
-                panelCabezeraAccounts.ResumeLayout();
+                panelCabezeraCuentas.ResumeLayout();
             }
-            else if (anchura_cabezera == 150 && !panelCabezeraAccounts.VerticalScroll.Visible)
+            else if (anchura_cabezera == 150 && !panelCabezeraCuentas.VerticalScroll.Visible)
             {
                 anchura_cabezera = 164;
 
-                panelCabezeraAccounts.SuspendLayout();
-                for (int i = 0; i < panelCabezeraAccounts.Controls.Count; i++)
+                panelCabezeraCuentas.SuspendLayout();
+                for (int i = 0; i < panelCabezeraCuentas.Controls.Count; i++)
                 {
-                    panelCabezeraAccounts.Controls[i].Size = new Size(anchura_cabezera, 40);
+                    panelCabezeraCuentas.Controls[i].Size = new Size(anchura_cabezera, 40);
                 }
-                panelCabezeraAccounts.ResumeLayout();
+                panelCabezeraCuentas.ResumeLayout();
             }
         }
 

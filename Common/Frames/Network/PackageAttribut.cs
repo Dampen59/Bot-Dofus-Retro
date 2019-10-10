@@ -10,10 +10,10 @@
 
 namespace Bot_Dofus_1._29._1.Comun.Frames.Transporte
 {
-    class PaqueteAtributo : Attribute
+    class PackageAttribut : Attribute
     {
         public string package;
 
-        public PaqueteAtributo(string _package) => package = _package;
+        public PackageAttribut(string _package) => package = _package;
     }
 }

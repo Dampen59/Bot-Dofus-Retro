@@ -68,10 +68,10 @@ namespace Bot_Dofus_1._29._1.Interfaces
             string package = lista_packages[listView.FocusedItem.Index];
             treeView.Nodes.Clear();
 
-            if (PaqueteRecibido.metodos.Count == 0)
+            if (PackageReceive.metodos.Count == 0)
                 return;
 
-            foreach (PaqueteDatos metodo in PaqueteRecibido.metodos)
+            foreach (PackageData metodo in PackageReceive.metodos)
             {
                 if (package.StartsWith(metodo.nombre_package))
                 {

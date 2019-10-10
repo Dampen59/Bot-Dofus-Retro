@@ -18,7 +18,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
 {
     class NPCFrame : Frame
     {
-        [PaqueteAtributo("DCK")]
+        [PackageAttribut("DCK")]
         public void get_Dialogo_Creado(ClienteTcp cliente, string package)
         {
             Account cuenta = cliente.Account;
@@ -27,7 +27,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
             cuenta.juego.personaje.hablando_npc_id = sbyte.Parse(package.Substring(3));
         }
 
-        [PaqueteAtributo("DQ")]
+        [PackageAttribut("DQ")]
         public void get_Lista_Respuestas(ClienteTcp cliente, string package)
         {
             Account cuenta = cliente.Account;

@@ -18,7 +18,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.LoginAccount
 {
     public class LoginAccount : Frame
     {
-        [PaqueteAtributo("HC")]
+        [PackageAttribut("HC")]
         public void get_Key_BienvenidaAsync(ClienteTcp cliente, string package)
         {
             Account cuenta = cliente.Account;
@@ -31,13 +31,13 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.LoginAccount
             cliente.SendPackage("Af");
         }
 
-        [PaqueteAtributo("Ad")]
+        [PackageAttribut("Ad")]
         public void get_Apodo(ClienteTcp cliente, string package) => cliente.Account.apodo = package.Substring(2);
 
-        [PaqueteAtributo("Af")]
+        [PackageAttribut("Af")]
         public void get_Fila_Espera_Login(ClienteTcp cliente, string package) => cliente.Account.logger.log_informacion("FILA DE ESPERA", "Posición " + package[2] + "/" + package[4]);
 
-        [PaqueteAtributo("AH")]
+        [PackageAttribut("AH")]
         public void get_Servidor_Estado(ClienteTcp cliente, string package)
         {
             Account cuenta = cliente.Account;
@@ -67,14 +67,14 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.LoginAccount
                 cliente.SendPackage("Ax");
         }
 
-        [PaqueteAtributo("AQ")]
+        [PackageAttribut("AQ")]
         public void get_Pregunta_Secreta(ClienteTcp cliente, string package)
         {
             if (cliente.Account.juego.servidor.estado == EstadosServidor.CONECTADO)
                 cliente.SendPackage("Ax", true);
         }
 
-        [PaqueteAtributo("AxK")]
+        [PackageAttribut("AxK")]
         public void get_Servidores_Lista(ClienteTcp cliente, string package)
         {
             Account cuenta = cliente.Account;
@@ -104,7 +104,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.LoginAccount
                 cliente.SendPackage($"AX{cuenta.juego.servidor.id}", true);
         }
 
-        [PaqueteAtributo("AXK")]
+        [PackageAttribut("AXK")]
         public void get_Seleccion_Servidor(ClienteTcp cliente, string package)
         {
             cliente.Account.tiquet_game = package.Substring(14);

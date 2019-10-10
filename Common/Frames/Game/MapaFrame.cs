@@ -25,7 +25,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
 {
     internal class MapaFrame : Frame
     {
-        [PaqueteAtributo("GM")]
+        [PackageAttribut("GM")]
         public async Task get_Movimientos_Personajes(ClienteTcp cliente, string package)
         {
             Account cuenta = cliente.Account;
@@ -138,7 +138,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
             }
         }
 
-        [PaqueteAtributo("GAF")]
+        [PackageAttribut("GAF")]
         public void get_Finalizar_Accion(ClienteTcp cliente, string package)
         {
             string[] id_fin_accion = package.Substring(3).Split('|');
@@ -146,10 +146,10 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
             cliente.Account.conexion.SendPackage("GKK" + id_fin_accion[0]);
         }
 
-        [PaqueteAtributo("GAS")]
+        [PackageAttribut("GAS")]
         public async Task get_Inicio_Accion(ClienteTcp cliente, string package) => await Task.Delay(200);
 
-        [PaqueteAtributo("GA")]
+        [PackageAttribut("GA")]
         public async Task get_Iniciar_Accion(ClienteTcp cliente, string package)
         {
             string[] separador = package.Substring(2).Split(';');
@@ -320,7 +320,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
             }
         }
 
-        [PaqueteAtributo("GDF")]
+        [PackageAttribut("GDF")]
         public void get_Estado_Interactivo(ClienteTcp cliente, string package)
         {
             foreach (string interactivo in package.Substring(4).Split('|'))
@@ -352,13 +352,13 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
             }
         }
 
-        [PaqueteAtributo("GDM")]
+        [PackageAttribut("GDM")]
         public void get_Nuevo_Mapa(ClienteTcp cliente, string package) => cliente.Account.juego.mapa.get_Actualizar_Mapa(package.Substring(4));
 
-        [PaqueteAtributo("GDK")]
+        [PackageAttribut("GDK")]
         public void get_Mapa_Cambiado(ClienteTcp cliente, string package) => cliente.Account.juego.mapa.get_Evento_Mapa_Cambiado();
 
-        [PaqueteAtributo("GV")]
+        [PackageAttribut("GV")]
         public void get_Reiniciar_Pantalla(ClienteTcp cliente, string package) => cliente.Account.conexion.SendPackage("GC1");
     }
 }

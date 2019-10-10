@@ -22,10 +22,10 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
 {
     class PersonajeFrame : Frame
     {
-        [PaqueteAtributo("As")]
+        [PackageAttribut("As")]
         public void get_Stats_Actualizados(ClienteTcp cliente, string package) => cliente.Account.juego.personaje.actualizar_Caracteristicas(package);
 
-        [PaqueteAtributo("PIK")]
+        [PackageAttribut("PIK")]
         public void get_Peticion_Grupo(ClienteTcp cliente, string package)
         {
             cliente.Account.logger.log_informacion("Grupo", $"Nueva invitación de grupo del personaje: {package.Substring(3).Split('|')[0]}");
@@ -33,14 +33,14 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
             cliente.Account.logger.log_informacion("Grupo", "Petición rechazada");
         }
 
-        [PaqueteAtributo("SL")]
+        [PackageAttribut("SL")]
         public void get_Lista_Hechizos(ClienteTcp cliente, string package)
         {
             if (!package[2].Equals('o'))
                 cliente.Account.juego.personaje.actualizar_Hechizos(package.Substring(2));
         }
 
-        [PaqueteAtributo("Ow")]
+        [PackageAttribut("Ow")]
         public void get_Actualizacion_Pods(ClienteTcp cliente, string package)
         {
             string[] pods = package.Substring(2).Split('|');
@@ -53,7 +53,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
             cliente.Account.juego.personaje.evento_Pods_Actualizados();
         }
 
-        [PaqueteAtributo("DV")]
+        [PackageAttribut("DV")]
         public void get_Cerrar_Dialogo(ClienteTcp cliente, string package)
         {
             Account cuenta = cliente.Account;
@@ -76,7 +76,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
             }
         }
 
-        [PaqueteAtributo("EV")]
+        [PackageAttribut("EV")]
         public void get_Ventana_Cerrada(ClienteTcp cliente, string package)
         {
             Account cuenta = cliente.Account;
@@ -88,7 +88,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
             }
         }
 
-        [PaqueteAtributo("JS")]
+        [PackageAttribut("JS")]
         public void get_Skills_Oficio(ClienteTcp cliente, string package)
         {
             string[] separador_skill;
@@ -129,7 +129,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
             personaje.evento_Oficios_Actualizados();
         }
 
-        [PaqueteAtributo("JX")]
+        [PackageAttribut("JX")]
         public void get_Experiencia_Oficio(ClienteTcp cliente, string package)
         {
             string[] separador_oficio_experiencia = package.Substring(3).Split('|');
@@ -155,35 +155,35 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
             personaje.evento_Oficios_Actualizados();
         }
 
-        [PaqueteAtributo("Re")]
+        [PackageAttribut("Re")]
         public void get_Datos_Montura(ClienteTcp cliente, string package) => cliente.Account.puede_utilizar_dragopavo = true;
 
-        [PaqueteAtributo("OAKO")]
+        [PackageAttribut("OAKO")]
         public void get_Aparecer_Objeto(ClienteTcp cliente, string package) => cliente.Account.juego.personaje.inventario.agregar_Objetos(package.Substring(4));
 
-        [PaqueteAtributo("OR")]
+        [PackageAttribut("OR")]
         public void get_Eliminar_Objeto(ClienteTcp cliente, string package) => cliente.Account.juego.personaje.inventario.eliminar_Objeto(uint.Parse(package.Substring(2)), 1, false);
 
-        [PaqueteAtributo("OQ")]
+        [PackageAttribut("OQ")]
         public void get_Modificar_Cantidad_Objeto(ClienteTcp cliente, string package) => cliente.Account.juego.personaje.inventario.modificar_Objetos(package.Substring(2));
 
-        [PaqueteAtributo("ECK")]
+        [PackageAttribut("ECK")]
         public void get_Intercambio_Ventana_Abierta(ClienteTcp cliente, string package) => cliente.Account.Estado_Account = StateAccount.BANKING;
 
-        [PaqueteAtributo("PCK")]
+        [PackageAttribut("PCK")]
         public void get_Grupo_Aceptado(ClienteTcp cliente, string package) => cliente.Account.juego.personaje.en_grupo = true;
 
-        [PaqueteAtributo("PV")]
+        [PackageAttribut("PV")]
         public void get_Grupo_Abandonado(ClienteTcp cliente, string package) => cliente.Account.juego.personaje.en_grupo = true;
 
-        [PaqueteAtributo("ERK")]
+        [PackageAttribut("ERK")]
         public void get_Peticion_Intercambio(ClienteTcp cliente, string package)
         {
             cliente.Account.logger.log_informacion("INFORMACIÓN", "Invitación de intercambio recibida, rechazando");
             cliente.SendPackage("EV", true);
         }
 
-        [PaqueteAtributo("ILS")]
+        [PackageAttribut("ILS")]
         public void get_Tiempo_Regenerado(ClienteTcp cliente, string package)
         {
             package = package.Substring(3);
@@ -197,7 +197,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
             cuenta.logger.log_informacion("DOFUS", $"Tú personaje recupera 1 pdv cada {tiempo / 1000} segundos");
         }
 
-        [PaqueteAtributo("ILF")]
+        [PackageAttribut("ILF")]
         public void get_Cantidad_Vida_Regenerada(ClienteTcp cliente, string package)
         {
             package = package.Substring(3);
@@ -209,7 +209,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
             cuenta.logger.log_informacion("DOFUS", $"Has recuperado {vida} puntos de vida");
         }
 
-        [PaqueteAtributo("eUK")]
+        [PackageAttribut("eUK")]
         public void get_Emote_Recibido(ClienteTcp cliente, string package)
         {
             string[] separador = package.Substring(3).Split('|');
@@ -225,10 +225,10 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
                 cuenta.Estado_Account = StateAccount.AWAY;
         }
 
-        [PaqueteAtributo("Bp")]
+        [PackageAttribut("Bp")]
         public void get_Ping_Promedio(ClienteTcp cliente, string package) => cliente.SendPackage($"Bp{cliente.GetAveragePings()}|{cliente.get_Total_Pings()}|50");
 
-        [PaqueteAtributo("pong")]
+        [PackageAttribut("pong")]
         public void get_Ping_Pong(ClienteTcp cliente, string package) => cliente.Account.logger.log_informacion("DOFUS", $"Ping: {cliente.get_Actual_Ping()} ms");
     }
 }

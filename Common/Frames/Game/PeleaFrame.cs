@@ -21,7 +21,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
 {
     internal class PeleaFrame : Frame
     {
-        [PaqueteAtributo("GP")]
+        [PackageAttribut("GP")]
         public void get_Combate_Celdas_Posicion(ClienteTcp cliente, string package)
         {
             Account cuenta = cliente.Account;
@@ -44,7 +44,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
             }
         }
 
-        [PaqueteAtributo("GICE")]
+        [PackageAttribut("GICE")]
         public async Task get_Error_Cambiar_Pos_Pelea(ClienteTcp cliente, string package)
         {
             if(cliente.Account.isFighting())
@@ -54,7 +54,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
             }
         }
 
-        [PaqueteAtributo("GIC")]
+        [PackageAttribut("GIC")]
         public async Task get_Cambiar_Pos_Pelea(ClienteTcp cliente, string package)
         {
             Account cuenta = cliente.Account;
@@ -80,7 +80,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
             }
         }
 
-        [PaqueteAtributo("GTM")]
+        [PackageAttribut("GTM")]
         public void get_Combate_Info_Stats(ClienteTcp cliente, string package)
         {
             string[] separador = package.Substring(4).Split('|');
@@ -115,7 +115,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
             }
         }
 
-        [PaqueteAtributo("GTR")]
+        [PackageAttribut("GTR")]
         public void get_Combate_Turno_Listo(ClienteTcp cliente, string package)
         {
             Account cuenta = cliente.Account;
@@ -127,7 +127,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
             cuenta.conexion.SendPackage("GT");
         }
 
-        [PaqueteAtributo("GJK")]
+        [PackageAttribut("GJK")]
         public void get_Combate_Unirse_Pelea(ClienteTcp cliente, string package)
         {
             Account cuenta = cliente.Account;
@@ -148,7 +148,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
             }
         }
 
-        [PaqueteAtributo("GTS")]
+        [PackageAttribut("GTS")]
         public void get_Combate_Inicio_Turno(ClienteTcp cliente, string package)
         {
             Account cuenta = cliente.Account;
@@ -160,7 +160,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
             cuenta.juego.pelea.get_Turno_Iniciado();
         }
 
-        [PaqueteAtributo("GE")]
+        [PackageAttribut("GE")]
         public void get_Combate_Finalizado(ClienteTcp cliente, string package)
         {
             Account cuenta = cliente.Account;

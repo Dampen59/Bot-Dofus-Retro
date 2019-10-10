@@ -10,46 +10,46 @@ namespace Bot_Dofus_1._29._1.Otros.Grupos
     public class Grupo : IDisposable
     {
         private Agrupamiento agrupamiento;
-        private Dictionary<Account, ManualResetEvent> cuentas_acabadas;
+        private Dictionary<Cuenta, ManualResetEvent> cuentas_acabadas;
 
-        public Account Leader { get; private set; }
-        public ObservableCollection<Account> miembros { get; private set; }
+        public Cuenta lider { get; private set; }
+        public ObservableCollection<Cuenta> miembros { get; private set; }
         private bool disposed;
 
-        public Grupo(Account leader)
+        public Grupo(Cuenta _lider)
         {
             agrupamiento = new Agrupamiento(this);
-            cuentas_acabadas = new Dictionary<Account, ManualResetEvent>();
-            Leader = leader;
-            miembros = new ObservableCollection<Account>();
+            cuentas_acabadas = new Dictionary<Cuenta, ManualResetEvent>();
+            lider = _lider;
+            miembros = new ObservableCollection<Cuenta>();
 
-            Leader.Group = this;
+            lider.grupo = this;
         }
 
-        public void agregar_Miembro(Account miembro)
+        public void agregar_Miembro(Cuenta miembro)
         {
-            if (miembros.Count >= 7)//dofus solo se pueden 8 Character en un grupo
+            if (miembros.Count >= 7)//dofus solo se pueden 8 personaje en un grupo
                 return;
 
-            miembro.Group = this;
+            miembro.grupo = this;
             miembros.Add(miembro);
             cuentas_acabadas.Add(miembro, new ManualResetEvent(false));
         }
 
-        public void eliminar_Miembro(Account miembro) => miembros.Remove(miembro);
+        public void eliminar_Miembro(Cuenta miembro) => miembros.Remove(miembro);
 
-        public void conectar_Accounts()
+        public void conectar_Cuentas()
         {
-            Leader.Connect();
+            lider.conectar();
 
-            foreach (Account miembro in miembros)
-                miembro.Connect();
+            foreach (Cuenta miembro in miembros)
+                miembro.conectar();
         }
 
-        public void desconectar_Accounts()
+        public void desconectar_Cuentas()
         {
-            foreach (Account miembro in miembros)
-                miembro.Disconnect();
+            foreach (Cuenta miembro in miembros)
+                miembro.desconectar();
         }
 
         #region Acciones
@@ -57,13 +57,13 @@ namespace Bot_Dofus_1._29._1.Otros.Grupos
         {
             if (accion is PeleasAccion)
             {
-                foreach (Account miembro in miembros)
+                foreach (Cuenta miembro in miembros)
                     cuentas_acabadas[miembro].Set();
                 return;
             }
 
-            foreach (Account miembro in miembros)
-                miembro.ScriptHandler.manejar_acciones.enqueue_Accion(accion, iniciar_dequeue);
+            foreach (Cuenta miembro in miembros)
+                miembro.script.manejar_acciones.enqueue_Accion(accion, iniciar_dequeue);
 
             if (iniciar_dequeue)
             {
@@ -74,9 +74,9 @@ namespace Bot_Dofus_1._29._1.Otros.Grupos
 
         public void esperar_Acciones_Terminadas() => WaitHandle.WaitAll(cuentas_acabadas.Values.ToArray());
 
-        private void miembro_Acciones_Acabadas(Account cuenta)
+        private void miembro_Acciones_Acabadas(Cuenta cuenta)
         {
-            cuenta.Logger.log_informacion("GRUPO", "Acciones acabadas");
+            cuenta.logger.log_informacion("GRUPO", "Acciones acabadas");
             cuentas_acabadas[cuenta].Set();
         }
         #endregion
@@ -92,7 +92,7 @@ namespace Bot_Dofus_1._29._1.Otros.Grupos
                 if (disposing)
                 {
                     agrupamiento.Dispose();
-                    Leader.Dispose();
+                    lider.Dispose();
 
                     for (int i = 0; i < miembros.Count; i++)
                     {
@@ -105,7 +105,7 @@ namespace Bot_Dofus_1._29._1.Otros.Grupos
                 cuentas_acabadas = null;
                 miembros.Clear();
                 miembros = null;
-                Leader = null;
+                lider = null;
 
                 disposed = true;
             }

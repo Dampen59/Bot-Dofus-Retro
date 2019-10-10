@@ -20,9 +20,9 @@ using System.Threading.Tasks;
 
 namespace Bot_Dofus_1._29._1.Otros.Peleas
 {
-    public class Fight : IEliminable, IDisposable
+    public class Pelea : IEliminable, IDisposable
     {
-        public Account cuenta { get; private set; }
+        public Cuenta cuenta { get; private set; }
         private ConcurrentDictionary<int, Luchadores> luchadores;
         private ConcurrentDictionary<int, Luchadores> enemigos;
         private ConcurrentDictionary<int, Luchadores> aliados;
@@ -49,7 +49,7 @@ namespace Bot_Dofus_1._29._1.Otros.Peleas
         public event Action<short, bool> hechizo_lanzado;
         public event Action<bool> movimiento;
 
-        public Fight(Account _cuenta)
+        public Pelea(Cuenta _cuenta)
         {
             cuenta = _cuenta;
             luchadores = new ConcurrentDictionary<int, Luchadores>();
@@ -64,15 +64,15 @@ namespace Bot_Dofus_1._29._1.Otros.Peleas
 
         public async Task get_Lanzar_Hechizo(short hechizo_id, short celda_id)
         {
-            if (cuenta.AccountStatus != AccountStatus.Fighting)
+            if (cuenta.Estado_Cuenta != EstadoCuenta.LUCHANDO)
                 return;
 
-            await cuenta.Connection.enviar_Paquete_Async("GA300" + hechizo_id + ';' + celda_id, false);
+            await cuenta.conexion.enviar_Paquete_Async("GA300" + hechizo_id + ';' + celda_id, false);
         }
 
         public void actualizar_Hechizo_Exito(short celda_id, short hechizo_id)
         {
-            Hechizo hechizo = cuenta.Game.Character.get_Hechizo(hechizo_id);
+            Hechizo hechizo = cuenta.juego.personaje.get_Hechizo(hechizo_id);
             HechizoStats datos_hechizo = hechizo.get_Stats();
 
             if (datos_hechizo.intervalo > 0 && !hechizos_intervalo.ContainsKey(hechizo.id))
@@ -193,8 +193,8 @@ namespace Bot_Dofus_1._29._1.Otros.Peleas
 
         public void get_Agregar_Luchador(Luchadores luchador)
         {
-            if (luchador.id == cuenta.Game.Character.id)
-                jugador_luchador = new LuchadorPersonaje(cuenta.Game.Character.nombre, cuenta.Game.Character.nivel, luchador);
+            if (luchador.id == cuenta.juego.personaje.id)
+                jugador_luchador = new LuchadorPersonaje(cuenta.juego.personaje.nombre, cuenta.juego.personaje.nivel, luchador);
 
             else if (!luchadores.TryAdd(luchador.id, luchador))
                 luchador.get_Actualizar_Luchador(luchador.id, luchador.esta_vivo, luchador.vida_actual, luchador.pa, luchador.pm, luchador.celda, luchador.vida_maxima, luchador.equipo, luchador.id_invocador);
@@ -256,7 +256,7 @@ namespace Bot_Dofus_1._29._1.Otros.Peleas
 
         public FallosLanzandoHechizo get_Puede_Lanzar_hechizo(short hechizo_id)
         {
-            Hechizo hechizo = cuenta.Game.Character.get_Hechizo(hechizo_id);
+            Hechizo hechizo = cuenta.juego.personaje.get_Hechizo(hechizo_id);
 
             if (hechizo == null)
                 return FallosLanzandoHechizo.DESONOCIDO;
@@ -272,15 +272,15 @@ namespace Bot_Dofus_1._29._1.Otros.Peleas
             if (hechizos_intervalo.ContainsKey(hechizo_id))
                 return FallosLanzandoHechizo.COOLDOWN;
 
-            if (datos_hechizo.efectos_normales.Count > 0 && datos_hechizo.efectos_normales[0].id == 181 && contador_invocaciones >= cuenta.Game.Character.caracteristicas.criaturas_invocables.total_stats)
+            if (datos_hechizo.efectos_normales.Count > 0 && datos_hechizo.efectos_normales[0].id == 181 && contador_invocaciones >= cuenta.juego.personaje.caracteristicas.criaturas_invocables.total_stats)
                 return FallosLanzandoHechizo.DEMASIADAS_INVOCACIONES;
 
             return FallosLanzandoHechizo.NINGUNO;
         }
 
-        public FallosLanzandoHechizo get_Puede_Lanzar_hechizo(short hechizo_id, Celda celda_actual, Celda celda_objetivo, Map map)
+        public FallosLanzandoHechizo get_Puede_Lanzar_hechizo(short hechizo_id, Celda celda_actual, Celda celda_objetivo, Mapa mapa)
         {
-            Hechizo hechizo = cuenta.Game.Character.get_Hechizo(hechizo_id);
+            Hechizo hechizo = cuenta.juego.personaje.get_Hechizo(hechizo_id);
 
             if (hechizo == null)
                 return FallosLanzandoHechizo.DESONOCIDO;
@@ -296,17 +296,17 @@ namespace Bot_Dofus_1._29._1.Otros.Peleas
             if (datos_hechizo.es_lanzado_linea && !jugador_luchador.celda.get_Esta_En_Linea(celda_objetivo))
                 return FallosLanzandoHechizo.NO_ESTA_EN_LINEA;
 
-            if (!get_Rango_hechizo(celda_actual, datos_hechizo, map).Contains(celda_objetivo.id))
+            if (!get_Rango_hechizo(celda_actual, datos_hechizo, mapa).Contains(celda_objetivo.id))
                 return FallosLanzandoHechizo.NO_ESTA_EN_RANGO;
 
             return FallosLanzandoHechizo.NINGUNO;
         }
 
-        public List<short> get_Rango_hechizo(Celda celda_personaje, HechizoStats datos_hechizo, Map map)
+        public List<short> get_Rango_hechizo(Celda celda_personaje, HechizoStats datos_hechizo, Mapa mapa)
         {
             List<short> rango = new List<short>();
             
-            foreach (Celda celda in HechizoShape.Get_Lista_Celdas_Rango_Hechizo(celda_personaje, datos_hechizo, cuenta.Game.Map, cuenta.Game.Character.caracteristicas.alcanze.total_stats))
+            foreach (Celda celda in HechizoShape.Get_Lista_Celdas_Rango_Hechizo(celda_personaje, datos_hechizo, cuenta.juego.mapa, cuenta.juego.personaje.caracteristicas.alcanze.total_stats))
             {
                 if (celda == null || rango.Contains(celda.id))
                     continue;
@@ -322,14 +322,14 @@ namespace Bot_Dofus_1._29._1.Otros.Peleas
             {
                 for (int i = rango.Count - 1; i >= 0; i--)
                 {
-                    if (get_Linea_Obstruida(map, celda_personaje, map.get_Celda_Id(rango[i]), get_Celdas_Ocupadas))
+                    if (get_Linea_Obstruida(mapa, celda_personaje, mapa.get_Celda_Id(rango[i]), get_Celdas_Ocupadas))
                         rango.RemoveAt(i);
                 }
             }
             return rango;
         }
 
-        public static bool get_Linea_Obstruida(Map map, Celda celda_inicial, Celda celda_destino, List<short> celdas_ocupadas)
+        public static bool get_Linea_Obstruida(Mapa mapa, Celda celda_inicial, Celda celda_destino, List<short> celdas_ocupadas)
         {
             double x = celda_inicial.x + 0.5;
             double y = celda_inicial.y + 0.5;
@@ -395,7 +395,7 @@ namespace Bot_Dofus_1._29._1.Otros.Peleas
                             {
                                 cellY = Math.Ceiling(yPadY);
                             }
-                            if (get_Es_Celda_Obstruida(cellX, cellY, map, celdas_ocupadas, celda_destino.id, anterior_x, anterior_y)) return true;
+                            if (get_Es_Celda_Obstruida(cellX, cellY, mapa, celdas_ocupadas, celda_destino.id, anterior_x, anterior_y)) return true;
                             anterior_x = cellX;
                             anterior_y = cellY;
                         }
@@ -407,7 +407,7 @@ namespace Bot_Dofus_1._29._1.Otros.Peleas
                                 cellY = Math.Floor(yPadY);
                             }
 
-                            if (get_Es_Celda_Obstruida(cellX, cellY, map, celdas_ocupadas, celda_destino.id, anterior_x, anterior_y))
+                            if (get_Es_Celda_Obstruida(cellX, cellY, mapa, celdas_ocupadas, celda_destino.id, anterior_x, anterior_y))
                                 return true;
 
                             anterior_x = cellX;
@@ -415,22 +415,22 @@ namespace Bot_Dofus_1._29._1.Otros.Peleas
                         }
                         else if (Math.Floor(diffBeforeCenterY * 100) <= error_superior)
                         {
-                            if (get_Es_Celda_Obstruida(cellX, Math.Floor(afterY), map, celdas_ocupadas, celda_destino.id, anterior_x, anterior_y)) return true;
+                            if (get_Es_Celda_Obstruida(cellX, Math.Floor(afterY), mapa, celdas_ocupadas, celda_destino.id, anterior_x, anterior_y)) return true;
                             anterior_x = cellX;
                             anterior_y = Math.Floor(afterY);
                         }
                         else if (Math.Floor(diffCenterAfterY * 100) >= error_info)
                         {
-                            if (get_Es_Celda_Obstruida(cellX, Math.Floor(beforeY), map, celdas_ocupadas, celda_destino.id, anterior_x, anterior_y)) return true;
+                            if (get_Es_Celda_Obstruida(cellX, Math.Floor(beforeY), mapa, celdas_ocupadas, celda_destino.id, anterior_x, anterior_y)) return true;
                             anterior_x = cellX;
                             anterior_y = Math.Floor(beforeY);
                         }
                         else
                         {
-                            if (get_Es_Celda_Obstruida(cellX, Math.Floor(beforeY), map, celdas_ocupadas, celda_destino.id, anterior_x, anterior_y)) return true;
+                            if (get_Es_Celda_Obstruida(cellX, Math.Floor(beforeY), mapa, celdas_ocupadas, celda_destino.id, anterior_x, anterior_y)) return true;
                             anterior_x = cellX;
                             anterior_y = Math.Floor(beforeY);
-                            if (get_Es_Celda_Obstruida(cellX, Math.Floor(afterY), map, celdas_ocupadas, celda_destino.id, anterior_x, anterior_y)) return true;
+                            if (get_Es_Celda_Obstruida(cellX, Math.Floor(afterY), mapa, celdas_ocupadas, celda_destino.id, anterior_x, anterior_y)) return true;
                             anterior_y = Math.Floor(afterY);
                         }
                         break;
@@ -450,7 +450,7 @@ namespace Bot_Dofus_1._29._1.Otros.Peleas
                             {
                                 cellX = Math.Ceiling(xPadX);
                             }
-                            if (get_Es_Celda_Obstruida(cellX, cellY, map, celdas_ocupadas, celda_destino.id, anterior_x, anterior_y))
+                            if (get_Es_Celda_Obstruida(cellX, cellY, mapa, celdas_ocupadas, celda_destino.id, anterior_x, anterior_y))
                                 return true;
                             anterior_x = cellX;
                             anterior_y = cellY;
@@ -462,7 +462,7 @@ namespace Bot_Dofus_1._29._1.Otros.Peleas
                             if ((beforeX == cellX && afterX < cellX) || (afterX == cellX && beforeX < cellX))
                                 cellX = Math.Floor(xPadX);
 
-                            if (get_Es_Celda_Obstruida(cellX, cellY, map, celdas_ocupadas, celda_destino.id, anterior_x, anterior_y))
+                            if (get_Es_Celda_Obstruida(cellX, cellY, mapa, celdas_ocupadas, celda_destino.id, anterior_x, anterior_y))
                                 return true;
 
                             anterior_x = cellX;
@@ -470,7 +470,7 @@ namespace Bot_Dofus_1._29._1.Otros.Peleas
                         }
                         else if (Math.Floor(diffBeforeCenterX * 100) <= error_superior)
                         {
-                            if (get_Es_Celda_Obstruida(Math.Floor(afterX), cellY, map, celdas_ocupadas, celda_destino.id, anterior_x, anterior_y))
+                            if (get_Es_Celda_Obstruida(Math.Floor(afterX), cellY, mapa, celdas_ocupadas, celda_destino.id, anterior_x, anterior_y))
                                 return true;
 
                             anterior_x = Math.Floor(afterX);
@@ -478,7 +478,7 @@ namespace Bot_Dofus_1._29._1.Otros.Peleas
                         }
                         else if (Math.Floor(diffCenterAfterX * 100) >= error_info)
                         {
-                            if (get_Es_Celda_Obstruida(Math.Floor(beforeX), cellY, map, celdas_ocupadas, celda_destino.id, anterior_x, anterior_y))
+                            if (get_Es_Celda_Obstruida(Math.Floor(beforeX), cellY, mapa, celdas_ocupadas, celda_destino.id, anterior_x, anterior_y))
                                 return true;
 
                             anterior_x = Math.Floor(beforeX);
@@ -486,16 +486,16 @@ namespace Bot_Dofus_1._29._1.Otros.Peleas
                         }
                         else
                         {
-                            if (get_Es_Celda_Obstruida(Math.Floor(beforeX), cellY, map, celdas_ocupadas, celda_destino.id, anterior_x, anterior_y)) return true;
+                            if (get_Es_Celda_Obstruida(Math.Floor(beforeX), cellY, mapa, celdas_ocupadas, celda_destino.id, anterior_x, anterior_y)) return true;
                             anterior_x = Math.Floor(beforeX);
                             anterior_y = cellY;
-                            if (get_Es_Celda_Obstruida(Math.Floor(afterX), cellY, map, celdas_ocupadas, celda_destino.id, anterior_x, anterior_y)) return true;
+                            if (get_Es_Celda_Obstruida(Math.Floor(afterX), cellY, mapa, celdas_ocupadas, celda_destino.id, anterior_x, anterior_y)) return true;
                             anterior_x = Math.Floor(afterX);
                         }
                         break;
 
                     default:
-                        if (get_Es_Celda_Obstruida(Math.Floor(xPadX), Math.Floor(yPadY), map, celdas_ocupadas, celda_destino.id, anterior_x, anterior_y))
+                        if (get_Es_Celda_Obstruida(Math.Floor(xPadX), Math.Floor(yPadY), mapa, celdas_ocupadas, celda_destino.id, anterior_x, anterior_y))
                             return true;
                         anterior_x = Math.Floor(xPadX);
                         anterior_y = Math.Floor(yPadY);
@@ -508,7 +508,7 @@ namespace Bot_Dofus_1._29._1.Otros.Peleas
             return false;
         }
 
-        private static bool get_Es_Celda_Obstruida(double x, double y, Map map, List<short> occupiedCells, int targetCellId, double lastX, double lastY)
+        private static bool get_Es_Celda_Obstruida(double x, double y, Mapa map, List<short> occupiedCells, int targetCellId, double lastX, double lastY)
         {
             Celda mp = map.get_Celda_Por_Coordenadas((int)x, (int)y);
 
@@ -518,21 +518,21 @@ namespace Bot_Dofus_1._29._1.Otros.Peleas
         #region Zona Eventos
         public void get_Combate_Creado()
         {
-            cuenta.Game.Character.timer_regeneracion.Change(Timeout.Infinite, Timeout.Infinite);
-            cuenta.AccountStatus = AccountStatus.Fighting;
+            cuenta.juego.personaje.timer_regeneracion.Change(Timeout.Infinite, Timeout.Infinite);
+            cuenta.Estado_Cuenta = EstadoCuenta.LUCHANDO;
             pelea_creada?.Invoke();
-            cuenta.Logger.log_informacion("PELEA", "Nueva pelea iniciada");
+            cuenta.logger.log_informacion("PELEA", "Nueva pelea iniciada");
         }
 
         public void get_Combate_Acabado()
         {
-            Clean();
+            limpiar();
             pelea_acabada?.Invoke();
-            cuenta.AccountStatus = AccountStatus.ConnectedInactive;
-            cuenta.Logger.log_informacion("PELEA", "Pelea acabada");
+            cuenta.Estado_Cuenta = EstadoCuenta.CONECTADO_INACTIVO;
+            cuenta.logger.log_informacion("PELEA", "Pelea acabada");
         }
 
-        public void Clean()
+        public void limpiar()
         {
             enemigos.Clear();
             aliados.Clear();
@@ -565,7 +565,7 @@ namespace Bot_Dofus_1._29._1.Otros.Peleas
 
         #region Zona Dispose
         public void Dispose() => Dispose(true);
-        ~Fight() => Dispose(false);
+        ~Pelea() => Dispose(false);
         
         public virtual void Dispose(bool disposing)
         {

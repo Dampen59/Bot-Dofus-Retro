@@ -1,6 +1,6 @@
 ﻿namespace Bot_Dofus_1._29._1.Forms
 {
-    partial class GestionAccounts
+    partial class GestionCuentas
     {
         /// <summary>
         /// Required designer variable.
@@ -29,25 +29,25 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GestionAccounts));
-            this.tabControlPrincipalAccounts = new System.Windows.Forms.TabControl();
-            this.ListaAccounts = new System.Windows.Forms.TabPage();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GestionCuentas));
+            this.tabControlPrincipalCuentas = new System.Windows.Forms.TabControl();
+            this.ListaCuentas = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.pictureBox_informacion = new System.Windows.Forms.PictureBox();
-            this.label_informacionClickAccounts = new System.Windows.Forms.Label();
-            this.listViewAccounts = new System.Windows.Forms.ListView();
-            this.ColumnaNombreAccount = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.label_informacionClickCuentas = new System.Windows.Forms.Label();
+            this.listViewCuentas = new System.Windows.Forms.ListView();
+            this.ColumnaNombreCuenta = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ColumnaNombreServidor = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ColumnaNombrePersonaje = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.contextMenuStripFormAccounts = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.contextMenuStripFormCuentas = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.conectarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.modificarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cuentaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contraseñaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nombreDelPersonajeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eliminarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.AgregarAccount = new System.Windows.Forms.TabPage();
+            this.AgregarCuenta = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.pictureBox_informacion_agregar_cuenta = new System.Windows.Forms.PictureBox();
@@ -55,7 +55,7 @@
             this.checkBox_Agregar_Retroceder = new System.Windows.Forms.CheckBox();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
-            this.label_Nombre_Account = new System.Windows.Forms.Label();
+            this.label_Nombre_Cuenta = new System.Windows.Forms.Label();
             this.label_Password = new System.Windows.Forms.Label();
             this.label_Eleccion_Servidor = new System.Windows.Forms.Label();
             this.label_Nombre_Personaje = new System.Windows.Forms.Label();
@@ -66,17 +66,17 @@
             this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
             this.textBox_Password = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
-            this.textBox_Nombre_Account = new System.Windows.Forms.TextBox();
-            this.boton_Agregar_Account = new System.Windows.Forms.Button();
+            this.textBox_Nombre_Cuenta = new System.Windows.Forms.TextBox();
+            this.boton_Agregar_Cuenta = new System.Windows.Forms.Button();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.imagenesFormAccounts = new System.Windows.Forms.ImageList(this.components);
-            this.tabControlPrincipalAccounts.SuspendLayout();
-            this.ListaAccounts.SuspendLayout();
+            this.imagenesFormCuentas = new System.Windows.Forms.ImageList(this.components);
+            this.tabControlPrincipalCuentas.SuspendLayout();
+            this.ListaCuentas.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_informacion)).BeginInit();
-            this.contextMenuStripFormAccounts.SuspendLayout();
-            this.AgregarAccount.SuspendLayout();
+            this.contextMenuStripFormCuentas.SuspendLayout();
+            this.AgregarCuenta.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_informacion_agregar_cuenta)).BeginInit();
@@ -88,41 +88,41 @@
             this.tableLayoutPanel10.SuspendLayout();
             this.SuspendLayout();
             // 
-            // tabControlPrincipalAccounts
+            // tabControlPrincipalCuentas
             // 
-            this.tabControlPrincipalAccounts.Controls.Add(this.ListaAccounts);
-            this.tabControlPrincipalAccounts.Controls.Add(this.AgregarAccount);
-            this.tabControlPrincipalAccounts.Controls.Add(this.tabPage1);
-            this.tabControlPrincipalAccounts.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControlPrincipalAccounts.Font = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.tabControlPrincipalAccounts.ImageList = this.imagenesFormAccounts;
-            this.tabControlPrincipalAccounts.ItemSize = new System.Drawing.Size(137, 28);
-            this.tabControlPrincipalAccounts.Location = new System.Drawing.Point(0, 0);
-            this.tabControlPrincipalAccounts.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.tabControlPrincipalAccounts.Name = "tabControlPrincipalAccounts";
-            this.tabControlPrincipalAccounts.SelectedIndex = 0;
-            this.tabControlPrincipalAccounts.Size = new System.Drawing.Size(463, 398);
-            this.tabControlPrincipalAccounts.TabIndex = 0;
+            this.tabControlPrincipalCuentas.Controls.Add(this.ListaCuentas);
+            this.tabControlPrincipalCuentas.Controls.Add(this.AgregarCuenta);
+            this.tabControlPrincipalCuentas.Controls.Add(this.tabPage1);
+            this.tabControlPrincipalCuentas.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControlPrincipalCuentas.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.tabControlPrincipalCuentas.ImageList = this.imagenesFormCuentas;
+            this.tabControlPrincipalCuentas.ItemSize = new System.Drawing.Size(137, 28);
+            this.tabControlPrincipalCuentas.Location = new System.Drawing.Point(0, 0);
+            this.tabControlPrincipalCuentas.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tabControlPrincipalCuentas.Name = "tabControlPrincipalCuentas";
+            this.tabControlPrincipalCuentas.SelectedIndex = 0;
+            this.tabControlPrincipalCuentas.Size = new System.Drawing.Size(463, 398);
+            this.tabControlPrincipalCuentas.TabIndex = 0;
             // 
-            // ListaAccounts
+            // ListaCuentas
             // 
-            this.ListaAccounts.Controls.Add(this.tableLayoutPanel1);
-            this.ListaAccounts.ImageKey = "lista_cuentas.png";
-            this.ListaAccounts.Location = new System.Drawing.Point(4, 32);
-            this.ListaAccounts.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.ListaAccounts.Name = "ListaAccounts";
-            this.ListaAccounts.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.ListaAccounts.Size = new System.Drawing.Size(455, 362);
-            this.ListaAccounts.TabIndex = 0;
-            this.ListaAccounts.Text = "Lista de cuentas";
-            this.ListaAccounts.UseVisualStyleBackColor = true;
+            this.ListaCuentas.Controls.Add(this.tableLayoutPanel1);
+            this.ListaCuentas.ImageKey = "lista_cuentas.png";
+            this.ListaCuentas.Location = new System.Drawing.Point(4, 32);
+            this.ListaCuentas.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.ListaCuentas.Name = "ListaCuentas";
+            this.ListaCuentas.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.ListaCuentas.Size = new System.Drawing.Size(455, 362);
+            this.ListaCuentas.TabIndex = 0;
+            this.ListaCuentas.Text = "Lista de cuentas";
+            this.ListaCuentas.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.listViewAccounts, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.listViewCuentas, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 4);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -138,7 +138,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.15801F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 89.84199F));
             this.tableLayoutPanel2.Controls.Add(this.pictureBox_informacion, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.label_informacionClickAccounts, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.label_informacionClickCuentas, 1, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 311);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -159,43 +159,43 @@
             this.pictureBox_informacion.TabIndex = 0;
             this.pictureBox_informacion.TabStop = false;
             // 
-            // label_informacionClickAccounts
+            // label_informacionClickCuentas
             // 
-            this.label_informacionClickAccounts.AutoSize = true;
-            this.label_informacionClickAccounts.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label_informacionClickAccounts.Location = new System.Drawing.Point(47, 0);
-            this.label_informacionClickAccounts.Name = "label_informacionClickAccounts";
-            this.label_informacionClickAccounts.Size = new System.Drawing.Size(393, 40);
-            this.label_informacionClickAccounts.TabIndex = 1;
-            this.label_informacionClickAccounts.Text = "Haz clic derecho para conectar/modificar/eliminar una cuenta\r\nDoble clic encima d" +
+            this.label_informacionClickCuentas.AutoSize = true;
+            this.label_informacionClickCuentas.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label_informacionClickCuentas.Location = new System.Drawing.Point(47, 0);
+            this.label_informacionClickCuentas.Name = "label_informacionClickCuentas";
+            this.label_informacionClickCuentas.Size = new System.Drawing.Size(393, 40);
+            this.label_informacionClickCuentas.TabIndex = 1;
+            this.label_informacionClickCuentas.Text = "Haz clic derecho para conectar/modificar/eliminar una cuenta\r\nDoble clic encima d" +
     "e una cuenta para conectarla";
-            this.label_informacionClickAccounts.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label_informacionClickCuentas.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // listViewAccounts
+            // listViewCuentas
             // 
-            this.listViewAccounts.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.ColumnaNombreAccount,
+            this.listViewCuentas.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.ColumnaNombreCuenta,
             this.ColumnaNombreServidor,
             this.ColumnaNombrePersonaje});
-            this.listViewAccounts.ContextMenuStrip = this.contextMenuStripFormAccounts;
-            this.listViewAccounts.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listViewAccounts.FullRowSelect = true;
-            this.listViewAccounts.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.listViewAccounts.HideSelection = false;
-            this.listViewAccounts.Location = new System.Drawing.Point(3, 4);
-            this.listViewAccounts.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.listViewAccounts.Name = "listViewAccounts";
-            this.listViewAccounts.Size = new System.Drawing.Size(443, 300);
-            this.listViewAccounts.TabIndex = 1;
-            this.listViewAccounts.UseCompatibleStateImageBehavior = false;
-            this.listViewAccounts.View = System.Windows.Forms.View.Details;
-            this.listViewAccounts.ColumnWidthChanging += new System.Windows.Forms.ColumnWidthChangingEventHandler(this.listViewAccounts_ColumnWidthChanging);
-            this.listViewAccounts.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listViewAccounts_MouseDoubleClick);
+            this.listViewCuentas.ContextMenuStrip = this.contextMenuStripFormCuentas;
+            this.listViewCuentas.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listViewCuentas.FullRowSelect = true;
+            this.listViewCuentas.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.listViewCuentas.HideSelection = false;
+            this.listViewCuentas.Location = new System.Drawing.Point(3, 4);
+            this.listViewCuentas.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.listViewCuentas.Name = "listViewCuentas";
+            this.listViewCuentas.Size = new System.Drawing.Size(443, 300);
+            this.listViewCuentas.TabIndex = 1;
+            this.listViewCuentas.UseCompatibleStateImageBehavior = false;
+            this.listViewCuentas.View = System.Windows.Forms.View.Details;
+            this.listViewCuentas.ColumnWidthChanging += new System.Windows.Forms.ColumnWidthChangingEventHandler(this.listViewCuentas_ColumnWidthChanging);
+            this.listViewCuentas.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listViewCuentas_MouseDoubleClick);
             // 
-            // ColumnaNombreAccount
+            // ColumnaNombreCuenta
             // 
-            this.ColumnaNombreAccount.Text = "Nombre de Account";
-            this.ColumnaNombreAccount.Width = 148;
+            this.ColumnaNombreCuenta.Text = "Nombre de Cuenta";
+            this.ColumnaNombreCuenta.Width = 148;
             // 
             // ColumnaNombreServidor
             // 
@@ -204,17 +204,17 @@
             // 
             // ColumnaNombrePersonaje
             // 
-            this.ColumnaNombrePersonaje.Text = "Nombre del Character";
+            this.ColumnaNombrePersonaje.Text = "Nombre del personaje";
             this.ColumnaNombrePersonaje.Width = 184;
             // 
-            // contextMenuStripFormAccounts
+            // contextMenuStripFormCuentas
             // 
-            this.contextMenuStripFormAccounts.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.contextMenuStripFormCuentas.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.conectarToolStripMenuItem,
             this.modificarToolStripMenuItem,
             this.eliminarToolStripMenuItem});
-            this.contextMenuStripFormAccounts.Name = "contextMenuStripFormAccounts";
-            this.contextMenuStripFormAccounts.Size = new System.Drawing.Size(126, 70);
+            this.contextMenuStripFormCuentas.Name = "contextMenuStripFormCuentas";
+            this.contextMenuStripFormCuentas.Size = new System.Drawing.Size(126, 70);
             // 
             // conectarToolStripMenuItem
             // 
@@ -239,22 +239,22 @@
             // 
             this.cuentaToolStripMenuItem.Name = "cuentaToolStripMenuItem";
             this.cuentaToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
-            this.cuentaToolStripMenuItem.Text = "Account";
-            this.cuentaToolStripMenuItem.Click += new System.EventHandler(this.modificar_Account);
+            this.cuentaToolStripMenuItem.Text = "Cuenta";
+            this.cuentaToolStripMenuItem.Click += new System.EventHandler(this.modificar_Cuenta);
             // 
             // contraseñaToolStripMenuItem
             // 
             this.contraseñaToolStripMenuItem.Name = "contraseñaToolStripMenuItem";
             this.contraseñaToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.contraseñaToolStripMenuItem.Text = "Contraseña";
-            this.contraseñaToolStripMenuItem.Click += new System.EventHandler(this.modificar_Account);
+            this.contraseñaToolStripMenuItem.Click += new System.EventHandler(this.modificar_Cuenta);
             // 
             // nombreDelPersonajeToolStripMenuItem
             // 
             this.nombreDelPersonajeToolStripMenuItem.Name = "nombreDelPersonajeToolStripMenuItem";
             this.nombreDelPersonajeToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
-            this.nombreDelPersonajeToolStripMenuItem.Text = "Nombre del Character";
-            this.nombreDelPersonajeToolStripMenuItem.Click += new System.EventHandler(this.modificar_Account);
+            this.nombreDelPersonajeToolStripMenuItem.Text = "Nombre del personaje";
+            this.nombreDelPersonajeToolStripMenuItem.Click += new System.EventHandler(this.modificar_Cuenta);
             // 
             // eliminarToolStripMenuItem
             // 
@@ -264,18 +264,18 @@
             this.eliminarToolStripMenuItem.Text = "Eliminar";
             this.eliminarToolStripMenuItem.Click += new System.EventHandler(this.eliminarToolStripMenuItem_Click);
             // 
-            // AgregarAccount
+            // AgregarCuenta
             // 
-            this.AgregarAccount.Controls.Add(this.tableLayoutPanel3);
-            this.AgregarAccount.ImageKey = "agregar_cuenta.png";
-            this.AgregarAccount.Location = new System.Drawing.Point(4, 32);
-            this.AgregarAccount.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.AgregarAccount.Name = "AgregarAccount";
-            this.AgregarAccount.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.AgregarAccount.Size = new System.Drawing.Size(455, 362);
-            this.AgregarAccount.TabIndex = 1;
-            this.AgregarAccount.Text = "Agregar una cuenta";
-            this.AgregarAccount.UseVisualStyleBackColor = true;
+            this.AgregarCuenta.Controls.Add(this.tableLayoutPanel3);
+            this.AgregarCuenta.ImageKey = "agregar_cuenta.png";
+            this.AgregarCuenta.Location = new System.Drawing.Point(4, 32);
+            this.AgregarCuenta.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.AgregarCuenta.Name = "AgregarCuenta";
+            this.AgregarCuenta.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.AgregarCuenta.Size = new System.Drawing.Size(455, 362);
+            this.AgregarCuenta.TabIndex = 1;
+            this.AgregarCuenta.Text = "Agregar una cuenta";
+            this.AgregarCuenta.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel3
             // 
@@ -331,7 +331,7 @@
             this.label1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.label1.Size = new System.Drawing.Size(400, 35);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Deja el campo \"Character\" en blanco si quieres que el bot conecte el primer perso" +
+            this.label1.Text = "Deja el campo \"personaje\" en blanco si quieres que el bot conecte el primer perso" +
     "naje de la cuenta";
             // 
             // checkBox_Agregar_Retroceder
@@ -352,7 +352,7 @@
             this.tableLayoutPanel5.ColumnCount = 1;
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel5.Controls.Add(this.tableLayoutPanel6, 0, 0);
-            this.tableLayoutPanel5.Controls.Add(this.boton_Agregar_Account, 0, 1);
+            this.tableLayoutPanel5.Controls.Add(this.boton_Agregar_Cuenta, 0, 1);
             this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel5.Location = new System.Drawing.Point(3, 44);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
@@ -367,7 +367,7 @@
             this.tableLayoutPanel6.ColumnCount = 2;
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28.96552F));
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 71.03448F));
-            this.tableLayoutPanel6.Controls.Add(this.label_Nombre_Account, 0, 0);
+            this.tableLayoutPanel6.Controls.Add(this.label_Nombre_Cuenta, 0, 0);
             this.tableLayoutPanel6.Controls.Add(this.label_Password, 0, 1);
             this.tableLayoutPanel6.Controls.Add(this.label_Eleccion_Servidor, 0, 2);
             this.tableLayoutPanel6.Controls.Add(this.label_Nombre_Personaje, 0, 3);
@@ -386,17 +386,17 @@
             this.tableLayoutPanel6.Size = new System.Drawing.Size(437, 238);
             this.tableLayoutPanel6.TabIndex = 2;
             // 
-            // label_Nombre_Account
+            // label_Nombre_Cuenta
             // 
-            this.label_Nombre_Account.AutoSize = true;
-            this.label_Nombre_Account.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label_Nombre_Account.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label_Nombre_Account.Location = new System.Drawing.Point(3, 0);
-            this.label_Nombre_Account.Name = "label_Nombre_Account";
-            this.label_Nombre_Account.Size = new System.Drawing.Size(120, 59);
-            this.label_Nombre_Account.TabIndex = 1;
-            this.label_Nombre_Account.Text = "Account:";
-            this.label_Nombre_Account.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label_Nombre_Cuenta.AutoSize = true;
+            this.label_Nombre_Cuenta.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label_Nombre_Cuenta.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_Nombre_Cuenta.Location = new System.Drawing.Point(3, 0);
+            this.label_Nombre_Cuenta.Name = "label_Nombre_Cuenta";
+            this.label_Nombre_Cuenta.Size = new System.Drawing.Size(120, 59);
+            this.label_Nombre_Cuenta.TabIndex = 1;
+            this.label_Nombre_Cuenta.Text = "Cuenta:";
+            this.label_Nombre_Cuenta.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label_Password
             // 
@@ -522,7 +522,7 @@
             // 
             this.tableLayoutPanel10.ColumnCount = 1;
             this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel10.Controls.Add(this.textBox_Nombre_Account, 0, 1);
+            this.tableLayoutPanel10.Controls.Add(this.textBox_Nombre_Cuenta, 0, 1);
             this.tableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel10.Location = new System.Drawing.Point(129, 3);
             this.tableLayoutPanel10.Name = "tableLayoutPanel10";
@@ -533,25 +533,25 @@
             this.tableLayoutPanel10.Size = new System.Drawing.Size(305, 53);
             this.tableLayoutPanel10.TabIndex = 1;
             // 
-            // textBox_Nombre_Account
+            // textBox_Nombre_Cuenta
             // 
-            this.textBox_Nombre_Account.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox_Nombre_Account.Location = new System.Drawing.Point(3, 20);
-            this.textBox_Nombre_Account.MaxLength = 25;
-            this.textBox_Nombre_Account.Name = "textBox_Nombre_Account";
-            this.textBox_Nombre_Account.Size = new System.Drawing.Size(299, 25);
-            this.textBox_Nombre_Account.TabIndex = 2;
+            this.textBox_Nombre_Cuenta.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox_Nombre_Cuenta.Location = new System.Drawing.Point(3, 20);
+            this.textBox_Nombre_Cuenta.MaxLength = 25;
+            this.textBox_Nombre_Cuenta.Name = "textBox_Nombre_Cuenta";
+            this.textBox_Nombre_Cuenta.Size = new System.Drawing.Size(299, 25);
+            this.textBox_Nombre_Cuenta.TabIndex = 2;
             // 
-            // boton_Agregar_Account
+            // boton_Agregar_Cuenta
             // 
-            this.boton_Agregar_Account.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.boton_Agregar_Account.Location = new System.Drawing.Point(3, 247);
-            this.boton_Agregar_Account.Name = "boton_Agregar_Account";
-            this.boton_Agregar_Account.Size = new System.Drawing.Size(437, 29);
-            this.boton_Agregar_Account.TabIndex = 9;
-            this.boton_Agregar_Account.Text = "Agregar cuenta";
-            this.boton_Agregar_Account.UseVisualStyleBackColor = true;
-            this.boton_Agregar_Account.Click += new System.EventHandler(this.boton_Agregar_Account_Click);
+            this.boton_Agregar_Cuenta.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.boton_Agregar_Cuenta.Location = new System.Drawing.Point(3, 247);
+            this.boton_Agregar_Cuenta.Name = "boton_Agregar_Cuenta";
+            this.boton_Agregar_Cuenta.Size = new System.Drawing.Size(437, 29);
+            this.boton_Agregar_Cuenta.TabIndex = 9;
+            this.boton_Agregar_Cuenta.Text = "Agregar cuenta";
+            this.boton_Agregar_Cuenta.UseVisualStyleBackColor = true;
+            this.boton_Agregar_Cuenta.Click += new System.EventHandler(this.boton_Agregar_Cuenta_Click);
             // 
             // tabPage1
             // 
@@ -564,19 +564,19 @@
             this.tabPage1.Text = "Agregar varias cuentas";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // imagenesFormAccounts
+            // imagenesFormCuentas
             // 
-            this.imagenesFormAccounts.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imagenesFormAccounts.ImageStream")));
-            this.imagenesFormAccounts.TransparentColor = System.Drawing.Color.Transparent;
-            this.imagenesFormAccounts.Images.SetKeyName(0, "agregar_cuenta.png");
-            this.imagenesFormAccounts.Images.SetKeyName(1, "lista_cuentas.png");
+            this.imagenesFormCuentas.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imagenesFormCuentas.ImageStream")));
+            this.imagenesFormCuentas.TransparentColor = System.Drawing.Color.Transparent;
+            this.imagenesFormCuentas.Images.SetKeyName(0, "agregar_cuenta.png");
+            this.imagenesFormCuentas.Images.SetKeyName(1, "lista_cuentas.png");
             // 
-            // GestionAccounts
+            // GestionCuentas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(463, 398);
-            this.Controls.Add(this.tabControlPrincipalAccounts);
+            this.Controls.Add(this.tabControlPrincipalCuentas);
             this.Font = new System.Drawing.Font("Segoe UI", 9.75F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -584,18 +584,18 @@
             this.MaximumSize = new System.Drawing.Size(479, 437);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(479, 437);
-            this.Name = "GestionAccounts";
+            this.Name = "GestionCuentas";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Gestor cuentas";
-            this.tabControlPrincipalAccounts.ResumeLayout(false);
-            this.ListaAccounts.ResumeLayout(false);
+            this.tabControlPrincipalCuentas.ResumeLayout(false);
+            this.ListaCuentas.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_informacion)).EndInit();
-            this.contextMenuStripFormAccounts.ResumeLayout(false);
-            this.AgregarAccount.ResumeLayout(false);
+            this.contextMenuStripFormCuentas.ResumeLayout(false);
+            this.AgregarCuenta.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
             this.tableLayoutPanel4.ResumeLayout(false);
@@ -617,15 +617,15 @@
 
         #endregion
 
-        private System.Windows.Forms.TabControl tabControlPrincipalAccounts;
-        private System.Windows.Forms.TabPage ListaAccounts;
-        private System.Windows.Forms.TabPage AgregarAccount;
-        private System.Windows.Forms.ImageList imagenesFormAccounts;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStripFormAccounts;
+        private System.Windows.Forms.TabControl tabControlPrincipalCuentas;
+        private System.Windows.Forms.TabPage ListaCuentas;
+        private System.Windows.Forms.TabPage AgregarCuenta;
+        private System.Windows.Forms.ImageList imagenesFormCuentas;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripFormCuentas;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.PictureBox pictureBox_informacion;
-        private System.Windows.Forms.Label label_informacionClickAccounts;
+        private System.Windows.Forms.Label label_informacionClickCuentas;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.PictureBox pictureBox_informacion_agregar_cuenta;
@@ -633,10 +633,10 @@
         private System.Windows.Forms.CheckBox checkBox_Agregar_Retroceder;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
-        private System.Windows.Forms.Label label_Nombre_Account;
+        private System.Windows.Forms.Label label_Nombre_Cuenta;
         private System.Windows.Forms.Label label_Password;
         private System.Windows.Forms.Label label_Eleccion_Servidor;
-        private System.Windows.Forms.Button boton_Agregar_Account;
+        private System.Windows.Forms.Button boton_Agregar_Cuenta;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel7;
         private System.Windows.Forms.Label label_Nombre_Personaje;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel8;
@@ -644,9 +644,9 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel9;
         private System.Windows.Forms.TextBox textBox_Password;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel10;
-        private System.Windows.Forms.TextBox textBox_Nombre_Account;
-        private System.Windows.Forms.ListView listViewAccounts;
-        private System.Windows.Forms.ColumnHeader ColumnaNombreAccount;
+        private System.Windows.Forms.TextBox textBox_Nombre_Cuenta;
+        private System.Windows.Forms.ListView listViewCuentas;
+        private System.Windows.Forms.ColumnHeader ColumnaNombreCuenta;
         private System.Windows.Forms.ColumnHeader ColumnaNombreServidor;
         private System.Windows.Forms.ColumnHeader ColumnaNombrePersonaje;
         private System.Windows.Forms.ToolStripMenuItem conectarToolStripMenuItem;

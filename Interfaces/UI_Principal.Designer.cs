@@ -286,9 +286,9 @@ namespace Bot_Dofus_1._29._1.Interfaces
             this.lista_imagenes.TransparentColor = System.Drawing.Color.Transparent;
             this.lista_imagenes.Images.SetKeyName(0, "terminal.png");
             this.lista_imagenes.Images.SetKeyName(1, "debugger.png");
-            this.lista_imagenes.Images.SetKeyName(2, "Character.png");
+            this.lista_imagenes.Images.SetKeyName(2, "personaje.png");
             this.lista_imagenes.Images.SetKeyName(3, "inventario.png");
-            this.lista_imagenes.Images.SetKeyName(4, "Map.png");
+            this.lista_imagenes.Images.SetKeyName(4, "mapa.png");
             this.lista_imagenes.Images.SetKeyName(5, "pelea.png");
             this.lista_imagenes.Images.SetKeyName(6, "bolsa_dinero.png");
             this.lista_imagenes.Images.SetKeyName(7, "ajustes.png");

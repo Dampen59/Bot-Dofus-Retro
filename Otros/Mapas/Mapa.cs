@@ -19,7 +19,7 @@ using System.Xml.Linq;
 
 namespace Bot_Dofus_1._29._1.Otros.Mapas
 {
-    public class Map : IEliminable, IDisposable
+    public class Mapa : IEliminable, IDisposable
     {
         public int id { get; set; }
         public byte anchura { get; set; }
@@ -36,7 +36,7 @@ namespace Bot_Dofus_1._29._1.Otros.Mapas
         public event Action entidades_actualizadas;
         private bool disposed = false;
 
-        public Map()
+        public Mapa()
         {
             entidades = new ConcurrentDictionary<int, Entidad>();
             interactivos = new ConcurrentDictionary<int, ObjetoInteractivo>();
@@ -160,9 +160,9 @@ namespace Bot_Dofus_1._29._1.Otros.Mapas
 
         #region Zona Dispose
         public void Dispose() => Dispose(true);
-        ~Map() => Dispose(false);
+        ~Mapa() => Dispose(false);
 
-        public void Clean()
+        public void limpiar()
         {
             id = 0;
             x = 0;

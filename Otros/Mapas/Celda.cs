@@ -34,7 +34,7 @@ namespace Bot_Dofus_1._29._1.Otros.Mapas
 
         public static readonly int[] texturas_teleport = { 1030, 1029, 1764, 2298, 745 };
 
-        public Celda(short _id, bool esta_activa, TipoCelda _tipo, bool _es_linea_vision, byte _nivel, byte _slope, short _objeto_interactivo_id, short _layer_object_1_num, short _layer_object_2_num, Map map)
+        public Celda(short _id, bool esta_activa, TipoCelda _tipo, bool _es_linea_vision, byte _nivel, byte _slope, short _objeto_interactivo_id, short _layer_object_1_num, short _layer_object_2_num, Mapa _mapa)
         {
             id = _id;
             activa = esta_activa;
@@ -50,10 +50,10 @@ namespace Bot_Dofus_1._29._1.Otros.Mapas
             if (_objeto_interactivo_id != -1)
             {
                 objeto_interactivo = new ObjetoInteractivo(_objeto_interactivo_id, this);
-                map.interactivos.TryAdd(id, objeto_interactivo);
+                _mapa.interactivos.TryAdd(id, objeto_interactivo);
             }
 
-            byte mapa_anchura = map.anchura;
+            byte mapa_anchura = _mapa.anchura;
             int _loc5 = id / ((mapa_anchura * 2) - 1);
             int _loc6 = id - (_loc5 * ((mapa_anchura * 2) - 1));
             int _loc7 = _loc6 % mapa_anchura;

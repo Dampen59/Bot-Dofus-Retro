@@ -204,7 +204,7 @@
             // 
             // ColumnaNombrePersonaje
             // 
-            this.ColumnaNombrePersonaje.Text = "Nombre del personaje";
+            this.ColumnaNombrePersonaje.Text = "Nombre del Character";
             this.ColumnaNombrePersonaje.Width = 184;
             // 
             // contextMenuStripFormAccounts
@@ -253,7 +253,7 @@
             // 
             this.nombreDelPersonajeToolStripMenuItem.Name = "nombreDelPersonajeToolStripMenuItem";
             this.nombreDelPersonajeToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
-            this.nombreDelPersonajeToolStripMenuItem.Text = "Nombre del personaje";
+            this.nombreDelPersonajeToolStripMenuItem.Text = "Nombre del Character";
             this.nombreDelPersonajeToolStripMenuItem.Click += new System.EventHandler(this.modificar_Account);
             // 
             // eliminarToolStripMenuItem
@@ -331,7 +331,7 @@
             this.label1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.label1.Size = new System.Drawing.Size(400, 35);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Deja el campo \"personaje\" en blanco si quieres que el bot conecte el primer perso" +
+            this.label1.Text = "Deja el campo \"Character\" en blanco si quieres que el bot conecte el primer perso" +
     "naje de la cuenta";
             // 
             // checkBox_Agregar_Retroceder

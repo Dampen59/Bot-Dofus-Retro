@@ -22,31 +22,31 @@ namespace Bot_Dofus_1._29._1.Interfaces
             cuenta = _cuenta;
 
             refrescar_Lista_Hechizos();
-            cuenta.juego.personaje.hechizos_actualizados += actualizar_Agregar_Lista_Hechizos;
+            cuenta.Game.Character.hechizos_actualizados += actualizar_Agregar_Lista_Hechizos;
         }
 
         private void UI_Pelea_Load(object sender, EventArgs e)
         {
             comboBox_focus_hechizo.SelectedIndex = 0;
-            checkbox_espectadores.Checked = cuenta.pelea_extension.configuracion.desactivar_espectador;
+            checkbox_espectadores.Checked = cuenta.CombatExtensions.configuracion.desactivar_espectador;
 
-            if (cuenta.puede_utilizar_dragopavo)
-                checkBox_utilizar_dragopavo.Checked = cuenta.pelea_extension.configuracion.utilizar_dragopavo;
+            if (cuenta.CanUseDrago)
+                checkBox_utilizar_dragopavo.Checked = cuenta.CombatExtensions.configuracion.utilizar_dragopavo;
             else
                 checkBox_utilizar_dragopavo.Enabled = false;
 
-            comboBox_lista_tactica.SelectedIndex = (byte)cuenta.pelea_extension.configuracion.tactica;
-            comboBox_lista_posicionamiento.SelectedIndex = (byte)cuenta.pelea_extension.configuracion.posicionamiento;
+            comboBox_lista_tactica.SelectedIndex = (byte)cuenta.CombatExtensions.configuracion.tactica;
+            comboBox_lista_posicionamiento.SelectedIndex = (byte)cuenta.CombatExtensions.configuracion.posicionamiento;
             comboBox_modo_lanzamiento.SelectedIndex = 0;
-            numericUp_regeneracion1.Value = cuenta.pelea_extension.configuracion.iniciar_regeneracion;
-            numericUp_regeneracion2.Value = cuenta.pelea_extension.configuracion.detener_regeneracion;
+            numericUp_regeneracion1.Value = cuenta.CombatExtensions.configuracion.iniciar_regeneracion;
+            numericUp_regeneracion2.Value = cuenta.CombatExtensions.configuracion.detener_regeneracion;
         }
 
         private void actualizar_Agregar_Lista_Hechizos()
         {
             comboBox_lista_hechizos.DisplayMember = "nombre";
             comboBox_lista_hechizos.ValueMember = "id";
-            comboBox_lista_hechizos.DataSource = cuenta.juego.personaje.hechizos.Values.ToList();
+            comboBox_lista_hechizos.DataSource = cuenta.Game.Character.hechizos.Values.ToList();
 
             comboBox_lista_hechizos.SelectedIndex = 0;
         }
@@ -54,8 +54,8 @@ namespace Bot_Dofus_1._29._1.Interfaces
         private void button_agregar_hechizo_Click(object sender, EventArgs e)
         {
             Hechizo hechizo = comboBox_lista_hechizos.SelectedItem as Hechizo;
-            cuenta.pelea_extension.configuracion.hechizos.Add(new HechizoPelea(hechizo.id, hechizo.nombre, (HechizoFocus)comboBox_focus_hechizo.SelectedIndex, (MetodoLanzamiento)comboBox_modo_lanzamiento.SelectedIndex, Convert.ToByte(numeric_lanzamientos_turno.Value)));
-            cuenta.pelea_extension.configuracion.guardar();
+            cuenta.CombatExtensions.configuracion.hechizos.Add(new HechizoPelea(hechizo.id, hechizo.nombre, (HechizoFocus)comboBox_focus_hechizo.SelectedIndex, (MetodoLanzamiento)comboBox_modo_lanzamiento.SelectedIndex, Convert.ToByte(numeric_lanzamientos_turno.Value)));
+            cuenta.CombatExtensions.configuracion.guardar();
             refrescar_Lista_Hechizos();
         }
 
@@ -63,7 +63,7 @@ namespace Bot_Dofus_1._29._1.Interfaces
         {
             listView_hechizos_pelea.Items.Clear();
 
-            foreach(HechizoPelea hechizo in cuenta.pelea_extension.configuracion.hechizos)
+            foreach(HechizoPelea hechizo in cuenta.CombatExtensions.configuracion.hechizos)
             {
                 listView_hechizos_pelea.Items.Add(hechizo.id.ToString()).SubItems.AddRange(new string[4]
                 {
@@ -77,12 +77,12 @@ namespace Bot_Dofus_1._29._1.Interfaces
             if (listView_hechizos_pelea.FocusedItem == null || listView_hechizos_pelea.FocusedItem.Index == 0)
                 return;
 
-            List<HechizoPelea> hechizo = cuenta.pelea_extension.configuracion.hechizos;
+            List<HechizoPelea> hechizo = cuenta.CombatExtensions.configuracion.hechizos;
             HechizoPelea temporal = hechizo[listView_hechizos_pelea.FocusedItem.Index - 1];
 
             hechizo[listView_hechizos_pelea.FocusedItem.Index - 1] = hechizo[listView_hechizos_pelea.FocusedItem.Index];
             hechizo[listView_hechizos_pelea.FocusedItem.Index] = temporal;
-            cuenta.pelea_extension.configuracion.guardar();
+            cuenta.CombatExtensions.configuracion.guardar();
             refrescar_Lista_Hechizos();
         }
 
@@ -91,63 +91,63 @@ namespace Bot_Dofus_1._29._1.Interfaces
             if (listView_hechizos_pelea.FocusedItem == null || listView_hechizos_pelea.FocusedItem.Index == 0)
                 return;
 
-            List<HechizoPelea> hechizo = cuenta.pelea_extension.configuracion.hechizos;
+            List<HechizoPelea> hechizo = cuenta.CombatExtensions.configuracion.hechizos;
             HechizoPelea temporal = hechizo[listView_hechizos_pelea.FocusedItem.Index + 1];
 
             hechizo[listView_hechizos_pelea.FocusedItem.Index + 1] = hechizo[listView_hechizos_pelea.FocusedItem.Index];
             hechizo[listView_hechizos_pelea.FocusedItem.Index] = temporal;
-            cuenta.pelea_extension.configuracion.guardar();
+            cuenta.CombatExtensions.configuracion.guardar();
             refrescar_Lista_Hechizos();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Mapa mapa = cuenta.juego.mapa;
+            Map map = cuenta.Game.Map;
 
-            List<Monstruos> monstruos = cuenta.juego.mapa.lista_monstruos();
+            List<Monstruos> monstruos = cuenta.Game.Map.lista_monstruos();
 
             if (monstruos.Count > 0)
             {
-                Celda celda_actual = cuenta.juego.personaje.celda, celda_monstruo_destino = monstruos[0].celda;
+                Celda celda_actual = cuenta.Game.Character.celda, celda_monstruo_destino = monstruos[0].celda;
 
                 if (celda_actual.id != celda_monstruo_destino.id & celda_monstruo_destino.id > 0)
                 {
-                    cuenta.logger.log_informacion("UI_PELEAS", "Monstruo encontrado en la casilla " + celda_monstruo_destino.id);
+                    cuenta.Logger.log_informacion("UI_PELEAS", "Monstruo encontrado en la casilla " + celda_monstruo_destino.id);
 
-                    switch (cuenta.juego.manejador.movimientos.get_Mover_A_Celda(celda_monstruo_destino, new List<Celda>()))
+                    switch (cuenta.Game.Handler.movimientos.get_Mover_A_Celda(celda_monstruo_destino, new List<Celda>()))
                     {
                         case ResultadoMovimientos.EXITO:
-                            cuenta.logger.log_informacion("UI_PELEAS", "Desplazando para comenzar el combate");
+                            cuenta.Logger.log_informacion("UI_PELEAS", "Desplazando para comenzar el combate");
                         break;
 
                         case ResultadoMovimientos.MISMA_CELDA:
                         case ResultadoMovimientos.FALLO:
                         case ResultadoMovimientos.PATHFINDING_ERROR:
-                            cuenta.logger.log_Error("UI_PELEAS", "El monstruo no esta en la casilla selecciona");
+                            cuenta.Logger.log_Error("UI_PELEAS", "El monstruo no esta en la casilla selecciona");
                         break;
                     }
                 }
             }
             else
-                cuenta.logger.log_Error("PELEAS", "No hay monstruos disponibles en el mapa");
+                cuenta.Logger.log_Error("PELEAS", "No hay monstruos disponibles en el Map");
         }
 
         private void checkbox_espectadores_CheckedChanged(object sender, EventArgs e)
         {
-            cuenta.pelea_extension.configuracion.desactivar_espectador = checkbox_espectadores.Checked;
-            cuenta.pelea_extension.configuracion.guardar();
+            cuenta.CombatExtensions.configuracion.desactivar_espectador = checkbox_espectadores.Checked;
+            cuenta.CombatExtensions.configuracion.guardar();
         }
 
         private void checkBox_utilizar_dragopavo_CheckedChanged(object sender, EventArgs e)
         {
-            cuenta.pelea_extension.configuracion.utilizar_dragopavo = checkBox_utilizar_dragopavo.Checked;
-            cuenta.pelea_extension.configuracion.guardar();
+            cuenta.CombatExtensions.configuracion.utilizar_dragopavo = checkBox_utilizar_dragopavo.Checked;
+            cuenta.CombatExtensions.configuracion.guardar();
         }
 
         private void comboBox_lista_tactica_SelectedIndexChanged(object sender, EventArgs e)
         {
-            cuenta.pelea_extension.configuracion.tactica = (Tactica)comboBox_lista_tactica.SelectedIndex;
-            cuenta.pelea_extension.configuracion.guardar();
+            cuenta.CombatExtensions.configuracion.tactica = (Tactica)comboBox_lista_tactica.SelectedIndex;
+            cuenta.CombatExtensions.configuracion.guardar();
         }
 
         private void button_eliminar_hechizo_Click(object sender, EventArgs e)
@@ -155,27 +155,27 @@ namespace Bot_Dofus_1._29._1.Interfaces
             if (listView_hechizos_pelea.FocusedItem == null)
                 return;
 
-            cuenta.pelea_extension.configuracion.hechizos.RemoveAt(listView_hechizos_pelea.FocusedItem.Index);
-            cuenta.pelea_extension.configuracion.guardar();
+            cuenta.CombatExtensions.configuracion.hechizos.RemoveAt(listView_hechizos_pelea.FocusedItem.Index);
+            cuenta.CombatExtensions.configuracion.guardar();
             refrescar_Lista_Hechizos();
         }
 
         private void comboBox_lista_posicionamiento_SelectedIndexChanged(object sender, EventArgs e)
         {
-            cuenta.pelea_extension.configuracion.posicionamiento = (PosicionamientoInicioPelea)comboBox_lista_posicionamiento.SelectedIndex;
-            cuenta.pelea_extension.configuracion.guardar();
+            cuenta.CombatExtensions.configuracion.posicionamiento = (PosicionamientoInicioPelea)comboBox_lista_posicionamiento.SelectedIndex;
+            cuenta.CombatExtensions.configuracion.guardar();
         }
 
         private void NumericUp_regeneracion1_ValueChanged(object sender, EventArgs e)
         {
-            cuenta.pelea_extension.configuracion.iniciar_regeneracion = (byte)numericUp_regeneracion1.Value;
-            cuenta.pelea_extension.configuracion.guardar();
+            cuenta.CombatExtensions.configuracion.iniciar_regeneracion = (byte)numericUp_regeneracion1.Value;
+            cuenta.CombatExtensions.configuracion.guardar();
         }
 
         private void NumericUp_regeneracion2_ValueChanged(object sender, EventArgs e)
         {
-            cuenta.pelea_extension.configuracion.detener_regeneracion = (byte)numericUp_regeneracion2.Value;
-            cuenta.pelea_extension.configuracion.guardar();
+            cuenta.CombatExtensions.configuracion.detener_regeneracion = (byte)numericUp_regeneracion2.Value;
+            cuenta.CombatExtensions.configuracion.guardar();
         }
     }
 }

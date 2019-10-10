@@ -11,14 +11,14 @@ using System.IO;
 
 namespace Bot_Dofus_1._29._1.Utilidades.Configuracion
 {
-    public class AccountConf
+    public class AccountConfiguration
     {
         public string nombre_cuenta { get; set; } = string.Empty;
         public string password { get; set; } = string.Empty;
         public string servidor { get; set; } = string.Empty;
         public string nombre_personaje { get; set; } = string.Empty;
 
-        public AccountConf(string _nombre_cuenta, string _password, string _servidor, string _nombre_personaje)
+        public AccountConfiguration(string _nombre_cuenta, string _password, string _servidor, string _nombre_personaje)
         {
             nombre_cuenta = _nombre_cuenta;
             password = _password;
@@ -34,11 +34,11 @@ namespace Bot_Dofus_1._29._1.Utilidades.Configuracion
             bw.Write(nombre_personaje);
         }
 
-        public static AccountConf cargar_Una_Account(BinaryReader br)
+        public static AccountConfiguration cargar_Una_Account(BinaryReader br)
         {
             try
             {
-                return new AccountConf(br.ReadString(), br.ReadString(), br.ReadString(), br.ReadString());
+                return new AccountConfiguration(br.ReadString(), br.ReadString(), br.ReadString(), br.ReadString());
             }
             catch
             {

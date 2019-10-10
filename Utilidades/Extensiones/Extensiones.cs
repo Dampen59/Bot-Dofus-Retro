@@ -5,33 +5,33 @@ namespace Bot_Dofus_1._29._1.Utilidades.Extensiones
 {
     public static class Extensiones
     {
-        public static string cadena_Amigable(this EstadoAccount estado)
+        public static string cadena_Amigable(this AccountStatus estado)
         {
             switch (estado)
             {
-                case EstadoAccount.CONECTANDO:
+                case AccountStatus.CONECTANDO:
                     return "Conectando";
-                case EstadoAccount.DESCONECTADO:
+                case AccountStatus.Disconnected:
                     return "Desconectado";
-                case EstadoAccount.INTERCAMBIO:
+                case AccountStatus.Exchanging:
                     return "Intercambiando";
-                case EstadoAccount.LUCHANDO:
+                case AccountStatus.Fighting:
                     return "Combate";
-                case EstadoAccount.RECOLECTANDO:
+                case AccountStatus.Collecting:
                     return "Recolectando";
-                case EstadoAccount.MOVIMIENTO:
+                case AccountStatus.Moving:
                     return "Desplazando";
-                case EstadoAccount.CONECTADO_INACTIVO:
+                case AccountStatus.ConnectedInactive:
                     return "Inactivo";
-                case EstadoAccount.ALMACENAMIENTO:
+                case AccountStatus.Storing:
                     return "Almacenamiento";
-                case EstadoAccount.DIALOGANDO:
+                case AccountStatus.Dialoguing:
                     return "Dialogando";
-                case EstadoAccount.COMPRANDO:
+                case AccountStatus.Buying:
                     return "Comprando";
-                case EstadoAccount.VENDIENDO:
+                case AccountStatus.Selling:
                     return "Vendiendo";
-                case EstadoAccount.REGENERANDO:
+                case AccountStatus.Regenerating:
                     return "Regenerando Vida";
                 default:
                     return "-";

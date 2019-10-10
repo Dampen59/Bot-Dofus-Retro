@@ -186,10 +186,10 @@
       <DependentUpon>UI_Debugger.cs</DependentUpon>
     </Compile>
     <Compile Include="Otros\Account.cs" />
-    <Compile Include="Otros\Game\Servidor\ServidorJuego.cs" />
+    <Compile Include="Otros\Game\Servidor\GameServer.cs" />
     <Compile Include="Otros\Mapas\Entidades\Entidad.cs" />
     <Compile Include="Otros\Game\Manejadores\Interactivos\Interactivo.cs" />
-    <Compile Include="Otros\Game\Manejadores\Manejador.cs" />
+    <Compile Include="Otros\Game\Manejadores\Handler.cs" />
     <Compile Include="Otros\Game\Manejadores\Movimientos\Movimiento.cs" />
     <Compile Include="Otros\Game\Manejadores\Recolecciones\Recoleccion.cs" />
     <Compile Include="Otros\Game\Manejadores\Recolecciones\RecoleccionResultado.cs" />
@@ -209,7 +209,7 @@
     <Compile Include="Otros\Game\Personaje\Inventario\ObjetosInventario.cs" />
     <Compile Include="Otros\Game\Personaje\Oficios\Oficio.cs" />
     <Compile Include="Otros\Game\Personaje\Oficios\SkillsOficio.cs" />
-    <Compile Include="Otros\Game\Juego.cs" />
+    <Compile Include="Otros\Game\Game.cs" />
     <Compile Include="Otros\Grupos\Agrupamiento.cs" />
     <Compile Include="Otros\Grupos\Grupo.cs" />
     <Compile Include="Otros\IEliminable.cs" />
@@ -217,7 +217,7 @@
     <Compile Include="Otros\Mapas\Entidades\Personajes.cs" />
     <Compile Include="Otros\Mapas\Interactivo\ObjetoInteractivo.cs" />
     <Compile Include="Otros\Mapas\Interactivo\ObjetoInteractivoModelo.cs" />
-    <Compile Include="Otros\Mapas\Mapa.cs" />
+    <Compile Include="Otros\Mapas\Map.cs" />
     <Compile Include="Otros\Mapas\Movimiento\Mapas\DuracionAnimacion.cs" />
     <Compile Include="Otros\Mapas\Movimiento\Mapas\Pathfinder.cs" />
     <Compile Include="Otros\Mapas\Movimiento\PathFinderUtil.cs" />
@@ -239,11 +239,11 @@
     <Compile Include="Otros\Peleas\Enums\Tactica.cs" />
     <Compile Include="Otros\Peleas\ManejadorHechizos.cs" />
     <Compile Include="Otros\Peleas\Peleadores\Luchadores.cs" />
-    <Compile Include="Otros\Peleas\Pelea.cs" />
+    <Compile Include="Otros\Peleas\Fight.cs" />
     <Compile Include="Otros\Peleas\Peleadores\LuchadorPersonaje.cs" />
-    <Compile Include="Otros\Peleas\PeleaExtensiones.cs" />
+    <Compile Include="Otros\Peleas\CombatExtensions.cs" />
     <Compile Include="Otros\Game\Personaje\Hechizos\Hechizo.cs" />
-    <Compile Include="Otros\Game\Personaje\PersonajeJuego.cs" />
+    <Compile Include="Otros\Game\Personaje\GameCharacter.cs" />
     <Compile Include="Otros\Game\Personaje\PersonajeStatsBase.cs" />
     <Compile Include="Otros\Game\Personaje\PersonajeStats.cs" />
     <Compile Include="Otros\Scripts\Acciones\AccionesScript.cs" />
@@ -276,10 +276,10 @@
     <Compile Include="Otros\Scripts\EstadoScript.cs" />
     <Compile Include="Otros\Scripts\Manejadores\LuaManejadorScript.cs" />
     <Compile Include="Otros\Scripts\Manejadores\ManejadorAcciones.cs" />
-    <Compile Include="Otros\Scripts\ManejadorScript.cs" />
+    <Compile Include="Otros\Scripts\ScriptHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Common\Network\ClienteTcp.cs" />
+    <Compile Include="Common\Network\TcpClient.cs" />
     <Compile Include="Otros\Enums\EstadoCuenta.cs" />
     <Compile Include="Otros\Game\Personaje\Inventario\Enums\TipoObjetosInventario.cs" />
     <Compile Include="Otros\Enums\EstadosServidor.cs" />

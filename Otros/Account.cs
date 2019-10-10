@@ -21,73 +21,73 @@ namespace Bot_Dofus_1._29._1.Otros
 {
     public class Account : IDisposable
     {
-        public string apodo { get; set; } = string.Empty;
-        public string key_bienvenida { get; set; } = string.Empty;
-        public string tiquet_game { get; set; } = string.Empty;
-        public Logger logger { get; private set; }
-        public ClienteTcp conexion { get; set; }
-        public Juego juego { get; private set; }
-        public ManejadorScript script { get; set; }
-        public PeleaExtensiones pelea_extension { get; set; }
-        public AccountConf configuracion { get; private set; }
-        private EstadoAccount estado_cuenta = EstadoAccount.DESCONECTADO;
-        public bool puede_utilizar_dragopavo = false;
+        public string Nickname { get; set; } = string.Empty;
+        public string WelcomeKey { get; set; } = string.Empty;
+        public string GameTicket { get; set; } = string.Empty;
+        public Logger Logger { get; private set; }
+        public TcpClient Connection { get; set; }
+        public Game.Game Game { get; private set; }
+        public ScriptHandler ScriptHandler { get; set; }
+        public CombatExtensions CombatExtensions { get; set; }
+        public AccountConfiguration AccountConfiguration { get; private set; }
+        private AccountStatus _accountStatus = AccountStatus.Disconnected;
+        public bool CanUseDrago = false;
 
-        public Grupo grupo { get; set; }
-        public bool tiene_grupo => grupo != null;
-        public bool es_lider_grupo => !tiene_grupo || grupo.lider == this;
+        public Grupo Group { get; set; }
+        public bool HasGroup => Group != null;
+        public bool IsGroupLeader => !HasGroup || Group.Leader == this;
 
-        private bool disposed;
-        public event Action evento_estado_cuenta;
-        public event Action cuenta_desconectada;
+        private bool _disposed;
+        public event Action AccountStatusEvent;
+        public event Action AccountDisconnectedEvent;
 
-        public Account(AccountConf _configuracion)
+        public Account(AccountConfiguration accountConfiguration)
         {
-            configuracion = _configuracion;
-            logger = new Logger();
-            juego = new Juego(this);
-            pelea_extension = new PeleaExtensiones(this);
-            script = new ManejadorScript(this);
+            AccountConfiguration = accountConfiguration;
+            Logger = new Logger();
+            Game = new Game.Game(this);
+            CombatExtensions = new CombatExtensions(this);
+            ScriptHandler = new ScriptHandler(this);
         }
 
-        public void conectar()
+        public void Connect()
         {
-            conexion = new ClienteTcp(this);
-            conexion.conexion_Servidor(IPAddress.Parse(GlobalConf.ip_conexion), GlobalConf.puerto_conexion);
+            Connection = new TcpClient(this);
+            Connection.ConnectToServer(IPAddress.Parse(GlobalConf.Ip), GlobalConf.Port);
         }
 
-        public void disconnect()
+        public void Disconnect()
         {
-            conexion?.Dispose();
-            conexion = null;
+            Connection?.Dispose();
+            Connection = null;
 
-            script.detener_Script();
-            juego.limpiar();
-            Estado_Account = EstadoAccount.DESCONECTADO;
-            cuenta_desconectada?.Invoke();
+            ScriptHandler.StopScript();
+            Game.Clean();
+            AccountStatus = AccountStatus.Disconnected;
+            AccountDisconnectedEvent?.Invoke();
         }
 
-        public void cambiando_Al_Servidor_Juego(string ip, int puerto)
+        public void ChangeGameServer(string ip, int port)
         {
-            conexion.get_Desconectar_Socket();
-            conexion.conexion_Servidor(IPAddress.Parse(ip), puerto);
+            Connection.DisconnectSocket();
+            Connection.ConnectToServer(IPAddress.Parse(ip), port);
         }
 
-        public EstadoAccount Estado_Account
+        public AccountStatus AccountStatus
         {
-            get => estado_cuenta;
+            get => _accountStatus;
             set
             {
-                estado_cuenta = value;
-                evento_estado_cuenta?.Invoke();
+                _accountStatus = value;
+                AccountStatusEvent?.Invoke();
             }
         }
 
-        public bool esta_ocupado() => Estado_Account != EstadoAccount.CONECTADO_INACTIVO && Estado_Account != EstadoAccount.REGENERANDO;
-        public bool esta_dialogando() => Estado_Account == EstadoAccount.ALMACENAMIENTO || Estado_Account == EstadoAccount.DIALOGANDO || Estado_Account == EstadoAccount.INTERCAMBIO || Estado_Account == EstadoAccount.COMPRANDO || Estado_Account == EstadoAccount.VENDIENDO;
-        public bool esta_luchando() => Estado_Account == EstadoAccount.LUCHANDO;
-        public bool esta_recolectando() => Estado_Account == EstadoAccount.RECOLECTANDO;
-        public bool esta_desplazando() => Estado_Account == EstadoAccount.MOVIMIENTO;
+        public bool IsBusy() => AccountStatus != AccountStatus.ConnectedInactive && AccountStatus != AccountStatus.Regenerating;
+        public bool IsDialoguing() => AccountStatus == AccountStatus.Storing || AccountStatus == AccountStatus.Dialoguing || AccountStatus == AccountStatus.Exchanging || AccountStatus == AccountStatus.Buying || AccountStatus == AccountStatus.Selling;
+        public bool IsFighting() => AccountStatus == AccountStatus.Fighting;
+        public bool IsCollecting() => AccountStatus == AccountStatus.Collecting;
+        public bool IsMoving() => AccountStatus == AccountStatus.Moving;
 
         #region Zona Dispose
         public void Dispose() => Dispose(true);
@@ -95,23 +95,23 @@ namespace Bot_Dofus_1._29._1.Otros
 
         public virtual void Dispose(bool disposing)
         {
-            if (!disposed)
+            if (!_disposed)
             {
                 if (disposing)
                 {
-                    script.Dispose();
-                    conexion?.Dispose();
-                    juego.Dispose();
+                    ScriptHandler.Dispose();
+                    Connection?.Dispose();
+                    Game.Dispose();
                 }
-                Estado_Account = EstadoAccount.DESCONECTADO;
-                script = null;
-                key_bienvenida = null;
-                conexion = null;
-                logger = null;
-                juego = null;
-                apodo = null;
-                configuracion = null;
-                disposed = true;
+                AccountStatus = AccountStatus.Disconnected;
+                ScriptHandler = null;
+                WelcomeKey = null;
+                Connection = null;
+                Logger = null;
+                Game = null;
+                Nickname = null;
+                AccountConfiguration = null;
+                _disposed = true;
             }
         }
         #endregion

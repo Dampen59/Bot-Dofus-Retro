@@ -18,12 +18,12 @@ namespace Bot_Dofus_1._29._1.Forms
 {
     public partial class GestionAccounts : Form
     {
-        private List<AccountConf> cuentas_cargadas;
+        private List<AccountConfiguration> cuentas_cargadas;
 
         public GestionAccounts()
         {
             InitializeComponent();
-            cuentas_cargadas = new List<AccountConf>();
+            cuentas_cargadas = new List<AccountConfiguration>();
 
             comboBox_Servidor.SelectedIndex = 0;
             cargar_Accounts_Lista();
@@ -111,14 +111,14 @@ namespace Bot_Dofus_1._29._1.Forms
             }
         }
 
-        public List<AccountConf> get_Accounts_Cargadas() => cuentas_cargadas;
+        public List<AccountConfiguration> get_Accounts_Cargadas() => cuentas_cargadas;
         private void listViewAccounts_MouseDoubleClick(object sender, MouseEventArgs e) => conectarToolStripMenuItem.PerformClick();
 
         private void modificar_Account(object sender, EventArgs e)
         {
             if (listViewAccounts.SelectedItems.Count == 1 && listViewAccounts.FocusedItem != null)
             {
-                AccountConf cuenta = GlobalConf.get_Account(listViewAccounts.SelectedItems[0].Index);
+                AccountConfiguration cuenta = GlobalConf.get_Account(listViewAccounts.SelectedItems[0].Index);
 
                 switch (sender.ToString())
                 {
@@ -137,7 +137,7 @@ namespace Bot_Dofus_1._29._1.Forms
                     break;
 
                     default:
-                        string nuevo_personaje = Interaction.InputBox($"Ingresa el nombre del nuevo personaje", "Modificar nombre de personaje", cuenta.nombre_personaje);
+                        string nuevo_personaje = Interaction.InputBox($"Ingresa el nombre del nuevo Character", "Modificar nombre de Character", cuenta.nombre_personaje);
                         cuenta.nombre_personaje = nuevo_personaje;
                     break;
                 }

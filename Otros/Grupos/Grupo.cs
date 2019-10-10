@@ -12,26 +12,26 @@ namespace Bot_Dofus_1._29._1.Otros.Grupos
         private Agrupamiento agrupamiento;
         private Dictionary<Account, ManualResetEvent> cuentas_acabadas;
 
-        public Account lider { get; private set; }
+        public Account Leader { get; private set; }
         public ObservableCollection<Account> miembros { get; private set; }
         private bool disposed;
 
-        public Grupo(Account _lider)
+        public Grupo(Account leader)
         {
             agrupamiento = new Agrupamiento(this);
             cuentas_acabadas = new Dictionary<Account, ManualResetEvent>();
-            lider = _lider;
+            Leader = leader;
             miembros = new ObservableCollection<Account>();
 
-            lider.grupo = this;
+            Leader.Group = this;
         }
 
         public void agregar_Miembro(Account miembro)
         {
-            if (miembros.Count >= 7)//dofus solo se pueden 8 personaje en un grupo
+            if (miembros.Count >= 7)//dofus solo se pueden 8 Character en un grupo
                 return;
 
-            miembro.grupo = this;
+            miembro.Group = this;
             miembros.Add(miembro);
             cuentas_acabadas.Add(miembro, new ManualResetEvent(false));
         }
@@ -40,16 +40,16 @@ namespace Bot_Dofus_1._29._1.Otros.Grupos
 
         public void conectar_Accounts()
         {
-            lider.conectar();
+            Leader.Connect();
 
             foreach (Account miembro in miembros)
-                miembro.conectar();
+                miembro.Connect();
         }
 
         public void desconectar_Accounts()
         {
             foreach (Account miembro in miembros)
-                miembro.disconnect();
+                miembro.Disconnect();
         }
 
         #region Acciones
@@ -63,7 +63,7 @@ namespace Bot_Dofus_1._29._1.Otros.Grupos
             }
 
             foreach (Account miembro in miembros)
-                miembro.script.manejar_acciones.enqueue_Accion(accion, iniciar_dequeue);
+                miembro.ScriptHandler.manejar_acciones.enqueue_Accion(accion, iniciar_dequeue);
 
             if (iniciar_dequeue)
             {
@@ -76,7 +76,7 @@ namespace Bot_Dofus_1._29._1.Otros.Grupos
 
         private void miembro_Acciones_Acabadas(Account cuenta)
         {
-            cuenta.logger.log_informacion("GRUPO", "Acciones acabadas");
+            cuenta.Logger.log_informacion("GRUPO", "Acciones acabadas");
             cuentas_acabadas[cuenta].Set();
         }
         #endregion
@@ -92,7 +92,7 @@ namespace Bot_Dofus_1._29._1.Otros.Grupos
                 if (disposing)
                 {
                     agrupamiento.Dispose();
-                    lider.Dispose();
+                    Leader.Dispose();
 
                     for (int i = 0; i < miembros.Count; i++)
                     {
@@ -105,7 +105,7 @@ namespace Bot_Dofus_1._29._1.Otros.Grupos
                 cuentas_acabadas = null;
                 miembros.Clear();
                 miembros = null;
-                lider = null;
+                Leader = null;
 
                 disposed = true;
             }

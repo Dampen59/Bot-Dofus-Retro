@@ -24,7 +24,7 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Entidades.Manejadores.Recolecciones
     public class Recoleccion : IDisposable
     {
         private Account cuenta;
-        private Mapa mapa;
+        private Map _map;
         public ObjetoInteractivo interactivo_recolectando;
         private List<int> interactivos_no_utilizables;
         private bool robado;
@@ -36,15 +36,15 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Entidades.Manejadores.Recolecciones
 
         public static readonly int[] herramientas_pescar = { 8541, 6661, 596, 1866, 1865, 1864, 1867, 2188, 1863, 1862, 1868, 1861, 1860, 2366 };
         
-        public Recoleccion(Account _cuenta, Movimiento movimientos, Mapa _mapa)
+        public Recoleccion(Account _cuenta, Movimiento movimientos, Map map)
         {
             cuenta = _cuenta;
             interactivos_no_utilizables = new List<int>();
             pathfinder = new Pathfinder();
-            mapa = _mapa;
+            _map = map;
 
             movimientos.movimiento_finalizado += get_Movimiento_Finalizado;
-            mapa.mapa_actualizado += evento_Mapa_Actualizado;
+            _map.mapa_actualizado += EventoMapActualizado;
         }
 
         public bool get_Puede_Recolectar(List<short> elementos_recolectables) => get_Interactivos_Utilizables(elementos_recolectables).Count > 0;
@@ -52,7 +52,7 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Entidades.Manejadores.Recolecciones
 
         public bool get_Recolectar(List<short> elementos)
         {
-            if (cuenta.esta_ocupado() || interactivo_recolectando != null)
+            if (cuenta.IsBusy() || interactivo_recolectando != null)
                 return false;
 
             foreach (KeyValuePair<short, ObjetoInteractivo> kvp in get_Interactivos_Utilizables(elementos))
@@ -61,14 +61,14 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Entidades.Manejadores.Recolecciones
                     return true;
             }
 
-            cuenta.logger.log_Peligro("RECOLECCION", "No se han encontrado elementos recolectables");
+            cuenta.Logger.log_Peligro("RECOLECCION", "No se han encontrado elementos recolectables");
             return false;
         }
 
         private Dictionary<short, ObjetoInteractivo> get_Interactivos_Utilizables(List<short> elementos_ids)
         {
             Dictionary<short, ObjetoInteractivo> elementos_utilizables = new Dictionary<short, ObjetoInteractivo>();
-            PersonajeJuego personaje = cuenta.juego.personaje;
+            GameCharacter personaje = cuenta.Game.Character;
 
             ObjetosInventario arma = personaje.inventario.get_Objeto_en_Posicion(InventarioPosiciones.ARMA);
             byte distancia_arma = 1;
@@ -80,12 +80,12 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Entidades.Manejadores.Recolecciones
                 es_herramienta_pescar = herramientas_pescar.Contains(arma.id_modelo);
             }
 
-            foreach (ObjetoInteractivo interactivo in mapa.interactivos.Values)
+            foreach (ObjetoInteractivo interactivo in _map.interactivos.Values)
             {
                 if (!interactivo.es_utilizable || !interactivo.modelo.recolectable)
                     continue;
 
-                List<Celda> path = pathfinder.get_Path(personaje.celda, interactivo.celda, mapa.celdas_ocupadas(), true, distancia_arma);
+                List<Celda> path = pathfinder.get_Path(personaje.celda, interactivo.celda, _map.celdas_ocupadas(), true, distancia_arma);
 
                 if (path == null || path.Count == 0)
                     continue;
@@ -112,12 +112,12 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Entidades.Manejadores.Recolecciones
         {
             interactivo_recolectando = interactivo.Value;
             byte distancia_detener = 1;
-            ObjetosInventario arma = cuenta.juego.personaje.inventario.get_Objeto_en_Posicion(InventarioPosiciones.ARMA);
+            ObjetosInventario arma = cuenta.Game.Character.inventario.get_Objeto_en_Posicion(InventarioPosiciones.ARMA);
 
             if(arma != null)
                 distancia_detener = get_Distancia_herramienta(arma.id_modelo);
             
-            switch (cuenta.juego.manejador.movimientos.get_Mover_A_Celda(interactivo_recolectando.celda, mapa.celdas_ocupadas(), true, distancia_detener))
+            switch (cuenta.Game.Handler.movimientos.get_Mover_A_Celda(interactivo_recolectando.celda, _map.celdas_ocupadas(), true, distancia_detener))
             {
                 case ResultadoMovimientos.EXITO:
                 case ResultadoMovimientos.MISMA_CELDA:
@@ -136,8 +136,8 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Entidades.Manejadores.Recolecciones
             {
                 foreach (short habilidad in interactivo_recolectando.modelo.habilidades)
                 {
-                    if (cuenta.juego.personaje.get_Skills_Recoleccion_Disponibles().Contains(habilidad))
-                        cuenta.conexion.enviar_Paquete("GA500" + interactivo_recolectando.celda.id + ";" + habilidad);
+                    if (cuenta.Game.Character.get_Skills_Recoleccion_Disponibles().Contains(habilidad))
+                        cuenta.Connection.enviar_Paquete("GA500" + interactivo_recolectando.celda.id + ";" + habilidad);
                 }
             }
             else
@@ -149,7 +149,7 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Entidades.Manejadores.Recolecciones
             if (interactivo_recolectando == null)
                 return;
 
-            if (!correcto && cuenta.juego.manejador.movimientos.actual_path != null)
+            if (!correcto && cuenta.Game.Handler.movimientos.actual_path != null)
                 evento_Recoleccion_Acabada(RecoleccionResultado.FALLO, interactivo_recolectando.celda.id);
         }
 
@@ -158,18 +158,18 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Entidades.Manejadores.Recolecciones
             if (interactivo_recolectando == null || interactivo_recolectando.celda.id != celda_id)
                 return;
 
-            if (cuenta.juego.personaje.id != id_personaje)
+            if (cuenta.Game.Character.id != id_personaje)
             {
                 robado = true;
-                cuenta.logger.log_informacion("INFORMACIÓN", "Un personaje te ha robado el recurso");
+                cuenta.Logger.log_informacion("INFORMACIÓN", "Un Character te ha robado el recurso");
                 evento_Recoleccion_Acabada(RecoleccionResultado.ROBADO, interactivo_recolectando.celda.id);
             }
             else
             {
-                cuenta.Estado_Account = EstadoAccount.RECOLECTANDO;
+                cuenta.AccountStatus = AccountStatus.Collecting;
                 recoleccion_iniciada?.Invoke();
                 await Task.Delay(tiempo_delay);
-                cuenta.conexion.enviar_Paquete("GKK" + tipo_gkk);
+                cuenta.Connection.enviar_Paquete("GKK" + tipo_gkk);
             }
         }
 
@@ -180,13 +180,13 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Entidades.Manejadores.Recolecciones
 
             robado = false;
             interactivo_recolectando = null;
-            cuenta.Estado_Account = EstadoAccount.CONECTADO_INACTIVO;
+            cuenta.AccountStatus = AccountStatus.ConnectedInactive;
             recoleccion_acabada?.Invoke(resultado);
         }
 
-        private void evento_Mapa_Actualizado()
+        private void EventoMapActualizado()
         {
-            pathfinder.set_Mapa(cuenta.juego.mapa);
+            pathfinder.set_Mapa(cuenta.Game.Map);
             interactivos_no_utilizables.Clear();
         }
 

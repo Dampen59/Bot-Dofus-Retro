@@ -23,7 +23,7 @@ namespace Bot_Dofus_1._29._1.Otros.Peleas
         public PeleaConf configuracion { get; set; }
         private Account Account;
         private ManejadorHechizos manejador_hechizos;
-        private Pelea pelea;
+        private Fight _fight;
 
         private int hechizo_lanzado_index;
         private bool esperando_sequencia_fin;
@@ -34,33 +34,33 @@ namespace Bot_Dofus_1._29._1.Otros.Peleas
             Account = _account;
             configuracion = new PeleaConf(_account);
             manejador_hechizos = new ManejadorHechizos(_account);
-            pelea = Account.Game.pelea;
+            _fight = Account.Game.Fight;
 
             get_Eventos();
         }
 
         private void get_Eventos()
         {
-            pelea.pelea_creada += get_Pelea_Creada;
-            pelea.turno_iniciado += get_Pelea_Turno_iniciado;
-            pelea.hechizo_lanzado += get_Procesar_Hechizo_Lanzado;
-            pelea.movimiento += get_Procesar_Movimiento;
+            _fight.pelea_creada += GetFightCreada;
+            _fight.turno_iniciado += GetFightTurnoIniciado;
+            _fight.hechizo_lanzado += get_Procesar_Hechizo_Lanzado;
+            _fight.movimiento += get_Procesar_Movimiento;
         }
 
-        private void get_Pelea_Creada()
+        private void GetFightCreada()
         {
             foreach (HechizoPelea hechizo in configuracion.hechizos)
                 hechizo.lanzamientos_restantes = hechizo.lanzamientos_x_turno;
         }
 
-        private async void get_Pelea_Turno_iniciado()
+        private async void GetFightTurnoIniciado()
         {
             hechizo_lanzado_index = 0;
             esperando_sequencia_fin = true;
 
             await Task.Delay(400);
 
-            if (configuracion.hechizos.Count == 0 || !Account.Game.pelea.get_Enemigos.Any())
+            if (configuracion.hechizos.Count == 0 || !Account.Game.Fight.get_Enemigos.Any())
             {
                 await get_Fin_Turno();
                 return;
@@ -107,7 +107,7 @@ namespace Bot_Dofus_1._29._1.Otros.Peleas
 
         public async void get_Procesar_Hechizo_Lanzado(short celda_id, bool exito)
         {
-            if (pelea.total_enemigos_vivos == 0)
+            if (_fight.total_enemigos_vivos == 0)
                 return;
 
             if (!esperando_sequencia_fin)
@@ -122,13 +122,13 @@ namespace Bot_Dofus_1._29._1.Otros.Peleas
                 return;
             }
 
-            pelea.actualizar_Hechizo_Exito(celda_id, configuracion.hechizos[hechizo_lanzado_index].id);
+            _fight.actualizar_Hechizo_Exito(celda_id, configuracion.hechizos[hechizo_lanzado_index].id);
             await get_Procesar_hechizo();
         }
 
         public async void get_Procesar_Movimiento(bool exito)
         {
-            if (pelea.total_enemigos_vivos == 0)
+            if (_fight.total_enemigos_vivos == 0)
                 return;
 
             if (!esperando_sequencia_fin)
@@ -154,35 +154,35 @@ namespace Bot_Dofus_1._29._1.Otros.Peleas
             hechizo_actual.lanzamientos_restantes = hechizo_actual.lanzamientos_x_turno;
             hechizo_lanzado_index++;
 
-            await Task.Delay(350 + Account.Client.get_Actual_Ping());
+            await Task.Delay(350 + Account.Connection.get_Actual_Ping());
             await get_Procesar_hechizo();
         }
 
         private async Task get_Fin_Turno()
         {
-            if (!pelea.esta_Cuerpo_A_Cuerpo_Con_Enemigo() && configuracion.tactica == Tactica.AGRESIVA)
-                await get_Mover(true, pelea.get_Obtener_Enemigo_Mas_Cercano());
-            else if (pelea.esta_Cuerpo_A_Cuerpo_Con_Enemigo() && configuracion.tactica == Tactica.FUGITIVA)
-                await get_Mover(false, pelea.get_Obtener_Enemigo_Mas_Cercano());
+            if (!_fight.esta_Cuerpo_A_Cuerpo_Con_Enemigo() && configuracion.tactica == Tactica.AGRESIVA)
+                await get_Mover(true, _fight.get_Obtener_Enemigo_Mas_Cercano());
+            else if (_fight.esta_Cuerpo_A_Cuerpo_Con_Enemigo() && configuracion.tactica == Tactica.FUGITIVA)
+                await get_Mover(false, _fight.get_Obtener_Enemigo_Mas_Cercano());
 
-            pelea.get_Turno_Acabado();
-            Account.Client.enviar_Paquete("Gt");
+            _fight.get_Turno_Acabado();
+            Account.Connection.enviar_Paquete("Gt");
         }
 
         public async Task get_Mover(bool cercano, Luchadores enemigo)
         {
             KeyValuePair<short, MovimientoNodo>? nodo = null;
-            Mapa mapa = Account.Game.mapa;
+            Map map = Account.Game.Map;
             int distancia = -1;
 
-            int distancia_total = Get_Total_Distancia_Enemigo(pelea.jugador_luchador.celda);
+            int distancia_total = Get_Total_Distancia_Enemigo(_fight.jugador_luchador.celda);
 
-            foreach (KeyValuePair<short, MovimientoNodo> kvp in PeleasPathfinder.get_Celdas_Accesibles(pelea, mapa, pelea.jugador_luchador.celda))
+            foreach (KeyValuePair<short, MovimientoNodo> kvp in PeleasPathfinder.get_Celdas_Accesibles(_fight, map, _fight.jugador_luchador.celda))
             {
                 if (!kvp.Value.alcanzable)
                     continue;
 
-                int temporal_distancia = Get_Total_Distancia_Enemigo(mapa.get_Celda_Id(kvp.Key));
+                int temporal_distancia = Get_Total_Distancia_Enemigo(map.get_Celda_Id(kvp.Key));
 
                 if ((cercano && temporal_distancia <= distancia_total) || (!cercano && temporal_distancia >= distancia_total))
                 {
@@ -201,10 +201,10 @@ namespace Bot_Dofus_1._29._1.Otros.Peleas
             }
 
             if (nodo != null)
-                await Account.Game.manejador.movimientos.get_Mover_Celda_Pelea(nodo);
+                await Account.Game.Handler.movimientos.get_Mover_Celda_Pelea(nodo);
         }
 
-        public int Get_Total_Distancia_Enemigo(Celda celda) => Account.Game.pelea.get_Enemigos.Sum(e => e.celda.get_Distancia_Entre_Dos_Casillas(celda) - 1);
+        public int Get_Total_Distancia_Enemigo(Celda celda) => Account.Game.Fight.get_Enemigos.Sum(e => e.celda.get_Distancia_Entre_Dos_Casillas(celda) - 1);
 
         #region Zona Dispose
         public void Dispose() => Dispose(true);

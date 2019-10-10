@@ -38,27 +38,27 @@ namespace Bot_Dofus_1._29._1.Forms
             {
                 if (gestion_cuentas.ShowDialog() == DialogResult.OK)
                 {
-                    List<AccountConf> cuentas_para_cargar = gestion_cuentas.get_Accounts_Cargadas();
+                    List<AccountConfiguration> cuentas_para_cargar = gestion_cuentas.get_Accounts_Cargadas();
 
                     if (cuentas_para_cargar.Count < 2)
                     {
-                        AccountConf cuenta_conf = cuentas_para_cargar[0];
-                        cuentas_cargadas.Add(cuenta_conf.nombre_cuenta, agregar_Nueva_Tab_Pagina(cuenta_conf.nombre_cuenta, new UI_Principal(new Account(cuenta_conf)), "Ninguno"));
+                        AccountConfiguration cuentaConfiguration = cuentas_para_cargar[0];
+                        cuentas_cargadas.Add(cuentaConfiguration.nombre_cuenta, agregar_Nueva_Tab_Pagina(cuentaConfiguration.nombre_cuenta, new UI_Principal(new Account(cuentaConfiguration)), "Ninguno"));
                     }
                     else
                     {
-                        AccountConf configuracion_lider = cuentas_para_cargar.First();
+                        AccountConfiguration configuracion_lider = cuentas_para_cargar.First();
                         Account lider = new Account(configuracion_lider);
                         Grupo grupo = new Grupo(lider);
                         cuentas_cargadas.Add(configuracion_lider.nombre_cuenta, agregar_Nueva_Tab_Pagina(configuracion_lider.nombre_cuenta, new UI_Principal(lider), configuracion_lider.nombre_cuenta));
                         cuentas_para_cargar.Remove(configuracion_lider);
 
-                        foreach (AccountConf cuenta_conf in cuentas_para_cargar)
+                        foreach (AccountConfiguration cuenta_conf in cuentas_para_cargar)
                         {
                             Account cuenta = new Account(cuenta_conf);
 
                             grupo.agregar_Miembro(cuenta);
-                            cuentas_cargadas.Add(cuenta_conf.nombre_cuenta, agregar_Nueva_Tab_Pagina(cuenta_conf.nombre_cuenta, new UI_Principal(cuenta), grupo.lider.configuracion.nombre_cuenta));
+                            cuentas_cargadas.Add(cuenta_conf.nombre_cuenta, agregar_Nueva_Tab_Pagina(cuenta_conf.nombre_cuenta, new UI_Principal(cuenta), grupo.Leader.AccountConfiguration.nombre_cuenta));
                         }
                     }
                 }

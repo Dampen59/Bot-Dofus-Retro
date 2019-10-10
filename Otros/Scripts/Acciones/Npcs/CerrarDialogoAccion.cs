@@ -6,9 +6,9 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts.Acciones.Npcs
     {
         internal override Task<ResultadosAcciones> proceso(Account cuenta)
         {
-            if (cuenta.esta_dialogando())
+            if (cuenta.IsDialoguing())
             {
-                cuenta.conexion.enviar_Paquete("DV", true);
+                cuenta.Connection.enviar_Paquete("DV", true);
                 return resultado_procesado;
             }
 

@@ -21,12 +21,12 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts.Api
 
         public bool cambiarMapa(string posicion)
         {
-            if (cuenta.esta_ocupado())
+            if (cuenta.IsBusy())
                 return false;
 
             if (!CambiarMapaAccion.TryParse(posicion, out CambiarMapaAccion accion))
             {
-                cuenta.logger.log_Error("MapaApi", $"Verifica el cambio de mapa {posicion}");
+                cuenta.Logger.log_Error("MapaApi", $"Verifica el cambio de Map {posicion}");
                 return false;
             }
 
@@ -36,20 +36,20 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts.Api
 
         public bool moverCelda(short celda_id)
         {
-            if (celda_id < 0 || celda_id > cuenta.juego.mapa.celdas.Length)
+            if (celda_id < 0 || celda_id > cuenta.Game.Map.celdas.Length)
                 return false;
 
-            if (!cuenta.juego.mapa.get_Celda_Id(celda_id).es_Caminable() || cuenta.juego.mapa.get_Celda_Id(celda_id).es_linea_vision)
+            if (!cuenta.Game.Map.get_Celda_Id(celda_id).es_Caminable() || cuenta.Game.Map.get_Celda_Id(celda_id).es_linea_vision)
                 return false;
 
             manejador_acciones.enqueue_Accion(new MoverCeldaAccion(celda_id), true);
             return true;
         }
 
-        public bool enCelda(short celda_id) => cuenta.juego.personaje.celda.id == celda_id;
-        public bool enMapa(string coordenadas) => cuenta.juego.mapa.esta_En_Mapa(coordenadas);
-        public string actualMapa() => cuenta.juego.mapa.id.ToString();
-        public string actualPosicion() => cuenta.juego.mapa.coordenadas;
+        public bool enCelda(short celda_id) => cuenta.Game.Character.celda.id == celda_id;
+        public bool enMapa(string coordenadas) => cuenta.Game.Map.esta_En_Mapa(coordenadas);
+        public string actualMapa() => cuenta.Game.Map.id.ToString();
+        public string actualPosicion() => cuenta.Game.Map.coordenadas;
 
         #region Zona Dispose
         ~MapaApi() => Dispose(false);

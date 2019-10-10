@@ -175,7 +175,7 @@
             this.label_puerto_servidor.Name = "label_puerto_servidor";
             this.label_puerto_servidor.Size = new System.Drawing.Size(160, 30);
             this.label_puerto_servidor.TabIndex = 2;
-            this.label_puerto_servidor.Text = "Puerto servidor conexión:";
+            this.label_puerto_servidor.Text = "Puerto Server conexión:";
             this.label_puerto_servidor.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // textBox_ip_servidor
@@ -195,7 +195,7 @@
             this.label_ip_conexion.Name = "label_ip_conexion";
             this.label_ip_conexion.Size = new System.Drawing.Size(160, 32);
             this.label_ip_conexion.TabIndex = 0;
-            this.label_ip_conexion.Text = "IP servidor conexión:";
+            this.label_ip_conexion.Text = "IP Server conexión:";
             this.label_ip_conexion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // Opciones

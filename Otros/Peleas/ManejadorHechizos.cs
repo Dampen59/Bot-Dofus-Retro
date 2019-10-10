@@ -23,15 +23,15 @@ namespace Bot_Dofus_1._29._1.Otros.Peleas
     public class ManejadorHechizos : IDisposable
     {
         private Account cuenta;
-        private Mapa mapa;
-        private Pelea pelea;
+        private Map _map;
+        private Fight _fight;
         private bool disposed;
 
         public ManejadorHechizos(Account _cuenta)
         {
             cuenta = _cuenta;
-            mapa = cuenta.juego.mapa;
-            pelea = cuenta.juego.pelea;
+            _map = cuenta.Game.Map;
+            _fight = cuenta.Game.Fight;
         }
 
         public async Task<ResultadoLanzandoHechizo> manejador_Hechizos(HechizoPelea hechizo)
@@ -42,13 +42,13 @@ namespace Bot_Dofus_1._29._1.Otros.Peleas
             if(hechizo.metodo_lanzamiento == MetodoLanzamiento.AMBOS)
                 return await get_Lanzar_Hechizo_Simple(hechizo);
 
-            if (hechizo.metodo_lanzamiento == MetodoLanzamiento.ALEJADO && !cuenta.juego.pelea.esta_Cuerpo_A_Cuerpo_Con_Enemigo())
+            if (hechizo.metodo_lanzamiento == MetodoLanzamiento.ALEJADO && !cuenta.Game.Fight.esta_Cuerpo_A_Cuerpo_Con_Enemigo())
                 return await get_Lanzar_Hechizo_Simple(hechizo);
 
-            if (hechizo.metodo_lanzamiento == MetodoLanzamiento.CAC && cuenta.juego.pelea.esta_Cuerpo_A_Cuerpo_Con_Enemigo())
+            if (hechizo.metodo_lanzamiento == MetodoLanzamiento.CAC && cuenta.Game.Fight.esta_Cuerpo_A_Cuerpo_Con_Enemigo())
                 return await get_Lanzar_Hechizo_Simple(hechizo);
 
-            if (hechizo.metodo_lanzamiento == MetodoLanzamiento.CAC && !cuenta.juego.pelea.esta_Cuerpo_A_Cuerpo_Con_Enemigo())
+            if (hechizo.metodo_lanzamiento == MetodoLanzamiento.CAC && !cuenta.Game.Fight.esta_Cuerpo_A_Cuerpo_Con_Enemigo())
                 return await get_Mover_Lanzar_hechizo_Simple(hechizo, get_Objetivo_Mas_Cercano(hechizo));
 
             return ResultadoLanzandoHechizo.NO_LANZADO;
@@ -56,18 +56,18 @@ namespace Bot_Dofus_1._29._1.Otros.Peleas
 
         private async Task<ResultadoLanzandoHechizo> get_Lanzar_Hechizo_Simple(HechizoPelea hechizo)
         {
-            if (pelea.get_Puede_Lanzar_hechizo(hechizo.id) != FallosLanzandoHechizo.NINGUNO)
+            if (_fight.get_Puede_Lanzar_hechizo(hechizo.id) != FallosLanzandoHechizo.NINGUNO)
                 return ResultadoLanzandoHechizo.NO_LANZADO;
 
             Luchadores enemigo = get_Objetivo_Mas_Cercano(hechizo);
 
             if (enemigo != null)
             {
-                FallosLanzandoHechizo resultado = pelea.get_Puede_Lanzar_hechizo(hechizo.id, pelea.jugador_luchador.celda, enemigo.celda, mapa);
+                FallosLanzandoHechizo resultado = _fight.get_Puede_Lanzar_hechizo(hechizo.id, _fight.jugador_luchador.celda, enemigo.celda, _map);
                 
                 if (resultado == FallosLanzandoHechizo.NINGUNO)
                 {
-                    await pelea.get_Lanzar_Hechizo(hechizo.id, enemigo.celda.id);
+                    await _fight.get_Lanzar_Hechizo(hechizo.id, enemigo.celda.id);
                     return ResultadoLanzandoHechizo.LANZADO;
                 }
 
@@ -85,15 +85,15 @@ namespace Bot_Dofus_1._29._1.Otros.Peleas
             KeyValuePair<short, MovimientoNodo>? nodo = null;
             int pm_utilizados = 99;
 
-            foreach (KeyValuePair<short, MovimientoNodo> movimiento in PeleasPathfinder.get_Celdas_Accesibles(pelea, mapa, pelea.jugador_luchador.celda))
+            foreach (KeyValuePair<short, MovimientoNodo> movimiento in PeleasPathfinder.get_Celdas_Accesibles(_fight, _map, _fight.jugador_luchador.celda))
             {
                 if (!movimiento.Value.alcanzable)
                     continue;
 
-                if (hechizo_pelea.metodo_lanzamiento == MetodoLanzamiento.CAC && !pelea.esta_Cuerpo_A_Cuerpo_Con_Aliado(mapa.get_Celda_Id(movimiento.Key)))
+                if (hechizo_pelea.metodo_lanzamiento == MetodoLanzamiento.CAC && !_fight.esta_Cuerpo_A_Cuerpo_Con_Aliado(_map.get_Celda_Id(movimiento.Key)))
                     continue;
 
-                if (pelea.get_Puede_Lanzar_hechizo(hechizo_pelea.id, mapa.get_Celda_Id(movimiento.Key), enemigo.celda, mapa) != FallosLanzandoHechizo.NINGUNO)
+                if (_fight.get_Puede_Lanzar_hechizo(hechizo_pelea.id, _map.get_Celda_Id(movimiento.Key), enemigo.celda, _map) != FallosLanzandoHechizo.NINGUNO)
                     continue;
 
                 if (movimiento.Value.camino.celdas_accesibles.Count <= pm_utilizados)
@@ -105,7 +105,7 @@ namespace Bot_Dofus_1._29._1.Otros.Peleas
 
             if (nodo != null)
             {
-                await cuenta.juego.manejador.movimientos.get_Mover_Celda_Pelea(nodo);
+                await cuenta.Game.Handler.movimientos.get_Mover_Celda_Pelea(nodo);
                 return ResultadoLanzandoHechizo.MOVIDO;
             }
 
@@ -114,24 +114,24 @@ namespace Bot_Dofus_1._29._1.Otros.Peleas
 
         private async Task<ResultadoLanzandoHechizo> lanzar_Hechizo_Celda_Vacia(HechizoPelea hechizo_pelea)
         {
-            if (pelea.get_Puede_Lanzar_hechizo(hechizo_pelea.id) != FallosLanzandoHechizo.NINGUNO)
+            if (_fight.get_Puede_Lanzar_hechizo(hechizo_pelea.id) != FallosLanzandoHechizo.NINGUNO)
                 return ResultadoLanzandoHechizo.NO_LANZADO;
 
-            if (hechizo_pelea.focus == HechizoFocus.CELDA_VACIA && pelea.get_Cuerpo_A_Cuerpo_Enemigo().Count() == 4)
+            if (hechizo_pelea.focus == HechizoFocus.CELDA_VACIA && _fight.get_Cuerpo_A_Cuerpo_Enemigo().Count() == 4)
                 return ResultadoLanzandoHechizo.NO_LANZADO;
 
-            Hechizo hechizo = cuenta.juego.personaje.get_Hechizo(hechizo_pelea.id);
+            Hechizo hechizo = cuenta.Game.Character.get_Hechizo(hechizo_pelea.id);
             HechizoStats datos_hechizo = hechizo.get_Stats();
 
-            List<short> rangos_disponibles = pelea.get_Rango_hechizo(pelea.jugador_luchador.celda, datos_hechizo, mapa);
+            List<short> rangos_disponibles = _fight.get_Rango_hechizo(_fight.jugador_luchador.celda, datos_hechizo, _map);
             foreach (short rango in rangos_disponibles)
             {
-                if (pelea.get_Puede_Lanzar_hechizo(hechizo_pelea.id, pelea.jugador_luchador.celda, mapa.get_Celda_Id(rango), mapa) == FallosLanzandoHechizo.NINGUNO)
+                if (_fight.get_Puede_Lanzar_hechizo(hechizo_pelea.id, _fight.jugador_luchador.celda, _map.get_Celda_Id(rango), _map) == FallosLanzandoHechizo.NINGUNO)
                 {
-                    if (hechizo_pelea.metodo_lanzamiento == MetodoLanzamiento.CAC || hechizo_pelea.metodo_lanzamiento == MetodoLanzamiento.AMBOS && mapa.get_Celda_Id(rango).get_Distancia_Entre_Dos_Casillas(pelea.jugador_luchador.celda) != 1)
+                    if (hechizo_pelea.metodo_lanzamiento == MetodoLanzamiento.CAC || hechizo_pelea.metodo_lanzamiento == MetodoLanzamiento.AMBOS && _map.get_Celda_Id(rango).get_Distancia_Entre_Dos_Casillas(_fight.jugador_luchador.celda) != 1)
                         continue;
 
-                    await pelea.get_Lanzar_Hechizo(hechizo_pelea.id, rango);
+                    await _fight.get_Lanzar_Hechizo(hechizo_pelea.id, rango);
                     return ResultadoLanzandoHechizo.LANZADO;
                 }
             }
@@ -142,12 +142,12 @@ namespace Bot_Dofus_1._29._1.Otros.Peleas
         private Luchadores get_Objetivo_Mas_Cercano(HechizoPelea hechizo)
         {
             if (hechizo.focus == HechizoFocus.ENCIMA)
-                return pelea.jugador_luchador;
+                return _fight.jugador_luchador;
 
             if (hechizo.focus == HechizoFocus.CELDA_VACIA)
                 return null;
 
-            return hechizo.focus == HechizoFocus.ENEMIGO ? pelea.get_Obtener_Enemigo_Mas_Cercano() : pelea.get_Obtener_Aliado_Mas_Cercano();
+            return hechizo.focus == HechizoFocus.ENEMIGO ? _fight.get_Obtener_Enemigo_Mas_Cercano() : _fight.get_Obtener_Aliado_Mas_Cercano();
         }
 
 
@@ -160,8 +160,8 @@ namespace Bot_Dofus_1._29._1.Otros.Peleas
             if (!disposed)
             {
                 cuenta = null;
-                mapa = null;
-                pelea = null;
+                _map = null;
+                _fight = null;
                 disposed = true;
             }
         }

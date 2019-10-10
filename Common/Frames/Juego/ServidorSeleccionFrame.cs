@@ -17,17 +17,17 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
     internal class ServidorSeleccionFrame : Frame
     {
         [PaqueteAtributo("HG")]
-        public void bienvenida_Juego(ClienteTcp cliente, string paquete) => cliente.enviar_Paquete("AT" + cliente.Account.tiquet_game);
+        public void bienvenida_Juego(TcpClient cliente, string paquete) => cliente.enviar_Paquete("AT" + cliente.Account.GameTicket);
 
         [PaqueteAtributo("ATK0")]
-        public void resultado_Servidor_Seleccion(ClienteTcp cliente, string paquete)
+        public void resultado_Servidor_Seleccion(TcpClient cliente, string paquete)
         {
             cliente.enviar_Paquete("Ak0");
             cliente.enviar_Paquete("AV");
         }
 
         [PaqueteAtributo("AV0")]
-        public void lista_Personajes(ClienteTcp cliente, string paquete)
+        public void lista_Personajes(TcpClient cliente, string paquete)
         {
             cliente.enviar_Paquete("Ages");
             cliente.enviar_Paquete("AL");
@@ -35,7 +35,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
         }
 
         [PaqueteAtributo("ALK")]
-        public void seleccionar_Personaje(ClienteTcp cliente, string paquete)
+        public void seleccionar_Personaje(TcpClient cliente, string paquete)
         {
             Account cuenta = cliente.Account;
             string[] _loc6_ = paquete.Substring(3).Split('|');
@@ -48,7 +48,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
                 int id = int.Parse(_loc11_[0]);
                 string nombre = _loc11_[1];
 
-                if (nombre.ToLower().Equals(cuenta.configuracion.nombre_personaje.ToLower()) || string.IsNullOrEmpty(cuenta.configuracion.nombre_personaje))
+                if (nombre.ToLower().Equals(cuenta.AccountConfiguration.nombre_personaje.ToLower()) || string.IsNullOrEmpty(cuenta.AccountConfiguration.nombre_personaje))
                 {
                     cliente.enviar_Paquete("AS" + id, true);
                     encontrado = true;
@@ -59,10 +59,10 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
         }
 
         [PaqueteAtributo("BT")]
-        public void get_Tiempo_Servidor(ClienteTcp cliente, string paquete) => cliente.enviar_Paquete("GI");
+        public void get_Tiempo_Servidor(TcpClient cliente, string paquete) => cliente.enviar_Paquete("GI");
 
         [PaqueteAtributo("ASK")]
-        public void personaje_Seleccionado(ClienteTcp cliente, string paquete)
+        public void personaje_Seleccionado(TcpClient cliente, string paquete)
         {
             Account cuenta = cliente.Account;
             string[] _loc4 = paquete.Substring(4).Split('|');
@@ -73,15 +73,15 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
             byte raza_id = byte.Parse(_loc4[3]);
             byte sexo = byte.Parse(_loc4[4]);
 
-            cuenta.juego.personaje.set_Datos_Personaje(id, nombre, nivel, sexo, raza_id);
-            cuenta.juego.personaje.inventario.agregar_Objetos(_loc4[9]);
+            cuenta.Game.Character.set_Datos_Personaje(id, nombre, nivel, sexo, raza_id);
+            cuenta.Game.Character.inventario.agregar_Objetos(_loc4[9]);
 
             cliente.enviar_Paquete("GC1");
             cliente.enviar_Paquete("BYA");
 
-            cuenta.juego.personaje.evento_Personaje_Seleccionado();
-            cuenta.juego.personaje.timer_afk.Change(1200000, 1200000);
-            cliente.Account.Estado_Account = EstadoAccount.CONECTADO_INACTIVO;
+            cuenta.Game.Character.evento_Personaje_Seleccionado();
+            cuenta.Game.Character.timer_afk.Change(1200000, 1200000);
+            cliente.Account.AccountStatus = AccountStatus.ConnectedInactive;
         }
     }
 }

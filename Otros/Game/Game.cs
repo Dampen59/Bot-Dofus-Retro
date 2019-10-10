@@ -9,20 +9,20 @@ namespace Bot_Dofus_1._29._1.Otros.Game
 {
     public class Game : IEliminable, IDisposable
     {
-        public ServidorJuego servidor { get; private set; }
-        public Mapa mapa { get; private set; }
-        public PersonajeJuego personaje { get; private set; }
-        public Manejador manejador { get; private set; }
-        public Pelea pelea{ get; private set; }
+        public GameServer Server { get; private set; }
+        public Map Map { get; private set; }
+        public GameCharacter Character { get; private set; }
+        public Handler Handler { get; private set; }
+        public Fight Fight{ get; private set; }
         private bool disposed = false;
 
         internal Game(Account account)
         {
-            servidor = new ServidorJuego();
-            mapa = new Mapa();
-            personaje = new PersonajeJuego(account);
-            manejador = new Manejador(account, mapa, personaje);
-            pelea = new Pelea(account);
+            Server = new GameServer();
+            Map = new Map();
+            Character = new GameCharacter(account);
+            Handler = new Handler(account, Map, Character);
+            Fight = new Fight(account);
         }
 
         #region Zona Dispose
@@ -31,11 +31,11 @@ namespace Bot_Dofus_1._29._1.Otros.Game
 
         public void Clean()
         {
-            mapa.Clean();
-            manejador.Clean();
-            pelea.Clean();
-            personaje.Clean();
-            servidor.Clean();
+            Map.Clean();
+            Handler.Clean();
+            Fight.Clean();
+            Character.Clean();
+            Server.Clean();
         }
 
         protected virtual void Dispose(bool disposing)
@@ -44,18 +44,18 @@ namespace Bot_Dofus_1._29._1.Otros.Game
             {
                 if (disposing)
                 {
-                    mapa.Dispose();
-                    personaje.Dispose();
-                    manejador.Dispose();
-                    pelea.Dispose();
-                    servidor.Dispose();
+                    Map.Dispose();
+                    Character.Dispose();
+                    Handler.Dispose();
+                    Fight.Dispose();
+                    Server.Dispose();
                 }
 
-                servidor = null;
-                mapa = null;
-                personaje = null;
-                manejador = null;
-                pelea = null;
+                Server = null;
+                Map = null;
+                Character = null;
+                Handler = null;
+                Fight = null;
                 disposed = true;
             }
         }

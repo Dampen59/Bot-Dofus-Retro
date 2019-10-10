@@ -1,18 +1,18 @@
 ﻿namespace Bot_Dofus_1._29._1.Otros.Enums
 {
-    public enum EstadoAccount
+    public enum AccountStatus
     {
         CONECTANDO,
-        CONECTADO_INACTIVO,
-        DESCONECTADO,
-        MOVIMIENTO,
-        LUCHANDO,
-        RECOLECTANDO,
-        DIALOGANDO,
-        ALMACENAMIENTO,
-        INTERCAMBIO,
-        COMPRANDO,
-        VENDIENDO,
-        REGENERANDO
+        ConnectedInactive,
+        Disconnected,
+        Moving,
+        Fighting,
+        Collecting,
+        Dialoguing,
+        Storing,
+        Exchanging,
+        Buying,
+        Selling,
+        Regenerating
     }
 }

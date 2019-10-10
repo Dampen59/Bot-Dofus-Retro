@@ -19,30 +19,30 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.LoginAccount
     public class LoginAccount : Frame
     {
         [PaqueteAtributo("HC")]
-        public void get_Key_BienvenidaAsync(ClienteTcp cliente, string paquete)
+        public void get_Key_BienvenidaAsync(TcpClient cliente, string paquete)
         {
             Account cuenta = cliente.Account;
 
-            cuenta.Estado_Account = EstadoAccount.CONECTANDO;
-            cuenta.key_bienvenida = paquete.Substring(2);
+            cuenta.AccountStatus = AccountStatus.CONECTANDO;
+            cuenta.WelcomeKey = paquete.Substring(2);
 
             cliente.enviar_Paquete("1.30");
-            cliente.enviar_Paquete(cliente.Account.configuracion.nombre_cuenta + "\n" + Hash.encriptar_Password(cliente.Account.configuracion.password, cliente.Account.key_bienvenida));
+            cliente.enviar_Paquete(cliente.Account.AccountConfiguration.nombre_cuenta + "\n" + Hash.encriptar_Password(cliente.Account.AccountConfiguration.password, cliente.Account.WelcomeKey));
             cliente.enviar_Paquete("Af");
         }
 
         [PaqueteAtributo("Ad")]
-        public void get_Apodo(ClienteTcp cliente, string paquete) => cliente.Account.apodo = paquete.Substring(2);
+        public void get_Apodo(TcpClient cliente, string paquete) => cliente.Account.Nickname = paquete.Substring(2);
 
         [PaqueteAtributo("Af")]
-        public void get_Fila_Espera_Login(ClienteTcp cliente, string paquete) => cliente.Account.logger.log_informacion("FILA DE ESPERA", "Posición " + paquete[2] + "/" + paquete[4]);
+        public void get_Fila_Espera_Login(TcpClient cliente, string paquete) => cliente.Account.Logger.log_informacion("FILA DE ESPERA", "Posición " + paquete[2] + "/" + paquete[4]);
 
         [PaqueteAtributo("AH")]
-        public void get_Servidor_Estado(ClienteTcp cliente, string paquete)
+        public void get_Servidor_Estado(TcpClient cliente, string paquete)
         {
             Account cuenta = cliente.Account;
             string[] separado_servidores = paquete.Substring(2).Split('|');
-            ServidorJuego servidor = cuenta.juego.servidor;
+            GameServer servidor = cuenta.Game.Server;
             bool primera_vez = true;
 
             foreach(string sv in separado_servidores)
@@ -53,10 +53,10 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.LoginAccount
                 EstadosServidor estado = (EstadosServidor)byte.Parse(separador[1]);
                 string nombre = id == 601 ? "Eratz" : "Henual";
 
-                if (id == cuenta.configuracion.get_Servidor_Id())
+                if (id == cuenta.AccountConfiguration.get_Servidor_Id())
                 {
                     servidor.actualizar_Datos(id, nombre, estado);
-                    cuenta.logger.log_informacion("LOGIN", $"El servidor {nombre} esta {estado}");
+                    cuenta.Logger.log_informacion("LOGIN", $"El Server {nombre} esta {estado}");
 
                     if (estado != EstadosServidor.CONECTADO)
                         primera_vez = false;
@@ -68,14 +68,14 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.LoginAccount
         }
 
         [PaqueteAtributo("AQ")]
-        public void get_Pregunta_Secreta(ClienteTcp cliente, string paquete)
+        public void get_Pregunta_Secreta(TcpClient cliente, string paquete)
         {
-            if (cliente.Account.juego.servidor.estado == EstadosServidor.CONECTADO)
+            if (cliente.Account.Game.Server.estado == EstadosServidor.CONECTADO)
                 cliente.enviar_Paquete("Ax", true);
         }
 
         [PaqueteAtributo("AxK")]
-        public void get_Servidores_Lista(ClienteTcp cliente, string paquete)
+        public void get_Servidores_Lista(TcpClient cliente, string paquete)
         {
             Account cuenta = cliente.Account;
             string[] loc5 = paquete.Substring(3).Split('|');
@@ -87,28 +87,28 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.LoginAccount
                 string[] _loc10_ = loc5[contador].Split(',');
                 int servidor_id = int.Parse(_loc10_[0]);
 
-                if (servidor_id == cuenta.juego.servidor.id)
+                if (servidor_id == cuenta.Game.Server.id)
                 {
-                    if(cuenta.juego.servidor.estado == EstadosServidor.CONECTADO)
+                    if(cuenta.Game.Server.estado == EstadosServidor.CONECTADO)
                     {
                         seleccionado = true;
-                        cuenta.juego.personaje.evento_Servidor_Seleccionado();
+                        cuenta.Game.Character.evento_Servidor_Seleccionado();
                     }
                     else
-                        cuenta.logger.log_Error("LOGIN", "Servidor no accesible cuando este accesible se re-conectara");
+                        cuenta.Logger.log_Error("LOGIN", "Servidor no accesible cuando este accesible se re-conectara");
                 }
                 contador++;
             }
 
             if(seleccionado)
-                cliente.enviar_Paquete($"AX{cuenta.juego.servidor.id}", true);
+                cliente.enviar_Paquete($"AX{cuenta.Game.Server.id}", true);
         }
 
         [PaqueteAtributo("AXK")]
-        public void get_Seleccion_Servidor(ClienteTcp cliente, string paquete)
+        public void get_Seleccion_Servidor(TcpClient cliente, string paquete)
         {
-            cliente.Account.tiquet_game = paquete.Substring(14);
-            cliente.Account.cambiando_Al_Servidor_Juego(Hash.desencriptar_Ip(paquete.Substring(3, 8)), Hash.desencriptar_Puerto(paquete.Substring(11, 3).ToCharArray()));
+            cliente.Account.GameTicket = paquete.Substring(14);
+            cliente.Account.ChangeGameServer(Hash.desencriptar_Ip(paquete.Substring(3, 8)), Hash.desencriptar_Puerto(paquete.Substring(11, 3).ToCharArray()));
         }
     }
 }

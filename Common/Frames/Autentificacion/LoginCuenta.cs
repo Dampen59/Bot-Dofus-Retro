@@ -26,7 +26,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.LoginAccount
             cuenta.Estado_Account = EstadoAccount.CONECTANDO;
             cuenta.key_bienvenida = paquete.Substring(2);
 
-            cliente.enviar_Paquete("1.29.1");
+            cliente.enviar_Paquete("1.30");
             cliente.enviar_Paquete(cliente.Account.configuracion.nombre_cuenta + "\n" + Hash.encriptar_Password(cliente.Account.configuracion.password, cliente.Account.key_bienvenida));
             cliente.enviar_Paquete("Af");
         }

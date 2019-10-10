@@ -19,14 +19,14 @@ using Bot_Dofus_1._29._1.Otros.Mapas.Entidades;
 
 namespace Bot_Dofus_1._29._1.Otros.Game.Personaje
 {
-    public class PersonajeJuego : Entidad, IEliminable
+    public class GameCharacter : Entidad, IEliminable
     {
         public int id { get; set; } = 0;
         public string nombre { get; set; }
         public byte nivel { get; set; } = 0;
         public byte sexo { get; set; } = 0;
         public byte raza_id { get; set; } = 0;
-        private Cuenta cuenta;
+        private Account cuenta;
         public InventarioGeneral inventario { get; private set; }
         public int puntos_caracteristicas { get; set; } = 0;
         public int kamas { get; private set; } = 0;
@@ -58,7 +58,7 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Personaje
         public event Action dialogo_npc_acabado;
         public event Action<List<Celda>> movimiento_pathfinding_minimapa;
         
-        public PersonajeJuego(Cuenta _cuenta)
+        public GameCharacter(Account _cuenta)
         {
             cuenta = _cuenta;
             timer_regeneracion = new Timer(regeneracion_TimerCallback, null, Timeout.Infinite, Timeout.Infinite);
@@ -218,7 +218,7 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Personaje
             }
             catch (Exception e)
             {
-                cuenta.logger.log_Error("TIMER-REGENERANDO", $"ERROR: {e}");
+                cuenta.Logger.log_Error("TIMER-REGENERANDO", $"ERROR: {e}");
             }
         }
 
@@ -226,12 +226,12 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Personaje
         {
             try
             {
-                if(cuenta.Estado_Cuenta != EstadoCuenta.DESCONECTADO)
-                    cuenta.conexion.enviar_Paquete("ping");
+                if(cuenta.AccountStatus != AccountStatus.Disconnected)
+                    cuenta.Connection.enviar_Paquete("ping");
             }
             catch (Exception e)
             {
-                cuenta.logger.log_Error("TIMER-ANTIAFK", $"ERROR: {e}");
+                cuenta.Logger.log_Error("TIMER-ANTIAFK", $"ERROR: {e}");
             }
         }
 
@@ -242,15 +242,15 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Personaje
 
         #region Zona Dispose
         public void Dispose() => Dispose(true);
-        ~PersonajeJuego() => Dispose(false);
+        ~GameCharacter() => Dispose(false);
 
-        public void limpiar()
+        public void Clean()
         {
             id = 0;
             hechizos.Clear();
             oficios.Clear();
-            inventario.limpiar();
-            caracteristicas.limpiar();
+            inventario.Clean();
+            caracteristicas.Clean();
 
             timer_regeneracion.Change(Timeout.Infinite, Timeout.Infinite);
             timer_afk.Change(Timeout.Infinite, Timeout.Infinite);

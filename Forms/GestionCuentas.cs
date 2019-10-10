@@ -16,33 +16,33 @@ using System.Windows.Forms;
 
 namespace Bot_Dofus_1._29._1.Forms
 {
-    public partial class GestionCuentas : Form
+    public partial class GestionAccounts : Form
     {
-        private List<CuentaConf> cuentas_cargadas;
+        private List<AccountConfiguration> cuentas_cargadas;
 
-        public GestionCuentas()
+        public GestionAccounts()
         {
             InitializeComponent();
-            cuentas_cargadas = new List<CuentaConf>();
+            cuentas_cargadas = new List<AccountConfiguration>();
 
             comboBox_Servidor.SelectedIndex = 0;
-            cargar_Cuentas_Lista();
+            cargar_Accounts_Lista();
         }
 
-        private void cargar_Cuentas_Lista()
+        private void cargar_Accounts_Lista()
         {
-            listViewCuentas.Items.Clear();
+            listViewAccounts.Items.Clear();
 
-            GlobalConf.get_Lista_Cuentas().ForEach(x =>
+            GlobalConf.get_Lista_Accounts().ForEach(x =>
             {
                 if (!Principal.cuentas_cargadas.ContainsKey(x.nombre_cuenta))
-                    listViewCuentas.Items.Add(x.nombre_cuenta).SubItems.AddRange(new string[2] { x.servidor, x.nombre_personaje });
+                    listViewAccounts.Items.Add(x.nombre_cuenta).SubItems.AddRange(new string[2] { x.servidor, x.nombre_personaje });
             });
         }
 
-        private void boton_Agregar_Cuenta_Click(object sender, EventArgs e)
+        private void boton_Agregar_Account_Click(object sender, EventArgs e)
         {
-            if (GlobalConf.get_Cuenta(textBox_Nombre_Cuenta.Text) != null && GlobalConf.mostrar_mensajes_debug)
+            if (GlobalConf.get_Account(textBox_Nombre_Account.Text) != null && GlobalConf.mostrar_mensajes_debug)
             {
                 MessageBox.Show("Ya existe una cuenta con el nombre de cuenta", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -65,64 +65,64 @@ namespace Bot_Dofus_1._29._1.Forms
 
             if (!tiene_errores)
             {
-                GlobalConf.agregar_Cuenta(textBox_Nombre_Cuenta.Text, textBox_Password.Text, comboBox_Servidor.SelectedItem.ToString(), textBox_nombre_personaje.Text);
-                cargar_Cuentas_Lista();
+                GlobalConf.agregar_Account(textBox_Nombre_Account.Text, textBox_Password.Text, comboBox_Servidor.SelectedItem.ToString(), textBox_nombre_personaje.Text);
+                cargar_Accounts_Lista();
 
-                textBox_Nombre_Cuenta.Clear();
+                textBox_Nombre_Account.Clear();
                 textBox_Password.Clear();
                 textBox_nombre_personaje.Clear();
 
                 if (checkBox_Agregar_Retroceder.Checked)
-                    tabControlPrincipalCuentas.SelectedIndex = 0;
+                    tabControlPrincipalAccounts.SelectedIndex = 0;
 
                 GlobalConf.guardar_Configuracion();
             }
         }
 
-        private void listViewCuentas_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e)
+        private void listViewAccounts_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e)
         {
             e.Cancel = true;
-            e.NewWidth = listViewCuentas.Columns[e.ColumnIndex].Width;
+            e.NewWidth = listViewAccounts.Columns[e.ColumnIndex].Width;
         }
 
         private void eliminarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (listViewCuentas.SelectedItems.Count > 0 && listViewCuentas.FocusedItem != null)
+            if (listViewAccounts.SelectedItems.Count > 0 && listViewAccounts.FocusedItem != null)
             {
-                foreach (ListViewItem cuenta in listViewCuentas.SelectedItems)
+                foreach (ListViewItem cuenta in listViewAccounts.SelectedItems)
                 {
-                    GlobalConf.eliminar_Cuenta(cuenta.Index);
+                    GlobalConf.eliminar_Account(cuenta.Index);
                     cuenta.Remove();
                 }
                 GlobalConf.guardar_Configuracion();
-                cargar_Cuentas_Lista();
+                cargar_Accounts_Lista();
             }
         }
 
         private void conectarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (listViewCuentas.SelectedItems.Count > 0 && listViewCuentas.FocusedItem != null)
+            if (listViewAccounts.SelectedItems.Count > 0 && listViewAccounts.FocusedItem != null)
             {
-                foreach (ListViewItem cuenta in listViewCuentas.SelectedItems)
-                    cuentas_cargadas.Add(GlobalConf.get_Lista_Cuentas().FirstOrDefault(f => f.nombre_cuenta == cuenta.Text));
+                foreach (ListViewItem cuenta in listViewAccounts.SelectedItems)
+                    cuentas_cargadas.Add(GlobalConf.get_Lista_Accounts().FirstOrDefault(f => f.nombre_cuenta == cuenta.Text));
 
                 DialogResult = DialogResult.OK;
                 Close();
             }
         }
 
-        public List<CuentaConf> get_Cuentas_Cargadas() => cuentas_cargadas;
-        private void listViewCuentas_MouseDoubleClick(object sender, MouseEventArgs e) => conectarToolStripMenuItem.PerformClick();
+        public List<AccountConfiguration> get_Accounts_Cargadas() => cuentas_cargadas;
+        private void listViewAccounts_MouseDoubleClick(object sender, MouseEventArgs e) => conectarToolStripMenuItem.PerformClick();
 
-        private void modificar_Cuenta(object sender, EventArgs e)
+        private void modificar_Account(object sender, EventArgs e)
         {
-            if (listViewCuentas.SelectedItems.Count == 1 && listViewCuentas.FocusedItem != null)
+            if (listViewAccounts.SelectedItems.Count == 1 && listViewAccounts.FocusedItem != null)
             {
-                CuentaConf cuenta = GlobalConf.get_Cuenta(listViewCuentas.SelectedItems[0].Index);
+                AccountConfiguration cuenta = GlobalConf.get_Account(listViewAccounts.SelectedItems[0].Index);
 
                 switch (sender.ToString())
                 {
-                    case "Cuenta":
+                    case "Account":
                         string nueva_cuenta = Interaction.InputBox($"Ingresa la nueva cuenta", "Modificar cuenta", cuenta.nombre_cuenta);
 
                         if (!string.IsNullOrEmpty(nueva_cuenta) || nueva_cuenta.Split(new char[0]).Length == 0)
@@ -137,13 +137,13 @@ namespace Bot_Dofus_1._29._1.Forms
                     break;
 
                     default:
-                        string nuevo_personaje = Interaction.InputBox($"Ingresa el nombre del nuevo personaje", "Modificar nombre de personaje", cuenta.nombre_personaje);
+                        string nuevo_personaje = Interaction.InputBox($"Ingresa el nombre del nuevo Character", "Modificar nombre de Character", cuenta.nombre_personaje);
                         cuenta.nombre_personaje = nuevo_personaje;
                     break;
                 }
 
                 GlobalConf.guardar_Configuracion();
-                cargar_Cuentas_Lista();
+                cargar_Accounts_Lista();
             }
         }
     }

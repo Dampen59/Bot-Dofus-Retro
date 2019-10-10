@@ -320,20 +320,20 @@ namespace Bot_Dofus_1._29._1.Properties
         ///	coroutine.yield()
         ///end
         ///
-        ///-- Mapa
+        ///-- Map
         ///function cambiarMapa(posicion)
-        ///	if api.mapa.cambiarMapa(posicion) then
+        ///	if api.Map.cambiarMapa(posicion) then
         ///		coroutine.yield()
         ///	end
         ///end
         ///function moverCelda(celda_id)
-        ///	if api.mapa.moverCelda(celda_id) then
+        ///	if api.Map.moverCelda(celda_id) then
         ///		coroutine.yield()
         ///	end
         ///end
-        ///enCelda = api.mapa.enCelda
-        ///enMapa = api.mapa.enMapa
-        ///actualMapa = api.mapa.actualMapa.
+        ///enCelda = api.Map.enCelda
+        ///enMapa = api.Map.enMapa
+        ///actualMapa = api.Map.actualMapa.
         /// </summary>
         internal static string api_ayuda {
             get {

@@ -32,33 +32,33 @@ namespace Bot_Dofus_1._29._1.Forms
             Directory.CreateDirectory("items");
         }
 
-        private void gestionDeCuentasToolStripMenuItem_Click(object sender, EventArgs e)
+        private void gestionDeAccountsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (GestionCuentas gestion_cuentas = new GestionCuentas())
+            using (GestionAccounts gestion_cuentas = new GestionAccounts())
             {
                 if (gestion_cuentas.ShowDialog() == DialogResult.OK)
                 {
-                    List<CuentaConf> cuentas_para_cargar = gestion_cuentas.get_Cuentas_Cargadas();
+                    List<AccountConfiguration> cuentas_para_cargar = gestion_cuentas.get_Accounts_Cargadas();
 
                     if (cuentas_para_cargar.Count < 2)
                     {
-                        CuentaConf cuenta_conf = cuentas_para_cargar[0];
-                        cuentas_cargadas.Add(cuenta_conf.nombre_cuenta, agregar_Nueva_Tab_Pagina(cuenta_conf.nombre_cuenta, new UI_Principal(new Cuenta(cuenta_conf)), "Ninguno"));
+                        AccountConfiguration cuentaConfiguration = cuentas_para_cargar[0];
+                        cuentas_cargadas.Add(cuentaConfiguration.nombre_cuenta, agregar_Nueva_Tab_Pagina(cuentaConfiguration.nombre_cuenta, new UI_Principal(new Account(cuentaConfiguration)), "Ninguno"));
                     }
                     else
                     {
-                        CuentaConf configuracion_lider = cuentas_para_cargar.First();
-                        Cuenta lider = new Cuenta(configuracion_lider);
+                        AccountConfiguration configuracion_lider = cuentas_para_cargar.First();
+                        Account lider = new Account(configuracion_lider);
                         Grupo grupo = new Grupo(lider);
                         cuentas_cargadas.Add(configuracion_lider.nombre_cuenta, agregar_Nueva_Tab_Pagina(configuracion_lider.nombre_cuenta, new UI_Principal(lider), configuracion_lider.nombre_cuenta));
                         cuentas_para_cargar.Remove(configuracion_lider);
 
-                        foreach (CuentaConf cuenta_conf in cuentas_para_cargar)
+                        foreach (AccountConfiguration cuenta_conf in cuentas_para_cargar)
                         {
-                            Cuenta cuenta = new Cuenta(cuenta_conf);
+                            Account cuenta = new Account(cuenta_conf);
 
                             grupo.agregar_Miembro(cuenta);
-                            cuentas_cargadas.Add(cuenta_conf.nombre_cuenta, agregar_Nueva_Tab_Pagina(cuenta_conf.nombre_cuenta, new UI_Principal(cuenta), grupo.lider.configuracion.nombre_cuenta));
+                            cuentas_cargadas.Add(cuenta_conf.nombre_cuenta, agregar_Nueva_Tab_Pagina(cuenta_conf.nombre_cuenta, new UI_Principal(cuenta), grupo.Leader.AccountConfiguration.nombre_cuenta));
                         }
                     }
                 }
@@ -67,7 +67,7 @@ namespace Bot_Dofus_1._29._1.Forms
 
         private Pagina agregar_Nueva_Tab_Pagina(string titulo, UserControl control, string nombre_grupo)
         {
-            Pagina nueva_pagina = tabControlCuentas.agregar_Nueva_Pagina(titulo);
+            Pagina nueva_pagina = tabControlAccounts.agregar_Nueva_Pagina(titulo);
             nueva_pagina.cabezera.propiedad_Imagen = Properties.Resources.circulo_rojo;
             nueva_pagina.cabezera.propiedad_Estado = "Desconectado";
             nueva_pagina.cabezera.propiedad_Grupo = nombre_grupo;

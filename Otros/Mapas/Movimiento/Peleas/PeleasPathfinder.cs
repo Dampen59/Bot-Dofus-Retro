@@ -54,19 +54,19 @@ namespace Bot_Dofus_1._29._1.Otros.Mapas.Movimiento.Peleas
             };
         }
 
-        public static Dictionary<short, MovimientoNodo> get_Celdas_Accesibles(Pelea pelea, Mapa mapa, Celda celda_actual)
+        public static Dictionary<short, MovimientoNodo> get_Celdas_Accesibles(Fight fight, Map map, Celda celda_actual)
         {
             Dictionary<short, MovimientoNodo> celdas = new Dictionary<short, MovimientoNodo>();
 
-            if (pelea.jugador_luchador.pm <= 0)
+            if (fight.jugador_luchador.pm <= 0)
                 return celdas;
 
-            short maximos_pm = pelea.jugador_luchador.pm;
+            short maximos_pm = fight.jugador_luchador.pm;
 
             List<NodoPelea> celdas_permitidas = new List<NodoPelea>();
             Dictionary<short, NodoPelea> celdas_prohibidas = new Dictionary<short, NodoPelea>();
             
-            NodoPelea nodo = new NodoPelea(celda_actual, maximos_pm, pelea.jugador_luchador.pa, 1);
+            NodoPelea nodo = new NodoPelea(celda_actual, maximos_pm, fight.jugador_luchador.pa, 1);
             celdas_permitidas.Add(nodo);
             celdas_prohibidas[celda_actual.id] = nodo;
             
@@ -75,12 +75,12 @@ namespace Bot_Dofus_1._29._1.Otros.Mapas.Movimiento.Peleas
                 NodoPelea actual = celdas_permitidas.Last();
                 celdas_permitidas.Remove(actual);
                 Celda nodo_celda = actual.celda;
-                List<Celda> adyecentes = get_Celdas_Adyecentes(nodo_celda, mapa.celdas);
+                List<Celda> adyecentes = get_Celdas_Adyecentes(nodo_celda, map.celdas);
                 
                 int i = 0;
                 while (i < adyecentes.Count)
                 {
-                    Luchadores enemigo = pelea.get_Luchadores.FirstOrDefault(f => f.celda.id == adyecentes[i]?.id);
+                    Luchadores enemigo = fight.get_Luchadores.FirstOrDefault(f => f.celda.id == adyecentes[i]?.id);
 
                     if (adyecentes[i] != null && enemigo == null)
                     {

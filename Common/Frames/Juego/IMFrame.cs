@@ -14,37 +14,37 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
     class IMFrame : Frame
     {
         [PackageAttribut("Im189")]
-        public void get_Mensaje_Bienvenida_Dofus(TcpClient cliente, string paquete) => cliente.Account.Logger.log_Error("DOFUS", "¡Bienvenido(a) a DOFUS, el Mundo de los Doce! Atención: Está prohibido comunicar tu usuario de cuenta y tu contraseña.");
+        public void get_Welcome_Message_Dofus(TcpClient cliente, string paquete) => cliente.Account.Logger.log_Error("DOFUS", "Welcome to DOFUS, the World of the Twelve! Attention It is forbidden to communicate your account username and password.");
 
         [PackageAttribut("Im039")]
-        public void get_Pelea_Espectador_Desactivado(TcpClient cliente, string paquete) => cliente.Account.Logger.log_informacion("COMBATE", "El modo Espectador está desactivado.");
+        public void get_Fight_Viewer_Off(TcpClient cliente, string paquete) => cliente.Account.Logger.log_informacion("COMBATE", "Spectator mode is disabled.");
 
         [PackageAttribut("Im040")]
-        public void get_Pelea_Espectador_Activado(TcpClient cliente, string paquete) => cliente.Account.Logger.log_informacion("COMBATE", "El modo Espectador está activado.");
+        public void get_Fight_Spectator_Activated(TcpClient cliente, string paquete) => cliente.Account.Logger.log_informacion("COMBATE", "Spectator mode is activated.");
 
         [PackageAttribut("Im0152")]
-        public void get_Mensaje_Ultima_Conexion_IP(TcpClient cliente, string paquete)
+        public void get_Last_Message_IP_Connection(TcpClient cliente, string paquete)
         {
             string mensaje = paquete.Substring(3).Split(';')[1];
-            cliente.Account.Logger.log_informacion("DOFUS", "Última conexión a tu cuenta realizada el " + mensaje.Split('~')[0] + "/" + mensaje.Split('~')[1] + "/" + mensaje.Split('~')[2] + " a las " + mensaje.Split('~')[3] + ":" + mensaje.Split('~')[4] + " mediante la dirección IP " + mensaje.Split('~')[5]);
+            cliente.Account.Logger.log_informacion("DOFUS", "Last connection to your account made on " + mensaje.Split('~')[0] + "/" + mensaje.Split('~')[1] + "/" + mensaje.Split('~')[2] + " to  " + mensaje.Split('~')[3] + ":" + mensaje.Split('~')[4] + " by IP address " + mensaje.Split('~')[5]);
         }
 
         [PackageAttribut("Im0153")]
-        public void get_Mensaje_Nueva_Conexion_IP(TcpClient cliente, string paquete) => cliente.Account.Logger.log_informacion("DOFUS", "Tu dirección IP actual es " + paquete.Substring(3).Split(';')[1]);
+        public void get_Message_New_ConnectionIP(TcpClient cliente, string paquete) => cliente.Account.Logger.log_informacion("DOFUS", "Your current IP address is " + paquete.Substring(3).Split(';')[1]);
 
         [PackageAttribut("Im020")]
-        public void get_Mensaje_Abrir_Cofre_Perder_Kamas(TcpClient cliente, string paquete) => cliente.Account.Logger.log_informacion("DOFUS", "Has tenido que dar " + paquete.Split(';')[1] + " kamas para poder acceder a este cofre.");
+        public void getMessageOpenBank(TcpClient cliente, string paquete) => cliente.Account.Logger.log_informacion("DOFUS", "You've had to give " + paquete.Split(';')[1] + " kamas to access to your bank");
 
         [PackageAttribut("Im025")]
-        public void get_Mensaje_Mascota_Feliz(TcpClient cliente, string paquete) => cliente.Account.Logger.log_informacion("DOFUS", "¡Tu mascota está muy contenta de volver a verte!");
+        public void get_Message_Pet_Happy(TcpClient cliente, string paquete) => cliente.Account.Logger.log_informacion("DOFUS", "Your pet is so happy to see you again!");
 
         [PackageAttribut("Im0157")]
-        public void get_Mensaje_Error_Chat_Difusion(TcpClient cliente, string paquete) => cliente.Account.Logger.log_informacion("DOFUS", "Este canal no tiene la difusión accesible más que a los abonados de nivel " + paquete.Split(';')[1]);
+        public void get_Message_Error_Chat_Diffusion(TcpClient cliente, string paquete) => cliente.Account.Logger.log_informacion("DOFUS", "This channel does not have the accessible diffusion only to the subscribers of level " + paquete.Split(';')[1]);
 
         [PackageAttribut("Im037")]
-        public void get_Mensaje_Modo_Away_Dofus(TcpClient cliente, string paquete) => cliente.Account.Logger.log_informacion("DOFUS", "Desde ahora serás considerado como ausente.");
+        public void get_Message_Away_Mode_Dofus(TcpClient cliente, string paquete) => cliente.Account.Logger.log_informacion("DOFUS", "From now on you will be considered away.");
 
         [PackageAttribut("Im112")]
-        public void get_Mensaje_Pods_Llenos(TcpClient cliente, string paquete) => cliente.Account.Logger.log_Error("DOFUS", "Estás demasiado cargado. Tira algunos objetos para poder moverte.");
+        public void get_Message_Pods_Full(TcpClient cliente, string paquete) => cliente.Account.Logger.log_Error("DOFUS", "You're too loaded. Throw away some objects to move around");
     }
 }

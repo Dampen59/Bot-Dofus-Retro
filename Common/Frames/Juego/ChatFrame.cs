@@ -5,13 +5,13 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
 {
     internal class ChatFrame : Frame
     {
-        [PaqueteAtributo("cC+")]
+        [PackageAttribut("cC+")]
         public void get_Agregar_Canal(TcpClient cliente, string paquete) => cliente.Account.Game.Character.agregar_Canal_Personaje(paquete.Substring(3));
 
-        [PaqueteAtributo("cC-")]
+        [PackageAttribut("cC-")]
         public void get_Eliminar_Canal(TcpClient cliente, string paquete) => cliente.Account.Game.Character.eliminar_Canal_Personaje(paquete.Substring(3));
 
-        [PaqueteAtributo("cMK")]
+        [PackageAttribut("cMK")]
         public void get_Mensajes_Chat(TcpClient cliente, string paquete)
         {
             string[] separador = paquete.Substring(3).Split('|');
@@ -20,11 +20,11 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
             switch (separador[0])
             {
                 case "?":
-                    canal = "RECLUTAMIENTO";
+                    canal = "RECRUITMENT";
                 break;
 
                 case ":":
-                    canal = "COMERCIO";
+                    canal = "TRADE";
                 break;
 
                 case "^":
@@ -32,27 +32,27 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
                 break;
 
                 case "i":
-                    canal = "INFORMACIÓN";
+                    canal = "INFORMATION";
                 break;
 
                 case "#":
-                    canal = "EQUIPO";
+                    canal = "TEAM";
                 break;
 
                 case "$":
-                    canal = "GRUPO";
+                    canal = "GROUP";
                 break;
 
                 case "%":
-                    canal = "GREMIO";
+                    canal = "GUILDS";
                 break;
 
                 case "F":
-                    cliente.Account.Logger.log_privado("RECIBIDO-PRIVADO", separador[2] + ": " + separador[3]);
+                    cliente.Account.Logger.log_privado("Receveid Private", separador[2] + ": " + separador[3]);
                 break;
 
                 case "T":
-                    cliente.Account.Logger.log_privado("ENVIADO-PRIVADO", separador[2] + ": " + separador[3]);
+                    cliente.Account.Logger.log_privado("Send Private", separador[2] + ": " + separador[3]);
                 break;
 
                 default:

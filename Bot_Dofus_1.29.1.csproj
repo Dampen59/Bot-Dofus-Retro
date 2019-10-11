@@ -135,7 +135,7 @@
     <Compile Include="Forms\Principal.Designer.cs">
       <DependentUpon>Principal.cs</DependentUpon>
     </Compile>
-    <Compile Include="Common\Frames\Authentication\LoginCuenta.cs" />
+    <Compile Include="Common\Frames\Authentication\LoginAccount.cs" />
     <Compile Include="Common\Frames\Frame.cs" />
     <Compile Include="Interfaces\UI_Hechizos.cs">
       <SubType>UserControl</SubType>

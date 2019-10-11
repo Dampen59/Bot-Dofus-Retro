@@ -16,17 +16,17 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
 {
     internal class ServidorSeleccionFrame : Frame
     {
-        [PaqueteAtributo("HG")]
+        [PackageAttribut("HG")]
         public void bienvenida_Juego(TcpClient cliente, string paquete) => cliente.enviar_Paquete("AT" + cliente.Account.GameTicket);
 
-        [PaqueteAtributo("ATK0")]
+        [PackageAttribut("ATK0")]
         public void resultado_Servidor_Seleccion(TcpClient cliente, string paquete)
         {
             cliente.enviar_Paquete("Ak0");
             cliente.enviar_Paquete("AV");
         }
 
-        [PaqueteAtributo("AV0")]
+        [PackageAttribut("AV0")]
         public void lista_Personajes(TcpClient cliente, string paquete)
         {
             cliente.enviar_Paquete("Ages");
@@ -34,7 +34,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
             cliente.enviar_Paquete("Af");
         }
 
-        [PaqueteAtributo("ALK")]
+        [PackageAttribut("ALK")]
         public void seleccionar_Personaje(TcpClient cliente, string paquete)
         {
             Account cuenta = cliente.Account;
@@ -58,10 +58,10 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
             }
         }
 
-        [PaqueteAtributo("BT")]
+        [PackageAttribut("BT")]
         public void get_Tiempo_Servidor(TcpClient cliente, string paquete) => cliente.enviar_Paquete("GI");
 
-        [PaqueteAtributo("ASK")]
+        [PackageAttribut("ASK")]
         public void personaje_Seleccionado(TcpClient cliente, string paquete)
         {
             Account cuenta = cliente.Account;

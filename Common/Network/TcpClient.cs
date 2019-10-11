@@ -108,7 +108,7 @@ namespace Bot_Dofus_1._29._1.Comun.Network
                         esta_esperando_paquete = false;
                     }
 
-                    PaqueteRecibido.Recibir(this, paquete);
+                    PackageReceived.Recibir(this, paquete);
                 }
 
                 if (esta_Conectado())

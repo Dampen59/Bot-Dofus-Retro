@@ -5,13 +5,13 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
 {
     internal class ChatFrame : Frame
     {
-        [PaqueteAtributo("cC+")]
+        [PackageAttribut("cC+")]
         public void get_Agregar_Canal(TcpClient cliente, string paquete) => cliente.Account.Game.Character.agregar_Canal_Personaje(paquete.Substring(3));
 
-        [PaqueteAtributo("cC-")]
+        [PackageAttribut("cC-")]
         public void get_Eliminar_Canal(TcpClient cliente, string paquete) => cliente.Account.Game.Character.eliminar_Canal_Personaje(paquete.Substring(3));
 
-        [PaqueteAtributo("cMK")]
+        [PackageAttribut("cMK")]
         public void get_Mensajes_Chat(TcpClient cliente, string paquete)
         {
             string[] separador = paquete.Substring(3).Split('|');

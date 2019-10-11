@@ -75,7 +75,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\Frames\Authentication\AuthenticationFrame.cs" />
-    <Compile Include="Common\Frames\Juego\AutentificacionJuego.cs" />
+    <Compile Include="Common\Frames\Juego\AuthentificationGame.cs" />
     <Compile Include="Common\Frames\Juego\ChatFrame.cs" />
     <Compile Include="Common\Frames\Juego\IMFrame.cs" />
     <Compile Include="Common\Frames\Juego\MapaFrame.cs" />
@@ -83,9 +83,9 @@
     <Compile Include="Common\Frames\Juego\PeleaFrame.cs" />
     <Compile Include="Common\Frames\Juego\PersonajeFrame.cs" />
     <Compile Include="Common\Frames\Juego\ServidorSeleccionFrame.cs" />
-    <Compile Include="Common\Frames\Transporte\PackageAttribut.cs" />
-    <Compile Include="Common\Frames\Transporte\PackageData.cs" />
-    <Compile Include="Common\Frames\Transporte\PackageReceived.cs" />
+    <Compile Include="Common\Frames\Network\PackageAttribut.cs" />
+    <Compile Include="Common\Frames\Network\PackageData.cs" />
+    <Compile Include="Common\Frames\Network\PackageReceived.cs" />
     <Compile Include="Controles\ColorCheckBox\ColorCheckBox.cs">
       <SubType>Component</SubType>
     </Compile>

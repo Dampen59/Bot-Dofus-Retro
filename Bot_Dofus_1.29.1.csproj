@@ -75,14 +75,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\Frames\Authentication\AuthenticationFrame.cs" />
-    <Compile Include="Common\Frames\Juego\AuthentificationGame.cs" />
-    <Compile Include="Common\Frames\Juego\ChatFrame.cs" />
-    <Compile Include="Common\Frames\Juego\IMFrame.cs" />
-    <Compile Include="Common\Frames\Juego\MapaFrame.cs" />
-    <Compile Include="Common\Frames\Juego\NPCFrame.cs" />
-    <Compile Include="Common\Frames\Juego\PeleaFrame.cs" />
-    <Compile Include="Common\Frames\Juego\PersonajeFrame.cs" />
-    <Compile Include="Common\Frames\Juego\ServidorSeleccionFrame.cs" />
+    <Compile Include="Common\Frames\Games\AuthentificationGame.cs" />
+    <Compile Include="Common\Frames\Games\ChatFrame.cs" />
+    <Compile Include="Common\Frames\Games\IMFrame.cs" />
+    <Compile Include="Common\Frames\Games\MapaFrame.cs" />
+    <Compile Include="Common\Frames\Games\NPCFrame.cs" />
+    <Compile Include="Common\Frames\Games\PeleaFrame.cs" />
+    <Compile Include="Common\Frames\Games\PersonajeFrame.cs" />
+    <Compile Include="Common\Frames\Games\ServidorSeleccionFrame.cs" />
     <Compile Include="Common\Frames\Network\PackageAttribut.cs" />
     <Compile Include="Common\Frames\Network\PackageData.cs" />
     <Compile Include="Common\Frames\Network\PackageReceived.cs" />

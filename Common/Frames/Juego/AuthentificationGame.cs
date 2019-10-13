@@ -28,7 +28,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
         }
 
         [PackageAttribut("M032")]
-        public void GetFloodErro(TcpClient cliente, string paquete)
+        public void GetFloodError(TcpClient cliente, string paquete)
         {
             cliente.Account.Logger.log_Error("Login", "To avoid disturbing other players, wait %1 seconds before reconnecting.");
             cliente.Account.Disconnect();

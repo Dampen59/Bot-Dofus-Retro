@@ -273,7 +273,7 @@
     <Compile Include="Otros\Scripts\Banderas\NPCBancoBandera.cs" />
     <Compile Include="Otros\Scripts\Banderas\PeleaBandera.cs" />
     <Compile Include="Otros\Scripts\Banderas\RecoleccionBandera.cs" />
-    <Compile Include="Otros\Scripts\EstadoScript.cs" />
+    <Compile Include="Otros\Scripts\ScriptState.cs" />
     <Compile Include="Otros\Scripts\Manejadores\LuaManejadorScript.cs" />
     <Compile Include="Otros\Scripts\Manejadores\ManejadorAcciones.cs" />
     <Compile Include="Otros\Scripts\ScriptHandler.cs" />

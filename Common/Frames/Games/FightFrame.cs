@@ -19,7 +19,7 @@ using System.Threading.Tasks;
 
 namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
 {
-    internal class PeleaFrame : Frame
+    internal class FightFrame : Frame
     {
         [PackageAttribut("GP")]
         public void get_Combate_Celdas_Posicion(TcpClient cliente, string paquete)
@@ -32,13 +32,13 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
                 cuenta.Game.Fight.celdas_preparacion.Add(map.get_Celda_Id((short)((Hash.get_Hash(_loc3[0][a]) << 6) + Hash.get_Hash(_loc3[0][a + 1]))));
                 
             if (cuenta.CombatExtensions.configuracion.desactivar_espectador)
-                cliente.enviar_Paquete("fS");
+                cliente.Send("fS");
 
             if (cuenta.CanUseDrago)
             {
                 if (cuenta.CombatExtensions.configuracion.utilizar_dragopavo && !cuenta.Game.Character.esta_utilizando_dragopavo)
                 {
-                    cliente.enviar_Paquete("Rr");
+                    cliente.Send("Rr");
                     cuenta.Game.Character.esta_utilizando_dragopavo = true;
                 }
             }
@@ -50,7 +50,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
             if(cliente.Account.IsFighting())
             {
                 await Task.Delay(150);
-                cliente.enviar_Paquete("GR1");//boton listo
+                cliente.Send("GR1");//boton listo
             }
         }
 
@@ -71,7 +71,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
                 if (id_entidad == cuenta.Game.Character.id)
                 {
                     await Task.Delay(150);
-                    cliente.enviar_Paquete("GR1");//boton listo
+                    cliente.Send("GR1");//boton listo
                 }
 
                 Luchadores luchador = cuenta.Game.Fight.get_Luchador_Por_Id(id_entidad);
@@ -122,9 +122,9 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
             int id = int.Parse(paquete.Substring(3));
 
             if(cuenta.Game.Character.id == id)
-                cuenta.Connection.enviar_Paquete("BD");
+                cuenta.Connection.Send("BD");
 
-            cuenta.Connection.enviar_Paquete("GT");
+            cuenta.Connection.Send("GT");
         }
 
         [PackageAttribut("GJK")]
@@ -166,7 +166,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
             Account cuenta = cliente.Account;
 
             cuenta.Game.Fight.get_Combate_Acabado();
-            cliente.enviar_Paquete("GC1");
+            cliente.Send("GC1");
         }
     }
 }

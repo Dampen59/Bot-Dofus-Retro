@@ -432,7 +432,7 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts
                         if (Account.IsBusy())
                             return;
 
-                        Account.Connection.enviar_Paquete("eU1", true);
+                        Account.Connection.Send("eU1", true);
                     }
 
                     Account.Logger.log_informacion("SCRIPTS", $"Regeneration started, life points to recover: {vida_para_regenerar}, time: {tiempo_estimado} seconds.");
@@ -443,7 +443,7 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts
                     if (corriendo)
                     {
                         if (Account.AccountStatus == AccountStatus.Regenerating)
-                            Account.Connection.enviar_Paquete("eU1", true);
+                            Account.Connection.Send("eU1", true);
 
                         Account.Logger.log_informacion("SCRIPTS", "Regeneration completed.");
                     }

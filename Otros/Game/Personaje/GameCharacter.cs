@@ -227,7 +227,7 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Personaje
             try
             {
                 if(cuenta.AccountStatus != AccountStatus.Disconnected)
-                    cuenta.Connection.enviar_Paquete("ping");
+                    cuenta.Connection.Send("ping");
             }
             catch (Exception e)
             {

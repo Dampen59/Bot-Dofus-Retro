@@ -67,7 +67,7 @@ namespace Bot_Dofus_1._29._1.Otros.Peleas
             if (cuenta.AccountStatus != AccountStatus.Fighting)
                 return;
 
-            await cuenta.Connection.enviar_Paquete_Async("GA300" + hechizo_id + ';' + celda_id, false);
+            await cuenta.Connection.Send_Async("GA300" + hechizo_id + ';' + celda_id, false);
         }
 
         public void actualizar_Hechizo_Exito(short celda_id, short hechizo_id)

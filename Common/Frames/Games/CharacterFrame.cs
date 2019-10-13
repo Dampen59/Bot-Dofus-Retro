@@ -20,7 +20,7 @@ using System.Threading;
 
 namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
 {
-    class PersonajeFrame : Frame
+    class CharacterFrame : Frame
     {
         [PackageAttribut("As")]
         public void get_Stats_Actualizados(TcpClient cliente, string paquete) => cliente.Account.Game.Character.actualizar_Caracteristicas(paquete);
@@ -29,7 +29,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
         public void get_Peticion_Grupo(TcpClient cliente, string paquete)
         {
             cliente.Account.Logger.log_informacion("Group", $"New Character group invitation: {paquete.Substring(3).Split('|')[0]}");
-            cliente.enviar_Paquete("PR");
+            cliente.Send("PR");
             cliente.Account.Logger.log_informacion("Group", "Invitation Rejected");
         }
 
@@ -180,7 +180,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
         public void get_Peticion_Intercambio(TcpClient cliente, string paquete)
         {
             cliente.Account.Logger.log_informacion("INFORMACIÓN", "Exchange invitation received, rejecting");
-            cliente.enviar_Paquete("EV", true);
+            cliente.Send("EV", true);
         }
 
         [PackageAttribut("ILS")]
@@ -226,7 +226,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
         }
 
         [PackageAttribut("Bp")]
-        public void get_Ping_Promedio(TcpClient cliente, string paquete) => cliente.enviar_Paquete($"Bp{cliente.get_Promedio_Pings()}|{cliente.get_Total_Pings()}|50");
+        public void get_Ping_Promedio(TcpClient cliente, string paquete) => cliente.Send($"Bp{cliente.get_Promedio_Pings()}|{cliente.get_Total_Pings()}|50");
 
         [PackageAttribut("pong")]
         public void get_Ping_Pong(TcpClient cliente, string paquete) => cliente.Account.Logger.log_informacion("DOFUS", $"Ping: {cliente.get_Actual_Ping()} ms");

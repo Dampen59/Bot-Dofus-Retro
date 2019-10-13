@@ -125,7 +125,7 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Entidades.Manejadores.Movimientos
                 return ResultadoMovimientos.MISMA_CELDA;
 
             actual_path = path_temporal;
-            enviar_Paquete_Movimiento();
+            Send_Movimiento();
             return ResultadoMovimientos.EXITO;
         }
 
@@ -143,7 +143,7 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Entidades.Manejadores.Movimientos
             nodo.Value.Value.camino.celdas_accesibles.Insert(0, cuenta.Game.Fight.jugador_luchador.celda.id);
             List<Celda> lista_celdas = nodo.Value.Value.camino.celdas_accesibles.Select(c => _map.get_Celda_Id(c)).ToList();
 
-            await cuenta.Connection.enviar_Paquete_Async("GA001" + PathFinderUtil.get_Pathfinding_Limpio(lista_celdas), false);
+            await cuenta.Connection.Send_Async("GA001" + PathFinderUtil.get_Pathfinding_Limpio(lista_celdas), false);
             personaje.evento_Personaje_Pathfinding_Minimapa(lista_celdas);
         }
 
@@ -162,13 +162,13 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Entidades.Manejadores.Movimientos
             }
         }
 
-        private void enviar_Paquete_Movimiento()
+        private void Send_Movimiento()
         {
             if (cuenta.AccountStatus == AccountStatus.Regenerating)
-                cuenta.Connection.enviar_Paquete("eU1", true);
+                cuenta.Connection.Send("eU1", true);
 
             string path_string = PathFinderUtil.get_Pathfinding_Limpio(actual_path);
-            cuenta.Connection.enviar_Paquete("GA001" + path_string, true);
+            cuenta.Connection.Send("GA001" + path_string, true);
             personaje.evento_Personaje_Pathfinding_Minimapa(actual_path);
         }
 
@@ -184,7 +184,7 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Entidades.Manejadores.Movimientos
                 if (cuenta == null || cuenta.AccountStatus == AccountStatus.Disconnected)
                     return;
 
-                cuenta.Connection.enviar_Paquete("GKK" + tipo_gkk);
+                cuenta.Connection.Send("GKK" + tipo_gkk);
                 personaje.celda = celda_destino;
             }
 

@@ -78,11 +78,11 @@
     <Compile Include="Common\Frames\Games\AuthentificationGame.cs" />
     <Compile Include="Common\Frames\Games\ChatFrame.cs" />
     <Compile Include="Common\Frames\Games\IMFrame.cs" />
-    <Compile Include="Common\Frames\Games\MapaFrame.cs" />
+    <Compile Include="Common\Frames\Games\MapFrame.cs" />
     <Compile Include="Common\Frames\Games\NPCFrame.cs" />
-    <Compile Include="Common\Frames\Games\PeleaFrame.cs" />
-    <Compile Include="Common\Frames\Games\PersonajeFrame.cs" />
-    <Compile Include="Common\Frames\Games\ServidorSeleccionFrame.cs" />
+    <Compile Include="Common\Frames\Games\FightFrame.cs" />
+    <Compile Include="Common\Frames\Games\CharacterFrame.cs" />
+    <Compile Include="Common\Frames\Games\ServerSelectionFrame.cs" />
     <Compile Include="Common\Frames\Network\PackageAttribut.cs" />
     <Compile Include="Common\Frames\Network\PackageData.cs" />
     <Compile Include="Common\Frames\Network\PackageReceived.cs" />

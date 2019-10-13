@@ -84,9 +84,9 @@ namespace Bot_Dofus_1._29._1.Interfaces
 
                 cuenta.Connect();
 
-                cuenta.Connection.paquete_recibido += debugger.paquete_Recibido;
-                cuenta.Connection.paquete_enviado += debugger.paquete_Enviado;
-                cuenta.Connection.socket_informacion += get_Mensajes_Socket_Informacion;
+                cuenta.Connection.package_received += debugger.package_received;
+                cuenta.Connection.package_sent += debugger.package_sent;
+                cuenta.Connection.socket_information += get_Mensajes_socket_information;
 
                 desconectarOconectarToolStripMenuItem.Text = "Desconectar";
             }
@@ -186,7 +186,7 @@ namespace Bot_Dofus_1._29._1.Interfaces
                 string[] canales = { "i", "*", "#$p", "%", "!", "?", ":", "^" };
                 CheckBox control = sender as CheckBox;
 
-                cuenta.Connection.enviar_Paquete((control.Checked ? "cC+" : "cC-") + canales[control.TabIndex]);
+                cuenta.Connection.Send((control.Checked ? "cC+" : "cC-") + canales[control.TabIndex]);
             }
         }
 
@@ -206,7 +206,7 @@ namespace Bot_Dofus_1._29._1.Interfaces
 
                     case "/PING":
                         if (cuenta.Connection != null)
-                            cuenta.Connection.enviar_Paquete("ping", true);
+                            cuenta.Connection.Send("ping", true);
                         else
                             escribir_mensaje("No estas conectado a dofus", "0040FF");
                     break;
@@ -215,19 +215,19 @@ namespace Bot_Dofus_1._29._1.Interfaces
                         switch (comboBox_lista_canales.SelectedIndex)
                         {
                             case 0://General
-                                cuenta.Connection.enviar_Paquete("BM*|" + textBox_enviar_consola.Text + "|", true);
+                                cuenta.Connection.Send("BM*|" + textBox_enviar_consola.Text + "|", true);
                                 break;
 
                             case 1://Reclutamiento
-                                cuenta.Connection.enviar_Paquete("BM?|" + textBox_enviar_consola.Text + "|", true);
+                                cuenta.Connection.Send("BM?|" + textBox_enviar_consola.Text + "|", true);
                                 break;
 
                             case 2://Comercio
-                                cuenta.Connection.enviar_Paquete("BM:|" + textBox_enviar_consola.Text + "|", true);
+                                cuenta.Connection.Send("BM:|" + textBox_enviar_consola.Text + "|", true);
                                 break;
 
                             case 3://Mensaje privado
-                                cuenta.Connection.enviar_Paquete("BM" + textBox_nombre_privado.Text + "|" + textBox_enviar_consola.Text + "|", true);
+                                cuenta.Connection.Send("BM" + textBox_nombre_privado.Text + "|" + textBox_enviar_consola.Text + "|", true);
                                 break;
                         }
                     break;
@@ -311,7 +311,7 @@ namespace Bot_Dofus_1._29._1.Interfaces
         #endregion
 
         #region Mensajes
-        private void get_Mensajes_Socket_Informacion(object error) => escribir_mensaje("[" + DateTime.Now.ToString("HH:mm:ss") + "] [Conexión] " + error, LogTipos.PELIGRO.ToString("X"));
+        private void get_Mensajes_socket_information(object error) => escribir_mensaje("[" + DateTime.Now.ToString("HH:mm:ss") + "] [Conexión] " + error, LogTipos.PELIGRO.ToString("X"));
 
         private void escribir_mensaje(string mensaje, string color)
         {

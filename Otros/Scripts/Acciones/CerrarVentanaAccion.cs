@@ -16,7 +16,7 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts.Acciones
         {
             if (cuenta.IsDialoguing())
             {
-                cuenta.Connection.enviar_Paquete("EV");
+                cuenta.Connection.Send("EV");
                 return resultado_procesado;
             }
 

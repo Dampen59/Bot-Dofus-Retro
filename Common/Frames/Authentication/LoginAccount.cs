@@ -26,9 +26,9 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.LoginAccount
             cuenta.AccountStatus = AccountStatus.CONECTANDO;
             cuenta.WelcomeKey = paquete.Substring(2);
 
-            cliente.enviar_Paquete("1.30");
-            cliente.enviar_Paquete(cliente.Account.AccountConfiguration.nombre_cuenta + "\n" + Hash.encriptar_Password(cliente.Account.AccountConfiguration.password, cliente.Account.WelcomeKey));
-            cliente.enviar_Paquete("Af");
+            cliente.Send("1.30");
+            cliente.Send(cliente.Account.AccountConfiguration.nombre_cuenta + "\n" + Hash.encriptar_Password(cliente.Account.AccountConfiguration.password, cliente.Account.WelcomeKey));
+            cliente.Send("Af");
         }
 
         [PackageAttribut("Ad")]
@@ -64,14 +64,14 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.LoginAccount
             }
 
             if(!primera_vez  && servidor.estado == EstadosServidor.CONECTADO)
-                cliente.enviar_Paquete("Ax");
+                cliente.Send("Ax");
         }
 
         [PackageAttribut("AQ")]
         public void get_Pregunta_Secreta(TcpClient cliente, string paquete)
         {
             if (cliente.Account.Game.Server.estado == EstadosServidor.CONECTADO)
-                cliente.enviar_Paquete("Ax", true);
+                cliente.Send("Ax", true);
         }
 
         [PackageAttribut("AxK")]
@@ -101,7 +101,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.LoginAccount
             }
 
             if(seleccionado)
-                cliente.enviar_Paquete($"AX{cuenta.Game.Server.id}", true);
+                cliente.Send($"AX{cuenta.Game.Server.id}", true);
         }
 
         [PackageAttribut("AXK")]

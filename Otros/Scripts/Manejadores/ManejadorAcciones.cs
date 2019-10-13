@@ -160,7 +160,7 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts.Manejadores
                 IEnumerable<Npcs> npcs = cuenta.Game.Map.lista_npcs();
                 Npcs npc = npcs.ElementAt((cuenta.Game.Character.hablando_npc_id * -1) - 1);
 
-                cuenta.Connection.enviar_Paquete("DR" + npc.pregunta + "|" + npc.respuestas[0], true);
+                cuenta.Connection.Send("DR" + npc.pregunta + "|" + npc.respuestas[0], true);
             }
             else if (accion_actual is NpcAccion || accion_actual is RespuestaAccion)
                 acciones_Salida(400);

@@ -9,13 +9,13 @@
 
 namespace Bot_Dofus_1._29._1.Comun.Frames.Transporte
 {
-    public class PaqueteDatos
+    public class PackageData
     {
         public object instancia { get; set; }
         public string nombre_paquete { get; set; }
         public MethodInfo informacion { get; set; }
 
-        public PaqueteDatos(object _instancia, string _nombre_paquete, MethodInfo _informacion)
+        public PackageData(object _instancia, string _nombre_paquete, MethodInfo _informacion)
         {
             instancia = _instancia;
             nombre_paquete = _nombre_paquete;

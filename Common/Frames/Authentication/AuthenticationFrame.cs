@@ -14,45 +14,45 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Autentificacion
 {
     internal class Authentication : Frame
     {
-        [PaqueteAtributo("AlEf")]
-        public void get_Error_Datos(TcpClient cliente, string paquete)
+        [PackageAttribut("AlEf")]
+        public void GetErrorData(TcpClient cliente, string paquete)
         {
             cliente.Account.Logger.log_Error("LOGIN", "Connection rejected. Incorrect account name or password.");
             cliente.Account.Disconnect();
         }
 
-        [PaqueteAtributo("AlEa")]
-        public void get_Error_Ya_Conectado(TcpClient cliente, string paquete)
+        [PackageAttribut("AlEa")]
+        public void GetErrorAlreadyConnected(TcpClient cliente, string paquete)
         {
             cliente.Account.Logger.log_Error("LOGIN", "Already connected. Try again.");
             cliente.Account.Disconnect();
         }
 
-        [PaqueteAtributo("AlEv")]
-        public void get_Error_Version(TcpClient cliente, string paquete)
+        [PackageAttribut("AlEv")]
+        public void GetProtocolError(TcpClient cliente, string paquete)
         {
             cliente.Account.Logger.log_Error("LOGIN",
                 "The %1 version of Dofus that you have installed is not compatible with this server. To play, install version %2. The DOFUS client will be closed.");
             cliente.Account.Disconnect();
         }
 
-        [PaqueteAtributo("AlEb")]
-        public void get_Error_Baneado(TcpClient cliente, string paquete)
+        [PackageAttribut("AlEb")]
+        public void GetErroBan(TcpClient cliente, string paquete)
         {
             cliente.Account.Logger.log_Error("LOGIN", "Connection rejected. Your account has been banned.");
             cliente.Account.Disconnect();
         }
 
-        [PaqueteAtributo("AlEd")]
-        public void get_Error_Conectado(TcpClient cliente, string paquete)
+        [PackageAttribut("AlEd")]
+        public void GetErrorAccountAlreadyConnected(TcpClient cliente, string paquete)
         {
             cliente.Account.Logger.log_Error("LOGIN",
                 "This account is already connected to a game server. Please try again.");
             cliente.Account.Disconnect();
         }
 
-        [PaqueteAtributo("AlEk")]
-        public void get_Error_Baneado_Tiempo(TcpClient cliente, string paquete)
+        [PackageAttribut("AlEk")]
+        public void GetErrorTempBan(TcpClient cliente, string paquete)
         {
             var informacion_ban = paquete.Substring(3).Split('|');
             int dias = int.Parse(informacion_ban[0].Substring(1)),

@@ -102,7 +102,7 @@
             this.checkBox_mensajes_debug.Name = "checkBox_mensajes_debug";
             this.checkBox_mensajes_debug.Size = new System.Drawing.Size(366, 20);
             this.checkBox_mensajes_debug.TabIndex = 0;
-            this.checkBox_mensajes_debug.Text = "Mostrar los mensajes debug";
+            this.checkBox_mensajes_debug.Text = "Show debug messages";
             this.checkBox_mensajes_debug.UseVisualStyleBackColor = true;
             // 
             // groupBox2
@@ -115,7 +115,7 @@
             this.groupBox2.Size = new System.Drawing.Size(378, 130);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Otros";
+            this.groupBox2.Text = "Others";
             // 
             // panel1
             // 
@@ -134,7 +134,7 @@
             this.boton_opciones_guardar.Name = "boton_opciones_guardar";
             this.boton_opciones_guardar.Size = new System.Drawing.Size(372, 35);
             this.boton_opciones_guardar.TabIndex = 0;
-            this.boton_opciones_guardar.Text = "Guardar";
+            this.boton_opciones_guardar.Text = "Save";
             this.boton_opciones_guardar.UseVisualStyleBackColor = true;
             this.boton_opciones_guardar.Click += new System.EventHandler(this.boton_opciones_guardar_Click);
             // 
@@ -175,7 +175,7 @@
             this.label_puerto_servidor.Name = "label_puerto_servidor";
             this.label_puerto_servidor.Size = new System.Drawing.Size(160, 30);
             this.label_puerto_servidor.TabIndex = 2;
-            this.label_puerto_servidor.Text = "Puerto Server conexión:";
+            this.label_puerto_servidor.Text = "Port Server Connection:";
             this.label_puerto_servidor.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // textBox_ip_servidor
@@ -195,7 +195,7 @@
             this.label_ip_conexion.Name = "label_ip_conexion";
             this.label_ip_conexion.Size = new System.Drawing.Size(160, 32);
             this.label_ip_conexion.TabIndex = 0;
-            this.label_ip_conexion.Text = "IP Server conexión:";
+            this.label_ip_conexion.Text = "IP Server connection:";
             this.label_ip_conexion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // Opciones
@@ -211,10 +211,10 @@
             this.MaximumSize = new System.Drawing.Size(400, 311);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(400, 311);
-            this.Name = "Opciones";
+            this.Name = "Settings";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Ajustes";
+            this.Text = "Settings";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);

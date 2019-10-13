@@ -8,7 +8,7 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts.Acciones.Npcs
         {
             if (cuenta.IsDialoguing())
             {
-                cuenta.Connection.enviar_Paquete("DV", true);
+                cuenta.Connection.Send("DV", true);
                 return resultado_procesado;
             }
 

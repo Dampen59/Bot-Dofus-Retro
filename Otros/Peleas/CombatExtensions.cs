@@ -166,7 +166,7 @@ namespace Bot_Dofus_1._29._1.Otros.Peleas
                 await get_Mover(false, _fight.get_Obtener_Enemigo_Mas_Cercano());
 
             _fight.get_Turno_Acabado();
-            Account.Connection.enviar_Paquete("Gt");
+            Account.Connection.Send("Gt");
         }
 
         public async Task get_Mover(bool cercano, Luchadores enemigo)

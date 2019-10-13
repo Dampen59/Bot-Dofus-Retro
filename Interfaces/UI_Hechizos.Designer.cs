@@ -72,22 +72,22 @@
             // nombre
             // 
             this.nombre.FillWeight = 300F;
-            this.nombre.HeaderText = "Nombre";
+            this.nombre.HeaderText = "Name";
             this.nombre.MinimumWidth = 300;
-            this.nombre.Name = "nombre";
+            this.nombre.Name = "name";
             this.nombre.ReadOnly = true;
             this.nombre.Width = 300;
             // 
             // nivel
             // 
-            this.nivel.HeaderText = "Nivel";
+            this.nivel.HeaderText = "Level";
             this.nivel.Name = "nivel";
             this.nivel.ReadOnly = true;
             // 
             // accion
             // 
             this.accion.FillWeight = 200F;
-            this.accion.HeaderText = "Acción";
+            this.accion.HeaderText = "Action";
             this.accion.MinimumWidth = 200;
             this.accion.Name = "accion";
             this.accion.ReadOnly = true;

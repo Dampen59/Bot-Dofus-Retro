@@ -81,7 +81,7 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts.Manejadores
 
                     if (cuenta.AccountStatus != AccountStatus.Fighting)
                     {
-                        cuenta.Logger.log_Peligro("SCRIPT", "Error al lanzar la pelea, los monstruos pudieron haberse movido o sido robados!");
+                        cuenta.Logger.log_Peligro("SCRIPT", "Error when throwing the fight, the monsters could have moved or been stolen!");
                         acciones_Salida(0);
                     }
                 }
@@ -91,10 +91,10 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts.Manejadores
                 if (es_correcto)
                     acciones_Salida(0);
                 else
-                    cuenta.ScriptHandler.StopScript("error al mover a la celda" + celda.celda_id);
+                    cuenta.ScriptHandler.StopScript("error when moving to cell" + celda.celda_id);
             }
             else if (accion_actual is CambiarMapaAccion && !es_correcto)
-                cuenta.ScriptHandler.StopScript("error al cambiar de Map");
+                cuenta.ScriptHandler.StopScript("error when changing Map");
         }
 
         private void get_Recoleccion_Iniciada()
@@ -106,8 +106,8 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts.Manejadores
             {
                 contador_recoleccion++;
 
-                if (manejador_script.get_Global_Or("MOSTRAR_CONTADOR_RECOLECCION", DataType.Boolean, false))
-                    cuenta.Logger.log_informacion("SCRIPT", $"Recolección #{contador_recoleccion}");
+                if (manejador_script.get_Global_Or("HARVEST_COUNT", DataType.Boolean, false))
+                    cuenta.Logger.log_informacion("SCRIPT", $"Collecting #{contador_recoleccion}");
             }
         }
 
@@ -121,7 +121,7 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts.Manejadores
                 switch (resultado)
                 {
                     case RecoleccionResultado.FALLO:
-                        cuenta.ScriptHandler.StopScript("Error recolectando");
+                        cuenta.ScriptHandler.StopScript("Collecting error");
                     break;
 
                     default:
@@ -160,7 +160,7 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts.Manejadores
                 IEnumerable<Npcs> npcs = cuenta.Game.Map.lista_npcs();
                 Npcs npc = npcs.ElementAt((cuenta.Game.Character.hablando_npc_id * -1) - 1);
 
-                cuenta.Connection.enviar_Paquete("DR" + npc.pregunta + "|" + npc.respuestas[0], true);
+                cuenta.Connection.Send("DR" + npc.pregunta + "|" + npc.respuestas[0], true);
             }
             else if (accion_actual is NpcAccion || accion_actual is RespuestaAccion)
                 acciones_Salida(400);

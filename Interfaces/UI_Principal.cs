@@ -32,8 +32,8 @@ namespace Bot_Dofus_1._29._1.Interfaces
 
         private void UI_Principal_Load(object sender, EventArgs e)
         {
-            desconectarOconectarToolStripMenuItem.Text = "Conectar";
-            escribir_mensaje($"[{DateTime.Now.ToString("HH:mm:ss")}] -> [INFORMACIÓN] Bot creado por Alvaro, http://www.salesprendes.com versión: {Application.ProductVersion} alpha", LogTipos.ERROR.ToString("X"));
+            desconectarOconectarToolStripMenuItem.Text = "Connected";
+            escribir_mensaje($"[{DateTime.Now.ToString("HH:mm:ss")}] -> [INFORMATIONS] Welcome on the Retro Bot Bversión: {Application.ProductVersion} alpha", LogTipos.ERROR.ToString("X"));
 
             cuenta.AccountStatusEvent += eventos_Estados_Account;
             cuenta.AccountDisconnectedEvent += desconectar_Account;
@@ -84,9 +84,9 @@ namespace Bot_Dofus_1._29._1.Interfaces
 
                 cuenta.Connect();
 
-                cuenta.Connection.paquete_recibido += debugger.paquete_Recibido;
-                cuenta.Connection.paquete_enviado += debugger.paquete_Enviado;
-                cuenta.Connection.socket_informacion += get_Mensajes_Socket_Informacion;
+                cuenta.Connection.package_received += debugger.package_received;
+                cuenta.Connection.package_sent += debugger.package_sent;
+                cuenta.Connection.socket_information += get_Mensajes_socket_information;
 
                 desconectarOconectarToolStripMenuItem.Text = "Desconectar";
             }
@@ -186,7 +186,7 @@ namespace Bot_Dofus_1._29._1.Interfaces
                 string[] canales = { "i", "*", "#$p", "%", "!", "?", ":", "^" };
                 CheckBox control = sender as CheckBox;
 
-                cuenta.Connection.enviar_Paquete((control.Checked ? "cC+" : "cC-") + canales[control.TabIndex]);
+                cuenta.Connection.Send((control.Checked ? "cC+" : "cC-") + canales[control.TabIndex]);
             }
         }
 
@@ -206,7 +206,7 @@ namespace Bot_Dofus_1._29._1.Interfaces
 
                     case "/PING":
                         if (cuenta.Connection != null)
-                            cuenta.Connection.enviar_Paquete("ping", true);
+                            cuenta.Connection.Send("ping", true);
                         else
                             escribir_mensaje("No estas conectado a dofus", "0040FF");
                     break;
@@ -215,19 +215,19 @@ namespace Bot_Dofus_1._29._1.Interfaces
                         switch (comboBox_lista_canales.SelectedIndex)
                         {
                             case 0://General
-                                cuenta.Connection.enviar_Paquete("BM*|" + textBox_enviar_consola.Text + "|", true);
+                                cuenta.Connection.Send("BM*|" + textBox_enviar_consola.Text + "|", true);
                                 break;
 
                             case 1://Reclutamiento
-                                cuenta.Connection.enviar_Paquete("BM?|" + textBox_enviar_consola.Text + "|", true);
+                                cuenta.Connection.Send("BM?|" + textBox_enviar_consola.Text + "|", true);
                                 break;
 
                             case 2://Comercio
-                                cuenta.Connection.enviar_Paquete("BM:|" + textBox_enviar_consola.Text + "|", true);
+                                cuenta.Connection.Send("BM:|" + textBox_enviar_consola.Text + "|", true);
                                 break;
 
                             case 3://Mensaje privado
-                                cuenta.Connection.enviar_Paquete("BM" + textBox_nombre_privado.Text + "|" + textBox_enviar_consola.Text + "|", true);
+                                cuenta.Connection.Send("BM" + textBox_nombre_privado.Text + "|" + textBox_enviar_consola.Text + "|", true);
                                 break;
                         }
                     break;
@@ -295,15 +295,15 @@ namespace Bot_Dofus_1._29._1.Interfaces
 
         private void servidor_Seleccionado()
         {
-            agregar_Tab_Pagina("Personaje", new UI_Personaje(cuenta), 2);
-            agregar_Tab_Pagina("Inventario", new UI_Inventario(cuenta), 3);
+            agregar_Tab_Pagina("Character", new UI_Personaje(cuenta), 2);
+            agregar_Tab_Pagina("Inventory", new UI_Inventario(cuenta), 3);
         }
 
         private void personaje_Seleccionado()
         {
             cuenta.CombatExtensions.configuracion.cargar();
             agregar_Tab_Pagina("Map", new UI_Mapa(cuenta), 4);
-            agregar_Tab_Pagina("Combates", new UI_Pelea(cuenta), 5);
+            agregar_Tab_Pagina("Fight", new UI_Pelea(cuenta), 5);
 
             cambiar_Todos_Controles_Chat(true);
             cargar_Canales_Chat();
@@ -311,7 +311,7 @@ namespace Bot_Dofus_1._29._1.Interfaces
         #endregion
 
         #region Mensajes
-        private void get_Mensajes_Socket_Informacion(object error) => escribir_mensaje("[" + DateTime.Now.ToString("HH:mm:ss") + "] [Conexión] " + error, LogTipos.PELIGRO.ToString("X"));
+        private void get_Mensajes_socket_information(object error) => escribir_mensaje("[" + DateTime.Now.ToString("HH:mm:ss") + "] [Conexión] " + error, LogTipos.PELIGRO.ToString("X"));
 
         private void escribir_mensaje(string mensaje, string color)
         {

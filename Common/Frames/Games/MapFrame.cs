@@ -25,7 +25,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
 {
     internal class MapaFrame : Frame
     {
-        [PaqueteAtributo("GM")]
+        [PackageAttribut("GM")]
         public async Task get_Movimientos_Personajes(TcpClient cliente, string paquete)
         {
             Account cuenta = cliente.Account;
@@ -113,14 +113,14 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
                                         short celda_posicion = fight.get_Celda_Mas_Cercana_O_Lejana(cuenta.CombatExtensions.configuracion.posicionamiento == PosicionamientoInicioPelea.CERCA_DE_ENEMIGOS, fight.celdas_preparacion);
 
                                         if (celda_posicion != celda.id)
-                                            cuenta.Connection.enviar_Paquete("Gp" + celda_posicion, true);
+                                            cuenta.Connection.Send("Gp" + celda_posicion, true);
                                         else
-                                            cuenta.Connection.enviar_Paquete("GR1");
+                                            cuenta.Connection.Send("GR1");
                                     }
                                     else if (cuenta.Game.Character.id == id)
                                     {
                                         await Task.Delay(300);
-                                        cuenta.Connection.enviar_Paquete("GR1");//boton listo
+                                        cuenta.Connection.Send("GR1");//boton listo
                                     }
                                 }
                              break;
@@ -138,18 +138,18 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
             }
         }
 
-        [PaqueteAtributo("GAF")]
+        [PackageAttribut("GAF")]
         public void get_Finalizar_Accion(TcpClient cliente, string paquete)
         {
             string[] id_fin_accion = paquete.Substring(3).Split('|');
 
-            cliente.Account.Connection.enviar_Paquete("GKK" + id_fin_accion[0]);
+            cliente.Account.Connection.Send("GKK" + id_fin_accion[0]);
         }
 
-        [PaqueteAtributo("GAS")]
+        [PackageAttribut("GAS")]
         public async Task get_Inicio_Accion(TcpClient cliente, string paquete) => await Task.Delay(200);
 
-        [PaqueteAtributo("GA")]
+        [PackageAttribut("GA")]
         public async Task get_Iniciar_Accion(TcpClient cliente, string paquete)
         {
             string[] separador = paquete.Substring(2).Split(';');
@@ -184,7 +184,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
                                 entidad.celda = celda;
 
                                 if (GlobalConf.mostrar_mensajes_debug)
-                                    cuenta.Logger.log_informacion("DEBUG", "Detectado movimiento de una entidad a la casilla: " + celda.id);
+                                    cuenta.Logger.log_informacion("DEBUG", "Detected movement of an entity to the cellId: " + celda.id);
                             }
                             map.evento_Entidad_Actualizada();
                         }
@@ -200,7 +200,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
                                     tipo_gkk_movimiento = byte.Parse(separador[0]);
 
                                     await Task.Delay(400 + (100 * personaje.celda.get_Distancia_Entre_Dos_Casillas(celda)));
-                                    cuenta.Connection.enviar_Paquete("GKK" + tipo_gkk_movimiento);
+                                    cuenta.Connection.Send("GKK" + tipo_gkk_movimiento);
                                 }
                             }
                         }
@@ -214,7 +214,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
                         {
                             personaje.celda = celda;
                             await Task.Delay(150);
-                            cuenta.Connection.enviar_Paquete("GKK1");
+                            cuenta.Connection.Send("GKK1");
                             map.evento_Entidad_Actualizada();
                             cuenta.Game.Handler.movimientos.movimiento_Actualizado(true);
                         }
@@ -274,7 +274,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
 
                             if (luchador != null && luchador.id == personaje.id)
                             {
-                                cuenta.Logger.log_Error("INFORMACIÓN", "No es posible realizar esta acción por culpa de un obstáculo invisible.");
+                                cuenta.Logger.log_Error("INFORMATION", "It is not possible to perform this action because of an invisible obstacle.");
                                 fight.get_Hechizo_Lanzado(short.Parse(separador[3]), false);
                             }
                         }
@@ -313,14 +313,14 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
                     break;
 
                     case 900:
-                        cuenta.Connection.enviar_Paquete("GA902" + id_entidad, true);
-                        cuenta.Logger.log_informacion("INFORMACIÓN", "Desafio del Character id: " + id_entidad + " cancelado");
+                        cuenta.Connection.Send("GA902" + id_entidad, true);
+                        cuenta.Logger.log_informacion("INFORMATION", "Challenge with CharacterId : " + id_entidad + " cancelled");
                     break;
                 }
             }
         }
 
-        [PaqueteAtributo("GDF")]
+        [PackageAttribut("GDF")]
         public void get_Estado_Interactivo(TcpClient cliente, string paquete)
         {
             foreach (string interactivo in paquete.Substring(4).Split('|'))
@@ -352,13 +352,13 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
             }
         }
 
-        [PaqueteAtributo("GDM")]
+        [PackageAttribut("GDM")]
         public void get_Nuevo_Mapa(TcpClient cliente, string paquete) => cliente.Account.Game.Map.get_Actualizar_Mapa(paquete.Substring(4));
 
-        [PaqueteAtributo("GDK")]
+        [PackageAttribut("GDK")]
         public void get_Mapa_Cambiado(TcpClient cliente, string paquete) => cliente.Account.Game.Map.get_Evento_Mapa_Cambiado();
 
-        [PaqueteAtributo("GV")]
-        public void get_Reiniciar_Pantalla(TcpClient cliente, string paquete) => cliente.Account.Connection.enviar_Paquete("GC1");
+        [PackageAttribut("GV")]
+        public void get_Reiniciar_Pantalla(TcpClient cliente, string paquete) => cliente.Account.Connection.Send("GC1");
     }
 }

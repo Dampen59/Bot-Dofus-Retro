@@ -137,7 +137,7 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Entidades.Manejadores.Recolecciones
                 foreach (short habilidad in interactivo_recolectando.modelo.habilidades)
                 {
                     if (cuenta.Game.Character.get_Skills_Recoleccion_Disponibles().Contains(habilidad))
-                        cuenta.Connection.enviar_Paquete("GA500" + interactivo_recolectando.celda.id + ";" + habilidad);
+                        cuenta.Connection.Send("GA500" + interactivo_recolectando.celda.id + ";" + habilidad);
                 }
             }
             else
@@ -169,7 +169,7 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Entidades.Manejadores.Recolecciones
                 cuenta.AccountStatus = AccountStatus.Collecting;
                 recoleccion_iniciada?.Invoke();
                 await Task.Delay(tiempo_delay);
-                cuenta.Connection.enviar_Paquete("GKK" + tipo_gkk);
+                cuenta.Connection.Send("GKK" + tipo_gkk);
             }
         }
 

@@ -38,16 +38,16 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts.Acciones
                     switch (test)
                     {
                         case ResultadoMovimientos.EXITO:
-                            cuenta.Logger.log_informacion("SCRIPT", $"Movimiento hacia un grupo de monstruos celda: {grupo_monstruo.celda.id}, total de monstruos: {grupo_monstruo.get_Total_Monstruos}, nivel total del grupo: {grupo_monstruo.get_Total_Nivel_Grupo}");
+                            cuenta.Logger.log_informacion("SCRIPT", $"Movement to a group of monsters cell: {grupo_monstruo.celda.id}, total monsters: {grupo_monstruo.get_Total_Monstruos}, total group level: {grupo_monstruo.get_Total_Nivel_Grupo}");
                         return resultado_procesado;
                             
                         case ResultadoMovimientos.PATHFINDING_ERROR:
                         case ResultadoMovimientos.MISMA_CELDA:
-                            cuenta.Logger.log_Peligro("SCRIPT", "El camino hacia el grupo de monstruos está bloqueado");
+                            cuenta.Logger.log_Peligro("SCRIPT", "The path to the group of monsters is blocked.");
                         continue;
 
                         default:
-                            cuenta.ScriptHandler.StopScript("Movimiento hacia el grupo de monstruos erróneo" + test);
+                            cuenta.ScriptHandler.StopScript("Moving to the wrong monster group" + test);
                         return resultado_fallado;
                     }
                 }

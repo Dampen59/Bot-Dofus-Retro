@@ -211,10 +211,10 @@
             this.MaximumSize = new System.Drawing.Size(400, 311);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(400, 311);
-            this.Name = "Options";
+            this.Name = "Settings";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Adjustments";
+            this.Text = "Settings";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);

@@ -105,7 +105,7 @@ namespace Bot_Dofus_1._29._1.Interfaces
             this.eliminarToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("eliminarToolStripMenuItem.Image")));
             this.eliminarToolStripMenuItem.Name = "eliminarToolStripMenuItem";
             this.eliminarToolStripMenuItem.Size = new System.Drawing.Size(78, 20);
-            this.eliminarToolStripMenuItem.Text = "Eliminar";
+            this.eliminarToolStripMenuItem.Text = "Remove";
             this.eliminarToolStripMenuItem.Click += new System.EventHandler(this.eliminarToolStripMenuItem_Click);
             // 
             // ScriptTituloStripMenuItem
@@ -120,7 +120,7 @@ namespace Bot_Dofus_1._29._1.Interfaces
             this.cargarScriptToolStripMenuItem.Image = global::Bot_Dofus_1._29._1.Properties.Resources.documento_azul;
             this.cargarScriptToolStripMenuItem.Name = "cargarScriptToolStripMenuItem";
             this.cargarScriptToolStripMenuItem.Size = new System.Drawing.Size(102, 20);
-            this.cargarScriptToolStripMenuItem.Text = "Cargar script";
+            this.cargarScriptToolStripMenuItem.Text = "Upload script";
             this.cargarScriptToolStripMenuItem.Click += new System.EventHandler(this.cargarScriptToolStripMenuItem_Click);
             // 
             // iniciarScriptToolStripMenuItem
@@ -155,7 +155,7 @@ namespace Bot_Dofus_1._29._1.Interfaces
             this.tabPage_consola.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage_consola.Size = new System.Drawing.Size(796, 511);
             this.tabPage_consola.TabIndex = 0;
-            this.tabPage_consola.Text = "Consola";
+            this.tabPage_consola.Text = "Console";
             this.tabPage_consola.UseVisualStyleBackColor = true;
             // 
             // tableLayout_Canales
@@ -235,9 +235,9 @@ namespace Bot_Dofus_1._29._1.Interfaces
             this.comboBox_lista_canales.FormattingEnabled = true;
             this.comboBox_lista_canales.Items.AddRange(new object[] {
             "General",
-            "Reclutamiento",
-            "Comercio",
-            "Mensaje Privado"});
+            "Recruitment",
+            "Trade",
+            "Private Message"});
             this.comboBox_lista_canales.Location = new System.Drawing.Point(3, 3);
             this.comboBox_lista_canales.Name = "comboBox_lista_canales";
             this.comboBox_lista_canales.Size = new System.Drawing.Size(131, 25);

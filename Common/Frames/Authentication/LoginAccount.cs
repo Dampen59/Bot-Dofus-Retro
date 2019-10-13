@@ -95,7 +95,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.LoginAccount
                         cuenta.Game.Character.evento_Servidor_Seleccionado();
                     }
                     else
-                        cuenta.Logger.log_Error("LOGIN", "Servidor no accesible cuando este accesible se re-conectara");
+                        cuenta.Logger.log_Error("LOGIN", "Server not accessible when this accessible will re-connect");
                 }
                 contador++;
             }

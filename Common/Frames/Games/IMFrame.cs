@@ -17,10 +17,10 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
         public void get_Welcome_Message_Dofus(TcpClient cliente, string paquete) => cliente.Account.Logger.log_Error("DOFUS", "Welcome to DOFUS, the World of the Twelve! Attention It is forbidden to communicate your account username and password.");
 
         [PackageAttribut("Im039")]
-        public void get_Fight_Viewer_Off(TcpClient cliente, string paquete) => cliente.Account.Logger.log_information("COMBATE", "Spectator mode is disabled.");
+        public void get_Fight_Viewer_Off(TcpClient cliente, string paquete) => cliente.Account.Logger.log_information("FIGHT", "Spectator mode is disabled.");
 
         [PackageAttribut("Im040")]
-        public void get_Fight_Spectator_Activated(TcpClient cliente, string paquete) => cliente.Account.Logger.log_information("COMBATE", "Spectator mode is activated.");
+        public void get_Fight_Spectator_Activated(TcpClient cliente, string paquete) => cliente.Account.Logger.log_information("FIGHT", "Spectator mode is activated.");
 
         [PackageAttribut("Im0152")]
         public void get_Last_Message_IP_Connection(TcpClient cliente, string paquete)

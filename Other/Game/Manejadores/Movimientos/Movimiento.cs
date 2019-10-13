@@ -89,7 +89,7 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Entidades.Manejadores.Movimientos
                 celdas_teleport.Remove(celda);
             }
 
-            cuenta.Logger.log_Peligro("MOVIMIENTOS", "No se ha encontrado celda de destino, usa el metodo por id");
+            cuenta.Logger.log_Danger("MOVIMIENTOS", "No se ha encontrado celda de destino, usa el metodo por id");
             return false;
         }
 
@@ -153,7 +153,7 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Entidades.Manejadores.Movimientos
             switch (resultado)
             {
                 case ResultadoMovimientos.EXITO:
-                        cuenta.Logger.log_informacion("MOVIMIENTOS", $"Map actual: {_map.id} desplazando para cambiar el Map a la casilla: {celda.id}");
+                        cuenta.Logger.log_information("MOVIMIENTOS", $"Map actual: {_map.id} desplazando para cambiar el Map a la casilla: {celda.id}");
                 return true;
 
                 default:

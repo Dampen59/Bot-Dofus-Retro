@@ -96,7 +96,7 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Personaje.Inventario
             if (paquete_eliminar)
             {
                 cuenta.Connection.Send($"Od{obj.id_inventario}|{cantidad}");
-                cuenta.Logger.log_informacion("Inventario", $"{cantidad} {obj.nombre} eliminados(s).");
+                cuenta.Logger.log_information("Inventario", $"{cantidad} {obj.nombre} eliminados(s).");
             }
 
             inventario_actualizado?.Invoke(true);
@@ -143,7 +143,7 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Personaje.Inventario
                 if (get_Objeto_en_Posicion(posicion) == null)
                 {
                     cuenta.Connection.Send("OM" + objeto.id_inventario + "|" + (sbyte)posicion, true);
-                    cuenta.Logger.log_informacion("INVENTARIO", $"{objeto.nombre} equipado.");
+                    cuenta.Logger.log_information("INVENTARIO", $"{objeto.nombre} equipado.");
                     objeto.posicion = posicion;
                     inventario_actualizado?.Invoke(true);
                     return true;
@@ -162,7 +162,7 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Personaje.Inventario
             if (objeto.cantidad == 1)
                 objeto.posicion = possibles_posiciones[0];
 
-            cuenta.Logger.log_informacion("INVENTARIO", $"{objeto.nombre} equipado.");
+            cuenta.Logger.log_information("INVENTARIO", $"{objeto.nombre} equipado.");
             inventario_actualizado?.Invoke(true);
             return true;
         }
@@ -177,7 +177,7 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Personaje.Inventario
 
             cuenta.Connection.Send("OM" + objeto.id_inventario + "|" + (sbyte)InventarioPosiciones.NO_EQUIPADO);
             objeto.posicion = InventarioPosiciones.NO_EQUIPADO;
-            cuenta.Logger.log_informacion("INVENTARIO", $"{objeto.nombre} desequipado.");
+            cuenta.Logger.log_information("INVENTARIO", $"{objeto.nombre} desequipado.");
             inventario_actualizado?.Invoke(true);
             return true;
         }
@@ -195,7 +195,7 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Personaje.Inventario
 
             cuenta.Connection.Send("OU" + objeto.id_inventario + "|");
             eliminar_Objeto(objeto, 1, false);
-            cuenta.Logger.log_informacion("INVENTARIO", $"{objeto.nombre} utilizado.");
+            cuenta.Logger.log_information("INVENTARIO", $"{objeto.nombre} utilizado.");
         }
 
         public void evento_Almacenamiento_Abierto() => almacenamiento_abierto?.Invoke();

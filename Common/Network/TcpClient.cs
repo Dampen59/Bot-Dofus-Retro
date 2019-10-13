@@ -182,7 +182,7 @@ namespace Bot_Dofus_1._29._1.Comun.Network
         }
 
         public int get_Total_Pings() => pings.Count();
-        public int get_Promedio_Pings() => (int)pings.Average();
+        public int get_Average_Pings() => (int)pings.Average();
         public int get_Actual_Ping() => Environment.TickCount - ticks;
 
         #region Zona Dispose

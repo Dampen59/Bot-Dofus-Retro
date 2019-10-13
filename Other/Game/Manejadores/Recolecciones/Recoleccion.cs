@@ -61,7 +61,7 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Entidades.Manejadores.Recolecciones
                     return true;
             }
 
-            cuenta.Logger.log_Peligro("RECOLECCION", "No se han encontrado elementos recolectables");
+            cuenta.Logger.log_Danger("RECOLECCION", "No se han encontrado elementos recolectables");
             return false;
         }
 
@@ -161,7 +161,7 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Entidades.Manejadores.Recolecciones
             if (cuenta.Game.Character.id != id_personaje)
             {
                 robado = true;
-                cuenta.Logger.log_informacion("INFORMACIÓN", "Un Character te ha robado el recurso");
+                cuenta.Logger.log_information("INFORMACIÓN", "Un Character te ha robado el recurso");
                 evento_Recoleccion_Acabada(RecoleccionResultado.ROBADO, interactivo_recolectando.celda.id);
             }
             else

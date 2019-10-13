@@ -184,7 +184,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
                                 entidad.celda = celda;
 
                                 if (GlobalConf.mostrar_mensajes_debug)
-                                    cuenta.Logger.log_informacion("DEBUG", "Detected movement of an entity to the cellId: " + celda.id);
+                                    cuenta.Logger.log_information("DEBUG", "Detected movement of an entity to the cellId: " + celda.id);
                             }
                             map.evento_Entidad_Actualizada();
                         }
@@ -314,7 +314,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
 
                     case 900:
                         cuenta.Connection.Send("GA902" + id_entidad, true);
-                        cuenta.Logger.log_informacion("INFORMATION", "Challenge with CharacterId : " + id_entidad + " cancelled");
+                        cuenta.Logger.log_information("INFORMATION", "Challenge with CharacterId : " + id_entidad + " cancelled");
                     break;
                 }
             }

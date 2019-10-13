@@ -48,11 +48,11 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
                 break;
 
                 case "F":
-                    cliente.Account.Logger.log_privado("Receveid Private", separador[2] + ": " + separador[3]);
+                    cliente.Account.Logger.private_log("Receveid Private", separador[2] + ": " + separador[3]);
                 break;
 
                 case "T":
-                    cliente.Account.Logger.log_privado("Send Private", separador[2] + ": " + separador[3]);
+                    cliente.Account.Logger.private_log("Send Private", separador[2] + ": " + separador[3]);
                 break;
 
                 default:

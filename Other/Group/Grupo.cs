@@ -76,7 +76,7 @@ namespace Bot_Dofus_1._29._1.Otros.Grupos
 
         private void miembro_Acciones_Acabadas(Account cuenta)
         {
-            cuenta.Logger.log_informacion("GRUPO", "Acciones acabadas");
+            cuenta.Logger.log_information("GRUPO", "Acciones acabadas");
             cuentas_acabadas[cuenta].Set();
         }
         #endregion

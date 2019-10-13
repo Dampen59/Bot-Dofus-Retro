@@ -81,7 +81,7 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts.Manejadores
 
                     if (cuenta.AccountStatus != AccountStatus.Fighting)
                     {
-                        cuenta.Logger.log_Peligro("SCRIPT", "Error when throwing the fight, the monsters could have moved or been stolen!");
+                        cuenta.Logger.log_Danger("SCRIPT", "Error when throwing the fight, the monsters could have moved or been stolen!");
                         acciones_Salida(0);
                     }
                 }
@@ -107,7 +107,7 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts.Manejadores
                 contador_recoleccion++;
 
                 if (manejador_script.get_Global_Or("HARVEST_COUNT", DataType.Boolean, false))
-                    cuenta.Logger.log_informacion("SCRIPT", $"Collecting #{contador_recoleccion}");
+                    cuenta.Logger.log_information("SCRIPT", $"Collecting #{contador_recoleccion}");
             }
         }
 
@@ -143,7 +143,7 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts.Manejadores
                 contador_pelea++;
 
                 if (manejador_script.get_Global_Or("MOSTRAR_CONTADOR_PELEAS", DataType.Boolean, false))
-                    cuenta.Logger.log_informacion("SCRIPT", $"Combate #{contador_pelea}");
+                    cuenta.Logger.log_information("SCRIPT", $"Combate #{contador_pelea}");
             }
         }
 
@@ -248,7 +248,7 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts.Manejadores
                 break;
 
                 case ResultadosAcciones.FALLO:
-                    cuenta.Logger.log_Peligro("SCRIPT", $"{tipo} fallo al procesar.");
+                    cuenta.Logger.log_Danger("SCRIPT", $"{tipo} fallo al procesar.");
                 break;
 
                 case ResultadosAcciones.PROCESANDO:
@@ -262,7 +262,7 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts.Manejadores
             if (!cuenta.ScriptHandler.corriendo)
                 return;
 
-            cuenta.Logger.log_Peligro("SCRIPT", "Tiempo acabado");
+            cuenta.Logger.log_Danger("SCRIPT", "Tiempo acabado");
             cuenta.ScriptHandler.StopScript();
             cuenta.ScriptHandler.activar_Script();
         }

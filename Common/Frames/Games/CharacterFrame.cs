@@ -226,7 +226,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
         }
 
         [PackageAttribut("Bp")]
-        public void get_Ping_Promedio(TcpClient cliente, string paquete) => cliente.Send($"Bp{cliente.get_Promedio_Pings()}|{cliente.get_Total_Pings()}|50");
+        public void get_Ping_Promedio(TcpClient cliente, string paquete) => cliente.Send($"Bp{cliente.get_Average_Pings()}|{cliente.get_Total_Pings()}|50");
 
         [PackageAttribut("pong")]
         public void get_Ping_Pong(TcpClient cliente, string paquete) => cliente.Account.Logger.log_informacion("DOFUS", $"Ping: {cliente.get_Actual_Ping()} ms");

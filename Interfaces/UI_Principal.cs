@@ -295,15 +295,15 @@ namespace Bot_Dofus_1._29._1.Interfaces
 
         private void servidor_Seleccionado()
         {
-            agregar_Tab_Pagina("Personaje", new UI_Personaje(cuenta), 2);
-            agregar_Tab_Pagina("Inventario", new UI_Inventario(cuenta), 3);
+            agregar_Tab_Pagina("Character", new UI_Personaje(cuenta), 2);
+            agregar_Tab_Pagina("Inventory", new UI_Inventario(cuenta), 3);
         }
 
         private void personaje_Seleccionado()
         {
             cuenta.CombatExtensions.configuracion.cargar();
             agregar_Tab_Pagina("Map", new UI_Mapa(cuenta), 4);
-            agregar_Tab_Pagina("Combates", new UI_Pelea(cuenta), 5);
+            agregar_Tab_Pagina("Fight", new UI_Pelea(cuenta), 5);
 
             cambiar_Todos_Controles_Chat(true);
             cargar_Canales_Chat();

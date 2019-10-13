@@ -114,7 +114,7 @@
             this.ListaAccounts.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ListaAccounts.Size = new System.Drawing.Size(455, 362);
             this.ListaAccounts.TabIndex = 0;
-            this.ListaAccounts.Text = "Lista de cuentas";
+            this.ListaAccounts.Text = "List of accounts";
             this.ListaAccounts.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel1
@@ -167,8 +167,8 @@
             this.label_informacionClickAccounts.Name = "label_informacionClickAccounts";
             this.label_informacionClickAccounts.Size = new System.Drawing.Size(393, 40);
             this.label_informacionClickAccounts.TabIndex = 1;
-            this.label_informacionClickAccounts.Text = "Haz clic derecho para conectar/modificar/eliminar una cuenta\r\nDoble clic encima d" +
-    "e una cuenta para conectarla";
+            this.label_informacionClickAccounts.Text = "Right click to connect / modify / delete an account\rdouble click on d" +
+    "e an account to connect it";
             this.label_informacionClickAccounts.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // listViewAccounts
@@ -194,17 +194,17 @@
             // 
             // ColumnaNombreAccount
             // 
-            this.ColumnaNombreAccount.Text = "Nombre de Account";
+            this.ColumnaNombreAccount.Text = "Account Name";
             this.ColumnaNombreAccount.Width = 148;
             // 
             // ColumnaNombreServidor
             // 
-            this.ColumnaNombreServidor.Text = "Servidor";
+            this.ColumnaNombreServidor.Text = "Server";
             this.ColumnaNombreServidor.Width = 107;
             // 
             // ColumnaNombrePersonaje
             // 
-            this.ColumnaNombrePersonaje.Text = "Nombre del Character";
+            this.ColumnaNombrePersonaje.Text = "Character Name";
             this.ColumnaNombrePersonaje.Width = 184;
             // 
             // contextMenuStripFormAccounts
@@ -221,7 +221,7 @@
             this.conectarToolStripMenuItem.Image = global::Bot_Dofus_1._29._1.Properties.Resources.flecha_direccion_izquierda;
             this.conectarToolStripMenuItem.Name = "conectarToolStripMenuItem";
             this.conectarToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
-            this.conectarToolStripMenuItem.Text = "Conectar";
+            this.conectarToolStripMenuItem.Text = "Connect";
             this.conectarToolStripMenuItem.Click += new System.EventHandler(this.conectarToolStripMenuItem_Click);
             // 
             // modificarToolStripMenuItem
@@ -233,7 +233,7 @@
             this.modificarToolStripMenuItem.Image = global::Bot_Dofus_1._29._1.Properties.Resources.boton_ajustes;
             this.modificarToolStripMenuItem.Name = "modificarToolStripMenuItem";
             this.modificarToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
-            this.modificarToolStripMenuItem.Text = "Modificar";
+            this.modificarToolStripMenuItem.Text = "Modify";
             // 
             // cuentaToolStripMenuItem
             // 
@@ -246,14 +246,14 @@
             // 
             this.contraseñaToolStripMenuItem.Name = "contraseñaToolStripMenuItem";
             this.contraseñaToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
-            this.contraseñaToolStripMenuItem.Text = "Contraseña";
+            this.contraseñaToolStripMenuItem.Text = "Password";
             this.contraseñaToolStripMenuItem.Click += new System.EventHandler(this.modificar_Account);
             // 
             // nombreDelPersonajeToolStripMenuItem
             // 
             this.nombreDelPersonajeToolStripMenuItem.Name = "nombreDelPersonajeToolStripMenuItem";
             this.nombreDelPersonajeToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
-            this.nombreDelPersonajeToolStripMenuItem.Text = "Nombre del Character";
+            this.nombreDelPersonajeToolStripMenuItem.Text = "Character Name";
             this.nombreDelPersonajeToolStripMenuItem.Click += new System.EventHandler(this.modificar_Account);
             // 
             // eliminarToolStripMenuItem
@@ -261,7 +261,7 @@
             this.eliminarToolStripMenuItem.Image = global::Bot_Dofus_1._29._1.Properties.Resources.cruz_roja;
             this.eliminarToolStripMenuItem.Name = "eliminarToolStripMenuItem";
             this.eliminarToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
-            this.eliminarToolStripMenuItem.Text = "Eliminar";
+            this.eliminarToolStripMenuItem.Text = "Delete";
             this.eliminarToolStripMenuItem.Click += new System.EventHandler(this.eliminarToolStripMenuItem_Click);
             // 
             // AgregarAccount
@@ -270,11 +270,11 @@
             this.AgregarAccount.ImageKey = "agregar_cuenta.png";
             this.AgregarAccount.Location = new System.Drawing.Point(4, 32);
             this.AgregarAccount.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.AgregarAccount.Name = "AgregarAccount";
+            this.AgregarAccount.Name = "Add Account";
             this.AgregarAccount.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.AgregarAccount.Size = new System.Drawing.Size(455, 362);
             this.AgregarAccount.TabIndex = 1;
-            this.AgregarAccount.Text = "Agregar una cuenta";
+            this.AgregarAccount.Text = "Add an account";
             this.AgregarAccount.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel3
@@ -331,8 +331,8 @@
             this.label1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.label1.Size = new System.Drawing.Size(400, 35);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Deja el campo \"Character\" en blanco si quieres que el bot conecte el primer perso" +
-    "naje de la cuenta";
+            this.label1.Text = "Leave the \"Character\" field blank if you want the bot to connect the first character " +
+    "account";
             // 
             // checkBox_Agregar_Retroceder
             // 
@@ -344,7 +344,7 @@
             this.checkBox_Agregar_Retroceder.Name = "checkBox_Agregar_Retroceder";
             this.checkBox_Agregar_Retroceder.Size = new System.Drawing.Size(443, 22);
             this.checkBox_Agregar_Retroceder.TabIndex = 51;
-            this.checkBox_Agregar_Retroceder.Text = "Regresar a la pestaña \"Lista de cuentas\" despues de agregar la cuenta";
+            this.checkBox_Agregar_Retroceder.Text = "Return to the \"List of Accounts\" tab after adding the account.";
             this.checkBox_Agregar_Retroceder.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel5
@@ -407,7 +407,7 @@
             this.label_Password.Name = "label_Password";
             this.label_Password.Size = new System.Drawing.Size(120, 59);
             this.label_Password.TabIndex = 3;
-            this.label_Password.Text = "Contraseña:";
+            this.label_Password.Text = "Password:";
             this.label_Password.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label_Eleccion_Servidor
@@ -419,7 +419,7 @@
             this.label_Eleccion_Servidor.Name = "label_Eleccion_Servidor";
             this.label_Eleccion_Servidor.Size = new System.Drawing.Size(120, 59);
             this.label_Eleccion_Servidor.TabIndex = 5;
-            this.label_Eleccion_Servidor.Text = "Servidor:";
+            this.label_Eleccion_Servidor.Text = "Server:";
             this.label_Eleccion_Servidor.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label_Nombre_Personaje
@@ -431,7 +431,7 @@
             this.label_Nombre_Personaje.Name = "label_Nombre_Personaje";
             this.label_Nombre_Personaje.Size = new System.Drawing.Size(120, 61);
             this.label_Nombre_Personaje.TabIndex = 7;
-            this.label_Nombre_Personaje.Text = "Personaje:";
+            this.label_Nombre_Personaje.Text = "Character Name:";
             this.label_Nombre_Personaje.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // tableLayoutPanel7
@@ -549,7 +549,7 @@
             this.boton_Agregar_Account.Name = "boton_Agregar_Account";
             this.boton_Agregar_Account.Size = new System.Drawing.Size(437, 29);
             this.boton_Agregar_Account.TabIndex = 9;
-            this.boton_Agregar_Account.Text = "Agregar cuenta";
+            this.boton_Agregar_Account.Text = "Add account";
             this.boton_Agregar_Account.UseVisualStyleBackColor = true;
             this.boton_Agregar_Account.Click += new System.EventHandler(this.boton_Agregar_Account_Click);
             // 
@@ -561,7 +561,7 @@
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(455, 362);
             this.tabPage1.TabIndex = 2;
-            this.tabPage1.Text = "Agregar varias cuentas";
+            this.tabPage1.Text = "Add multiple accounts";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // imagenesFormAccounts
@@ -587,7 +587,7 @@
             this.Name = "GestionAccounts";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Gestor cuentas";
+            this.Text = "Account Manager";
             this.tabControlPrincipalAccounts.ResumeLayout(false);
             this.ListaAccounts.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);

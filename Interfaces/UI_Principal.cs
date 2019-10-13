@@ -33,7 +33,7 @@ namespace Bot_Dofus_1._29._1.Interfaces
         private void UI_Principal_Load(object sender, EventArgs e)
         {
             desconectarOconectarToolStripMenuItem.Text = "Connected";
-            escribir_mensaje($"[{DateTime.Now.ToString("HH:mm:ss")}] -> [INFORMATIONS] Welcome on the Retro Bot Bversión: {Application.ProductVersion} alpha", LogTipos.ERROR.ToString("X"));
+            escribir_mensaje($"[{DateTime.Now.ToString("HH:mm:ss")}] -> [INFORMATIONS] Welcome on the Retro Bot version: {Application.ProductVersion} alpha", LogTipos.ERROR.ToString("X"));
 
             cuenta.AccountStatusEvent += eventos_Estados_Account;
             cuenta.AccountDisconnectedEvent += desconectar_Account;
@@ -49,7 +49,7 @@ namespace Bot_Dofus_1._29._1.Interfaces
             cuenta.Game.Character.personaje_seleccionado += personaje_Seleccionado;
 
             if (cuenta.HasGroup)
-                escribir_mensaje("[" + DateTime.Now.ToString("HH:mm:ss") + "] -> El líder del grupo es: " + cuenta.Group.Leader.AccountConfiguration.nombre_cuenta, LogTipos.ERROR.ToString("X"));
+                escribir_mensaje("[" + DateTime.Now.ToString("HH:mm:ss") + "] -> The group leader is: " + cuenta.Group.Leader.AccountConfiguration.nombre_cuenta, LogTipos.ERROR.ToString("X"));
         }
 
         private void eliminarToolStripMenuItem_Click(object sender, EventArgs e)
@@ -77,7 +77,7 @@ namespace Bot_Dofus_1._29._1.Interfaces
 
         private void desconectarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (desconectarOconectarToolStripMenuItem.Text.Equals("Conectar"))
+            if (desconectarOconectarToolStripMenuItem.Text.Equals("Connected"))
             {
                 while (tabControl_principal.TabPages.Count > 2)
                     tabControl_principal.TabPages.RemoveAt(2);
@@ -88,7 +88,7 @@ namespace Bot_Dofus_1._29._1.Interfaces
                 cuenta.Connection.package_sent += debugger.package_sent;
                 cuenta.Connection.socket_information += get_Mensajes_socket_information;
 
-                desconectarOconectarToolStripMenuItem.Text = "Desconectar";
+                desconectarOconectarToolStripMenuItem.Text = "Disconnect";
             }
             else if (desconectarOconectarToolStripMenuItem.Text.Equals("Desconectar"))
                 cuenta.Disconnect();
@@ -106,7 +106,7 @@ namespace Bot_Dofus_1._29._1.Interfaces
                 for (int i = 2; i < tabControl_principal.TabPages.Count; ++i)
                     tabControl_principal.TabPages[i].Enabled = false;
 
-                desconectarOconectarToolStripMenuItem.Text = "Conectar";
+                desconectarOconectarToolStripMenuItem.Text = "Connected";
             }));
         }
 
@@ -208,7 +208,7 @@ namespace Bot_Dofus_1._29._1.Interfaces
                         if (cuenta.Connection != null)
                             cuenta.Connection.Send("ping", true);
                         else
-                            escribir_mensaje("No estas conectado a dofus", "0040FF");
+                            escribir_mensaje("You're not connected to dofus.", "0040FF");
                     break;
 
                     default:
@@ -252,7 +252,7 @@ namespace Bot_Dofus_1._29._1.Interfaces
             {
                 using (OpenFileDialog ofd = new OpenFileDialog())
                 {
-                    ofd.Title = "Selecciona el script para el bot";
+                    ofd.Title = "Select the script for the bot";
                     ofd.Filter = "Extension (.lua) | *.lua";
 
                     if (ofd.ShowDialog() == DialogResult.OK)

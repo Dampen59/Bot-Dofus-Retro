@@ -88,7 +88,7 @@
             // 
             // cantidad_minima
             // 
-            this.cantidad_minima.HeaderText = "Cantidad Mínima";
+            this.cantidad_minima.HeaderText = "Minimum Quantity";
             this.cantidad_minima.MinimumWidth = 130;
             this.cantidad_minima.Name = "cantidad_minima";
             this.cantidad_minima.ReadOnly = true;
@@ -96,7 +96,7 @@
             // 
             // cantidad_maxima
             // 
-            this.cantidad_maxima.HeaderText = "Cantidad máxima";
+            this.cantidad_maxima.HeaderText = "Maximum quantity";
             this.cantidad_maxima.MinimumWidth = 135;
             this.cantidad_maxima.Name = "cantidad_maxima";
             this.cantidad_maxima.ReadOnly = true;
@@ -104,7 +104,7 @@
             // 
             // tiempo
             // 
-            this.tiempo.HeaderText = "Tiempo/Porcentaje";
+            this.tiempo.HeaderText = "Time/Percentage";
             this.tiempo.MinimumWidth = 130;
             this.tiempo.Name = "tiempo";
             this.tiempo.ReadOnly = true;
@@ -144,7 +144,7 @@
             // Nombre
             // 
             this.Nombre.FillWeight = 200F;
-            this.Nombre.HeaderText = "Nombre";
+            this.Nombre.HeaderText = "Name";
             this.Nombre.MinimumWidth = 200;
             this.Nombre.Name = "Nombre";
             this.Nombre.ReadOnly = true;
@@ -152,14 +152,14 @@
             // 
             // Nivel
             // 
-            this.Nivel.HeaderText = "Nivel";
+            this.Nivel.HeaderText = "Level";
             this.Nivel.Name = "Nivel";
             this.Nivel.ReadOnly = true;
             // 
             // Experiencia
             // 
             this.Experiencia.FillWeight = 200F;
-            this.Experiencia.HeaderText = "Experiencia";
+            this.Experiencia.HeaderText = "Experience";
             this.Experiencia.MinimumWidth = 200;
             this.Experiencia.Name = "Experiencia";
             this.Experiencia.ReadOnly = true;
@@ -167,7 +167,7 @@
             // 
             // porcentaje
             // 
-            this.porcentaje.HeaderText = "Porcentaje";
+            this.porcentaje.HeaderText = "Percentage";
             this.porcentaje.Name = "porcentaje";
             this.porcentaje.ReadOnly = true;
             // 

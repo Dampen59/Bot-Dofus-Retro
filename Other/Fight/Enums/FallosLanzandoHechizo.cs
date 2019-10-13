@@ -9,7 +9,7 @@ namespace Bot_Dofus_1._29._1.Otros.Peleas.Enums
 {
     public enum FallosLanzandoHechizo
     {
-        NINGUNO,
+        NONE,
         DEMASIADOS_LANZAMIENTOS,
         DEMASIADOS_LANZAMIENTOS_POR_OBJETIVO,
         COOLDOWN,

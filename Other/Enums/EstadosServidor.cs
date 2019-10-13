@@ -2,8 +2,8 @@
 {
     public enum EstadosServidor
     {
-        APAGADO,
-        CONECTADO,
-        GUARDANDO
+        OFFLINE,
+        ONLINE,
+        SAVING
     }
 }

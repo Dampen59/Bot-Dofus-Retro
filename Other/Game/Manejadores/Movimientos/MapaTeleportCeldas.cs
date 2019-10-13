@@ -2,7 +2,7 @@
 {
     public enum MapaTeleportCeldas
     {
-        NINGUNO,
+        NONE,
         ARRIBA,
         DERECHA,
         ABAJO,

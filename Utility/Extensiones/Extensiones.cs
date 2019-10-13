@@ -10,29 +10,29 @@ namespace Bot_Dofus_1._29._1.Utilidades.Extensiones
             switch (estado)
             {
                 case AccountStatus.CONECTANDO:
-                    return "Conectando";
+                    return "Connected";
                 case AccountStatus.Disconnected:
-                    return "Desconectado";
+                    return "Disconnected";
                 case AccountStatus.Exchanging:
-                    return "Intercambiando";
+                    return "Exchange";
                 case AccountStatus.Fighting:
-                    return "Combate";
+                    return "Fight";
                 case AccountStatus.Collecting:
-                    return "Recolectando";
+                    return "Collecting";
                 case AccountStatus.Moving:
-                    return "Desplazando";
+                    return "Move";
                 case AccountStatus.ConnectedInactive:
-                    return "Inactivo";
+                    return "Inactive";
                 case AccountStatus.Storing:
-                    return "Almacenamiento";
+                    return "Storing";
                 case AccountStatus.Dialoguing:
-                    return "Dialogando";
+                    return "Dialog";
                 case AccountStatus.Buying:
-                    return "Comprando";
+                    return "Buying";
                 case AccountStatus.Selling:
-                    return "Vendiendo";
+                    return "Selling";
                 case AccountStatus.Regenerating:
-                    return "Regenerando Vida";
+                    return "Regenerating";
                 default:
                     return "-";
             }

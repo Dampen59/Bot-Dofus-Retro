@@ -4,6 +4,6 @@
     {
         ZAAP = 0,
         ZAAPI = 1,
-        NINGUNO = 2
+        NONE = 2
     }
 }

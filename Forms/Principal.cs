@@ -43,7 +43,7 @@ namespace Bot_Dofus_1._29._1.Forms
                     if (cuentas_para_cargar.Count < 2)
                     {
                         AccountConfiguration cuentaConfiguration = cuentas_para_cargar[0];
-                        cuentas_cargadas.Add(cuentaConfiguration.nombre_cuenta, agregar_Nueva_Tab_Pagina(cuentaConfiguration.nombre_cuenta, new UI_Principal(new Account(cuentaConfiguration)), "Ninguno"));
+                        cuentas_cargadas.Add(cuentaConfiguration.nombre_cuenta, agregar_Nueva_Tab_Pagina(cuentaConfiguration.nombre_cuenta, new UI_Principal(new Account(cuentaConfiguration)), "NONE"));
                     }
                     else
                     {
@@ -69,7 +69,7 @@ namespace Bot_Dofus_1._29._1.Forms
         {
             Pagina nueva_pagina = tabControlAccounts.agregar_Nueva_Pagina(titulo);
             nueva_pagina.cabezera.propiedad_Imagen = Properties.Resources.circulo_rojo;
-            nueva_pagina.cabezera.propiedad_Estado = "Desconectado";
+            nueva_pagina.cabezera.propiedad_Estado = "Disconnected";
             nueva_pagina.cabezera.propiedad_Grupo = nombre_grupo;
             nueva_pagina.contenido.Controls.Add(control);
             control.Dock = DockStyle.Fill;

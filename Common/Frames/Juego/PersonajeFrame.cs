@@ -28,9 +28,9 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
         [PackageAttribut("PIK")]
         public void get_Peticion_Grupo(TcpClient cliente, string paquete)
         {
-            cliente.Account.Logger.log_informacion("Grupo", $"Nueva invitación de grupo del Character: {paquete.Substring(3).Split('|')[0]}");
+            cliente.Account.Logger.log_informacion("Group", $"New Character group invitation: {paquete.Substring(3).Split('|')[0]}");
             cliente.enviar_Paquete("PR");
-            cliente.Account.Logger.log_informacion("Grupo", "Petición rechazada");
+            cliente.Account.Logger.log_informacion("Group", "Invitation Rejected");
         }
 
         [PackageAttribut("SL")]
@@ -179,7 +179,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
         [PackageAttribut("ERK")]
         public void get_Peticion_Intercambio(TcpClient cliente, string paquete)
         {
-            cliente.Account.Logger.log_informacion("INFORMACIÓN", "Invitación de intercambio recibida, rechazando");
+            cliente.Account.Logger.log_informacion("INFORMACIÓN", "Exchange invitation received, rejecting");
             cliente.enviar_Paquete("EV", true);
         }
 
@@ -194,7 +194,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
             personaje.timer_regeneracion.Change(Timeout.Infinite, Timeout.Infinite);
             personaje.timer_regeneracion.Change(tiempo, tiempo);
 
-            cuenta.Logger.log_informacion("DOFUS", $"Tú Character recupera 1 pdv cada {tiempo / 1000} segundos");
+            cuenta.Logger.log_informacion("DOFUS", $"Your Character recovers 1 pdv each {tiempo / 1000} seconds");
         }
 
         [PackageAttribut("ILF")]
@@ -206,7 +206,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
             GameCharacter personaje = cuenta.Game.Character;
 
             personaje.caracteristicas.vitalidad_actual += vida;
-            cuenta.Logger.log_informacion("DOFUS", $"Has recuperado {vida} puntos de vida");
+            cuenta.Logger.log_informacion("DOFUS", $"You've recovered {vida} life points");
         }
 
         [PackageAttribut("eUK")]

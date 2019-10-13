@@ -275,7 +275,7 @@ namespace Bot_Dofus_1._29._1.Otros.Peleas
             if (datos_hechizo.efectos_normales.Count > 0 && datos_hechizo.efectos_normales[0].id == 181 && contador_invocaciones >= cuenta.Game.Character.caracteristicas.criaturas_invocables.total_stats)
                 return FallosLanzandoHechizo.DEMASIADAS_INVOCACIONES;
 
-            return FallosLanzandoHechizo.NINGUNO;
+            return FallosLanzandoHechizo.NONE;
         }
 
         public FallosLanzandoHechizo get_Puede_Lanzar_hechizo(short hechizo_id, Celda celda_actual, Celda celda_objetivo, Map map)
@@ -299,7 +299,7 @@ namespace Bot_Dofus_1._29._1.Otros.Peleas
             if (!get_Rango_hechizo(celda_actual, datos_hechizo, map).Contains(celda_objetivo.id))
                 return FallosLanzandoHechizo.NO_ESTA_EN_RANGO;
 
-            return FallosLanzandoHechizo.NINGUNO;
+            return FallosLanzandoHechizo.NONE;
         }
 
         public List<short> get_Rango_hechizo(Celda celda_personaje, HechizoStats datos_hechizo, Map map)

@@ -10,7 +10,7 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Servidor
         public EstadosServidor estado;
         private bool disposed = false;
 
-        public GameServer() => actualizar_Datos(0, "UNDEFINED", EstadosServidor.APAGADO);
+        public GameServer() => actualizar_Datos(0, "UNDEFINED", EstadosServidor.OFFLINE);
 
         public void actualizar_Datos(int _id, string _nombre, EstadosServidor _estado)
         {
@@ -27,7 +27,7 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Servidor
         {
             id = 0;
             nombre = null;
-            estado = EstadosServidor.APAGADO;
+            estado = EstadosServidor.OFFLINE;
         }
 
         protected virtual void Dispose(bool disposing)
@@ -37,7 +37,7 @@ namespace Bot_Dofus_1._29._1.Otros.Game.Servidor
 
             id = 0;
             nombre = null;
-            estado = EstadosServidor.APAGADO;
+            estado = EstadosServidor.OFFLINE;
             disposed = true;
         }
         #endregion

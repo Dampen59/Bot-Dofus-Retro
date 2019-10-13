@@ -339,7 +339,7 @@ namespace Bot_Dofus_1._29._1.Interfaces
 
         private void evento_Scripts_Cargado(string nombre)
         {
-            cuenta.Logger.log_informacion("SCRIPT", $"'{nombre}' cargado.");
+            cuenta.Logger.log_information("SCRIPT", $"'{nombre}' cargado.");
             BeginInvoke((Action)(() =>
             {
                 ScriptTituloStripMenuItem.Text = $"{(nombre.Length > 16 ? nombre.Substring(0, 16) : nombre)}";
@@ -349,7 +349,7 @@ namespace Bot_Dofus_1._29._1.Interfaces
 
         private void evento_Scripts_Iniciado()
         {
-            cuenta.Logger.log_informacion("SCRIPT", "Iniciado");
+            cuenta.Logger.log_information("SCRIPT", "Iniciado");
             BeginInvoke((Action)(() =>
             {
                 cargarScriptToolStripMenuItem.Enabled = false;
@@ -360,9 +360,9 @@ namespace Bot_Dofus_1._29._1.Interfaces
         private void evento_Scripts_Detenido(string motivo)
         {
             if (string.IsNullOrEmpty(motivo))
-                cuenta.Logger.log_informacion("SCRIPT", "Detenido");
+                cuenta.Logger.log_information("SCRIPT", "Detenido");
             else
-                cuenta.Logger.log_informacion("SCRIPT", $"Detenido {motivo}");
+                cuenta.Logger.log_information("SCRIPT", $"Detenido {motivo}");
 
             BeginInvoke((Action)(() =>
             {

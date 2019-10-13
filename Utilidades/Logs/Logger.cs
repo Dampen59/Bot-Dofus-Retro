@@ -16,7 +16,7 @@ namespace Bot_Dofus_1._29._1.Utilidades.Logs
             }
             catch (Exception e)
             {
-                log_Final("LOGGER", "Se produjo una excepción al activar el evento registrado.", LogTipos.ERROR, e);
+                log_Final("LOGGER", "An exception occurred when you activated the logged event.", LogTipos.ERROR, e);
             }
         }
 
@@ -28,9 +28,9 @@ namespace Bot_Dofus_1._29._1.Utilidades.Logs
         }
 
         public void log_Error(string referencia, string mensaje) => log_Final(referencia, mensaje, LogTipos.ERROR);
-        public void log_Peligro(string referencia, string mensaje) => log_Final(referencia, mensaje, LogTipos.PELIGRO);
-        public void log_informacion(string referencia, string mensaje) => log_Final(referencia, mensaje, LogTipos.INFORMACION);
+        public void log_Danger(string referencia, string mensaje) => log_Final(referencia, mensaje, LogTipos.PELIGRO);
+        public void log_information(string referencia, string mensaje) => log_Final(referencia, mensaje, LogTipos.INFORMACION);
         public void log_normal(string referencia, string mensaje) => log_Final(referencia, mensaje, LogTipos.NORMAL);
-        public void log_privado(string referencia, string mensaje) => log_Final(referencia, mensaje, LogTipos.PRIVADO);
+        public void private_log(string referencia, string mensaje) => log_Final(referencia, mensaje, LogTipos.PRIVADO);
     }
 }

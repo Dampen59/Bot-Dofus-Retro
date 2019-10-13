@@ -521,7 +521,7 @@ namespace Bot_Dofus_1._29._1.Otros.Peleas
             cuenta.Game.Character.timer_regeneracion.Change(Timeout.Infinite, Timeout.Infinite);
             cuenta.AccountStatus = AccountStatus.Fighting;
             pelea_creada?.Invoke();
-            cuenta.Logger.log_informacion("PELEA", "Nueva pelea iniciada");
+            cuenta.Logger.log_information("PELEA", "Nueva pelea iniciada");
         }
 
         public void get_Combate_Acabado()
@@ -529,7 +529,7 @@ namespace Bot_Dofus_1._29._1.Otros.Peleas
             Clean();
             pelea_acabada?.Invoke();
             cuenta.AccountStatus = AccountStatus.ConnectedInactive;
-            cuenta.Logger.log_informacion("PELEA", "Pelea acabada");
+            cuenta.Logger.log_information("PELEA", "Pelea acabada");
         }
 
         public void Clean()

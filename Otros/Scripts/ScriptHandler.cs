@@ -79,7 +79,7 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts
             //no necesita coroutines
             manejador_script.Set_Global("Character", api.personaje);
 
-            manejador_script.Set_Global("message", new Action<string>((mensaje) => Account.Logger.log_informacion("SCRIPT", mensaje)));
+            manejador_script.Set_Global("message", new Action<string>((mensaje) => Account.Logger.log_information("SCRIPT", mensaje)));
             manejador_script.Set_Global("messageError", new Action<string>((mensaje) => Account.Logger.log_Error("SCRIPT", mensaje)));
             manejador_script.Set_Global("stopScript", new Action(() => StopScript()));
             manejador_script.Set_Global("delayFunction", new Action<int>((ms) => manejar_acciones.enqueue_Accion(new DelayAccion(ms), true)));
@@ -194,7 +194,7 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts
         {
             if (Account.Game.Character.caracteristicas.energia_actual == 0)
             {
-                Account.Logger.log_informacion("SCRIPT", "Character's dead, going Phoenix mode.");
+                Account.Logger.log_information("SCRIPT", "Character's dead, going Phoenix mode.");
                 estado_script = ScriptState.FENIX;
             }
             await Task.Delay(50);
@@ -210,7 +210,7 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts
                 if (!corriendo)
                     return;
 
-                Account.Logger.log_informacion("SCRIPT", "Inventory full, switching to bank mode");
+                Account.Logger.log_information("SCRIPT", "Inventory full, switching to bank mode");
                 estado_script = ScriptState.BANK;
             }
         }
@@ -381,7 +381,7 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts
                     await Task.Delay(500);
                 }
 
-                Account.Logger.log_informacion("SCRIPT", $"{sacos.Count} bag(s) open.");
+                Account.Logger.log_information("SCRIPT", $"{sacos.Count} bag(s) open.");
             }
         }
 
@@ -392,14 +392,14 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts
             int maximas_peleas_mapa = manejador_script.get_Global_Or("FIGHT_ON_MAP", DataType.Number, -1);
             if (maximas_peleas_mapa != -1 && manejar_acciones.contador_peleas_mapa >= maximas_peleas_mapa)
             {
-                Account.Logger.log_informacion("SCRIPT", "The limit of fights in this Map has been reached.");
+                Account.Logger.log_information("SCRIPT", "The limit of fights in this Map has been reached.");
                 procesar_Actual_Bandera();
                 return;
             }
 
             if (!es_dung && !Account.Game.Map.get_Puede_Luchar_Contra_Grupo_Monstruos(accion.monstruos_minimos, accion.monstruos_maximos, accion.monstruo_nivel_minimo, accion.monstruo_nivel_maximo, accion.monstruos_prohibidos, accion.monstruos_obligatorios))
             {
-                Account.Logger.log_informacion("SCRIPT", "No group of monsters available on this Map");
+                Account.Logger.log_information("SCRIPT", "No group of monsters available on this Map");
                 procesar_Actual_Bandera();
                 return;
             }
@@ -435,7 +435,7 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts
                         Account.Connection.Send("eU1", true);
                     }
 
-                    Account.Logger.log_informacion("SCRIPTS", $"Regeneration started, life points to recover: {vida_para_regenerar}, time: {tiempo_estimado} seconds.");
+                    Account.Logger.log_information("SCRIPTS", $"Regeneration started, life points to recover: {vida_para_regenerar}, time: {tiempo_estimado} seconds.");
 
                     for (int i = 0; i < tiempo_estimado && Account.Game.Character.caracteristicas.porcentaje_vida <= Account.CombatExtensions.configuracion.detener_regeneracion && corriendo; i++)
                         await Task.Delay(1000);
@@ -445,7 +445,7 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts
                         if (Account.AccountStatus == AccountStatus.Regenerating)
                             Account.Connection.Send("eU1", true);
 
-                        Account.Logger.log_informacion("SCRIPTS", "Regeneration completed.");
+                        Account.Logger.log_information("SCRIPTS", "Regeneration completed.");
                     }
                 }
             }

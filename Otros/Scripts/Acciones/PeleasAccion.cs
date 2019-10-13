@@ -38,12 +38,12 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts.Acciones
                     switch (test)
                     {
                         case ResultadoMovimientos.EXITO:
-                            cuenta.Logger.log_informacion("SCRIPT", $"Movement to a group of monsters cell: {grupo_monstruo.celda.id}, total monsters: {grupo_monstruo.get_Total_Monstruos}, total group level: {grupo_monstruo.get_Total_Nivel_Grupo}");
+                            cuenta.Logger.log_information("SCRIPT", $"Movement to a group of monsters cell: {grupo_monstruo.celda.id}, total monsters: {grupo_monstruo.get_Total_Monstruos}, total group level: {grupo_monstruo.get_Total_Nivel_Grupo}");
                         return resultado_procesado;
                             
                         case ResultadoMovimientos.PATHFINDING_ERROR:
                         case ResultadoMovimientos.MISMA_CELDA:
-                            cuenta.Logger.log_Peligro("SCRIPT", "The path to the group of monsters is blocked.");
+                            cuenta.Logger.log_Danger("SCRIPT", "The path to the group of monsters is blocked.");
                         continue;
 
                         default:

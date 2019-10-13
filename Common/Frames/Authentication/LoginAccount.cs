@@ -35,7 +35,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.LoginAccount
         public void get_Apodo(TcpClient cliente, string paquete) => cliente.Account.Nickname = paquete.Substring(2);
 
         [PackageAttribut("Af")]
-        public void get_Fila_Espera_Login(TcpClient cliente, string paquete) => cliente.Account.Logger.log_informacion("FILA DE ESPERA", "Posición " + paquete[2] + "/" + paquete[4]);
+        public void get_Fila_Espera_Login(TcpClient cliente, string paquete) => cliente.Account.Logger.log_information("FILA DE ESPERA", "Posición " + paquete[2] + "/" + paquete[4]);
 
         [PackageAttribut("AH")]
         public void get_Servidor_Estado(TcpClient cliente, string paquete)
@@ -56,7 +56,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.LoginAccount
                 if (id == cuenta.AccountConfiguration.get_Servidor_Id())
                 {
                     servidor.actualizar_Datos(id, nombre, estado);
-                    cuenta.Logger.log_informacion("LOGIN", $"El Server {nombre} esta {estado}");
+                    cuenta.Logger.log_information("LOGIN", $"El Server {nombre} esta {estado}");
 
                     if (estado != EstadosServidor.CONECTADO)
                         primera_vez = false;

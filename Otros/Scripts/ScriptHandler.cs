@@ -63,10 +63,10 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts
         public void get_Desde_Archivo(string ruta_archivo)
         {
             if (activado)
-                throw new Exception("Ya se está ejecutando un script.");
+                throw new Exception("A script is already running.");
 
             if (!File.Exists(ruta_archivo) || !ruta_archivo.EndsWith(".lua"))
-                throw new Exception("Archivo no encontrado o no es válido.");
+                throw new Exception("File not found or not valid.");
 
             manejador_script.cargar_Desde_Archivo(ruta_archivo, funciones_Personalizadas);
             evento_script_cargado?.Invoke(Path.GetFileNameWithoutExtension(ruta_archivo));
@@ -121,7 +121,7 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts
 
             try
             {
-                Table mapas_dung = manejador_script.get_Global_Or<Table>("MAP_DUNG", DataType.Table, null);
+                Table mapas_dung = manejador_script.get_Global_Or<Table>("MAPS_DUNG", DataType.Table, null);
                 
                 if (mapas_dung != null)
                 {

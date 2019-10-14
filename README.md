@@ -1,3 +1,5 @@
+Discord : https://discord.gg/UPcCn2A
+
 # TOTALMENTE GRATUITO
 ## By Aidemu
 

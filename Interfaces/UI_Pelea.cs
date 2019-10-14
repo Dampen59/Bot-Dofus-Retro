@@ -112,12 +112,12 @@ namespace Bot_Dofus_1._29._1.Interfaces
 
                 if (celda_actual.id != celda_monstruo_destino.id & celda_monstruo_destino.id > 0)
                 {
-                    cuenta.Logger.log_informacion("UI_PELEAS", "Monstruo encontrado en la casilla " + celda_monstruo_destino.id);
+                    cuenta.Logger.log_information("UI_PELEAS", "Monstruo encontrado en la casilla " + celda_monstruo_destino.id);
 
                     switch (cuenta.Game.Handler.movimientos.get_Mover_A_Celda(celda_monstruo_destino, new List<Celda>()))
                     {
                         case ResultadoMovimientos.EXITO:
-                            cuenta.Logger.log_informacion("UI_PELEAS", "Desplazando para comenzar el combate");
+                            cuenta.Logger.log_information("UI_PELEAS", "Desplazando para comenzar el combate");
                         break;
 
                         case ResultadoMovimientos.MISMA_CELDA:

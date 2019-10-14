@@ -77,7 +77,7 @@ namespace Bot_Dofus_1._29._1.Interfaces
                 switch (cuenta.Game.Handler.movimientos.get_Mover_A_Celda(celda_destino, map.celdas_ocupadas()))
                 {
                     case ResultadoMovimientos.EXITO:
-                        cuenta.Logger.log_informacion("UI_MAPA", $"Personaje desplazado a la casilla: {celda_destino.id}");
+                        cuenta.Logger.log_information("UI_MAPA", $"Personaje desplazado a la casilla: {celda_destino.id}");
                     break;
 
                     case ResultadoMovimientos.MISMA_CELDA:

@@ -24,12 +24,12 @@ namespace Bot_Dofus_1._29._1.Interfaces
             lista_paquetes = new List<string>();
         }
 
-        public void paquete_Recibido(string paquete)
+        public void package_received(string paquete)
         {
             agregar_Nuevo_Paquete(paquete, false);
         }
 
-        public void paquete_Enviado(string paquete)
+        public void package_sent(string paquete)
         {
             agregar_Nuevo_Paquete(paquete, true);
         }

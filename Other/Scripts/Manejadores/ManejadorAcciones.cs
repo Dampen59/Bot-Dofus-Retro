@@ -296,7 +296,7 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts.Manejadores
             if (cuenta?.ScriptHandler.corriendo == false)
                 return;
 
-            if (timer_out.habilitado)
+            if (timer_out.enabled)
                 timer_out.Stop();
 
             if (delay > 0)

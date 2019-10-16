@@ -169,7 +169,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
                 switch (id_accion)
                 {
                     case 1:
-                        celda = map.get_Celda_Id(Hash.get_Celda_Id_Desde_hash(separador[3].Substring(separador[3].Length - 2)));
+                        celda = map.get_Celda_Id(Hash.get_CellID_From_Hash(separador[3].Substring(separador[3].Length - 2)));
 
                         if (!cuenta.IsFighting())
                         {
@@ -183,7 +183,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.Juego
                             {
                                 entidad.celda = celda;
 
-                                if (GlobalConf.mostrar_mensajes_debug)
+                                if (GlobalConf.show_debug_messages)
                                     cuenta.Logger.log_information("DEBUG", "Detected movement of an entity to the cellId: " + celda.id);
                             }
                             map.evento_Entidad_Actualizada();

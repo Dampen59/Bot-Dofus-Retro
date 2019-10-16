@@ -27,7 +27,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.LoginAccount
             cuenta.WelcomeKey = paquete.Substring(2);
 
             cliente.Send("1.30");
-            cliente.Send(cliente.Account.AccountConfiguration.nombre_cuenta + "\n" + Hash.encriptar_Password(cliente.Account.AccountConfiguration.password, cliente.Account.WelcomeKey));
+            cliente.Send(cliente.Account.AccountConfiguration.accountNumber + "\n" + Hash.Crypt_password(cliente.Account.AccountConfiguration.password, cliente.Account.WelcomeKey));
             cliente.Send("Af");
         }
 
@@ -53,10 +53,10 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.LoginAccount
                 EstadosServidor estado = (EstadosServidor)byte.Parse(separador[1]);
                 string nombre = id == 601 ? "Eratz" : "Henual";
 
-                if (id == cuenta.AccountConfiguration.get_Servidor_Id())
+                if (id == cuenta.AccountConfiguration.Get_ServerID())
                 {
                     servidor.actualizar_Datos(id, nombre, estado);
-                    cuenta.Logger.log_information("LOGIN", $"The server {cuenta.AccountConfiguration.get_Servidor_Id()} is {estado}");
+                    cuenta.Logger.log_information("LOGIN", $"The server {cuenta.AccountConfiguration.Get_ServerID()} is {estado}");
 
                     if (estado != EstadosServidor.ONLINE)
                         primera_vez = false;
@@ -108,7 +108,7 @@ namespace Bot_Dofus_1._29._1.Comun.Frames.LoginAccount
         public void get_Seleccion_Servidor(TcpClient cliente, string paquete)
         {
             cliente.Account.GameTicket = paquete.Substring(14);
-            cliente.Account.ChangeGameServer(Hash.desencriptar_Ip(paquete.Substring(3, 8)), Hash.desencriptar_Puerto(paquete.Substring(11, 3).ToCharArray()));
+            cliente.Account.ChangeGameServer(Hash.Decrypt_ip(paquete.Substring(3, 8)), Hash.Decrypt_Port(paquete.Substring(11, 3).ToCharArray()));
         }
     }
 }

@@ -20,7 +20,7 @@ namespace Bot_Dofus_1._29._1.Forms
         {
             InitializeComponent();
 
-            checkBox_mensajes_debug.Checked = GlobalConf.mostrar_mensajes_debug;
+            checkBox_mensajes_debug.Checked = GlobalConf.show_debug_messages;
             textBox_ip_servidor.Text = GlobalConf.Ip;
             textBox_puerto_servidor.Text = Convert.ToString(GlobalConf.Port);
         }
@@ -39,10 +39,10 @@ namespace Bot_Dofus_1._29._1.Forms
                 return;
             }
 
-            GlobalConf.mostrar_mensajes_debug = checkBox_mensajes_debug.Checked;
+            GlobalConf.show_debug_messages = checkBox_mensajes_debug.Checked;
             GlobalConf.Ip = textBox_ip_servidor.Text;
             GlobalConf.Port = short.Parse(textBox_puerto_servidor.Text);
-            GlobalConf.guardar_Configuracion();
+            GlobalConf.SaveConfig();
             Close();
         }
     }

@@ -288,14 +288,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Utility\Configuracion\CuentaConf.cs" />
+    <Compile Include="Utility\Configuracion\AccountConfiguration.cs" />
     <Compile Include="Utility\Configuracion\GlobalConf.cs" />
     <Compile Include="Utility\Criptografia\Hash.cs" />
     <Compile Include="Utility\Criptografia\Randomize.cs" />
     <Compile Include="Utility\Extensiones\Extensiones.cs" />
     <Compile Include="Utility\Logs\Logger.cs" />
-    <Compile Include="Utility\Logs\LogMensajes.cs" />
-    <Compile Include="Utility\Logs\LogTipos.cs" />
+    <Compile Include="Utility\Logs\LogMessage.cs" />
+    <Compile Include="Utility\Logs\LogTypes.cs" />
     <Compile Include="Utility\TimerWrapper.cs" />
     <EmbeddedResource Include="Controles\ControlMapa\ControlMapa.resx">
       <DependentUpon>ControlMapa.cs</DependentUpon>

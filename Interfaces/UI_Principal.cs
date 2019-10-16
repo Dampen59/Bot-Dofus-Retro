@@ -27,17 +27,17 @@ namespace Bot_Dofus_1._29._1.Interfaces
         {
             InitializeComponent();
             cuenta = _cuenta;
-            nombre_cuenta = cuenta.AccountConfiguration.nombre_cuenta; ;
+            nombre_cuenta = cuenta.AccountConfiguration.accountNumber; ;
         }
 
         private void UI_Principal_Load(object sender, EventArgs e)
         {
             desconectarOconectarToolStripMenuItem.Text = "Connected";
-            escribir_mensaje($"[{DateTime.Now.ToString("HH:mm:ss")}] -> [INFORMATIONS] Welcome on the Retro Bot version: {Application.ProductVersion} alpha", LogTipos.ERROR.ToString("X"));
+            escribir_mensaje($"[{DateTime.Now.ToString("HH:mm:ss")}] -> [INFORMATIONS] Welcome on the Retro Bot version: {Application.ProductVersion} alpha", LogTypes.ERROR.ToString("X"));
 
             cuenta.AccountStatusEvent += eventos_Estados_Account;
             cuenta.AccountDisconnectedEvent += desconectar_Account;
-            cuenta.Logger.log_evento += (mensaje, color) => escribir_mensaje(mensaje.ToString(), color);
+            cuenta.Logger.log_event += (mensaje, color) => escribir_mensaje(mensaje.ToString(), color);
 
             cuenta.ScriptHandler.evento_script_cargado += evento_Scripts_Cargado;
             cuenta.ScriptHandler.evento_script_iniciado += evento_Scripts_Iniciado;
@@ -49,7 +49,7 @@ namespace Bot_Dofus_1._29._1.Interfaces
             cuenta.Game.Character.personaje_seleccionado += personaje_Seleccionado;
 
             if (cuenta.HasGroup)
-                escribir_mensaje("[" + DateTime.Now.ToString("HH:mm:ss") + "] -> The group leader is: " + cuenta.Group.Leader.AccountConfiguration.nombre_cuenta, LogTipos.ERROR.ToString("X"));
+                escribir_mensaje("[" + DateTime.Now.ToString("HH:mm:ss") + "] -> The group leader is: " + cuenta.Group.Leader.AccountConfiguration.accountNumber, LogTypes.ERROR.ToString("X"));
         }
 
         private void eliminarToolStripMenuItem_Click(object sender, EventArgs e)
@@ -311,7 +311,7 @@ namespace Bot_Dofus_1._29._1.Interfaces
         #endregion
 
         #region Mensajes
-        private void get_Mensajes_socket_information(object error) => escribir_mensaje("[" + DateTime.Now.ToString("HH:mm:ss") + "] [Conexión] " + error, LogTipos.PELIGRO.ToString("X"));
+        private void get_Mensajes_socket_information(object error) => escribir_mensaje("[" + DateTime.Now.ToString("HH:mm:ss") + "] [Conexión] " + error, LogTypes.WARNING.ToString("X"));
 
         private void escribir_mensaje(string mensaje, string color)
         {

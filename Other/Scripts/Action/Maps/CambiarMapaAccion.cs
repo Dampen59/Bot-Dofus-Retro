@@ -20,8 +20,8 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts.Acciones
         public MapaTeleportCeldas direccion { get; private set; }
         public short celda_id { get; private set; }
 
-        public bool celda_especifica => direccion == MapaTeleportCeldas.NONE && celda_id != -1;
-        public bool direccion_especifica => direccion != MapaTeleportCeldas.NONE && celda_id == -1;
+        public bool celda_especifica => direccion == MapaTeleportCeldas.NINGUNO && celda_id != -1;
+        public bool direccion_especifica => direccion != MapaTeleportCeldas.NINGUNO && celda_id == -1;
 
         public CambiarMapaAccion(MapaTeleportCeldas _direccion, short _celda_id)
         {
@@ -52,7 +52,7 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts.Acciones
             string[] partes = texto.Split('|');
             string total_partes = partes[Randomize.get_Random(0, partes.Length)];
 
-            Match match = Regex.Match(total_partes, @"(?<direccion>top|right|bottom|left)\((?<celda>\d{1,3})\)");
+            Match match = Regex.Match(total_partes, @"(?<move>top|right|bottom|left)\((?<cell>\d{1,3})\)");
             if (match.Success)
             {
                 accion = new CambiarMapaAccion((MapaTeleportCeldas)Enum.Parse(typeof(MapaTeleportCeldas), match.Groups["move"].Value, true), short.Parse(match.Groups["cell"].Value));
@@ -60,7 +60,7 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts.Acciones
             }
             else
             {
-                match = Regex.Match(total_partes, @"(?<direccion>top|right|bottom|left)");
+                match = Regex.Match(total_partes, @"(?<move>top|right|bottom|left)");
                 if (match.Success)
                 {
                     accion = new CambiarMapaAccion((MapaTeleportCeldas)Enum.Parse(typeof(MapaTeleportCeldas), match.Groups["move"].Value, true), -1);
@@ -68,10 +68,10 @@ namespace Bot_Dofus_1._29._1.Otros.Scripts.Acciones
                 }
                 else
                 {
-                    match = Regex.Match(total_partes, @"(?<celda>\d{1,3})");
+                    match = Regex.Match(total_partes, @"(?<cell>\d{1,3})");
                     if (match.Success)
                     {
-                        accion = new CambiarMapaAccion(MapaTeleportCeldas.NONE, short.Parse(match.Groups["celda"].Value));
+                        accion = new CambiarMapaAccion(MapaTeleportCeldas.NINGUNO, short.Parse(match.Groups["cell"].Value));
                         return true;
                     }
                 }

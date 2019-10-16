@@ -14,31 +14,31 @@ namespace Bot_Dofus_1._29._1.Utilidades.Configuracion
 {
     internal class GlobalConf
     {
-        private static List<AccountConfiguration> lista_cuentas;
-        private static readonly string ruta_archivo_cuentas = Path.Combine(Directory.GetCurrentDirectory(), "cuentas.bot");
-        public static bool mostrar_mensajes_debug { get; set; }
+        private static List<AccountConfiguration> accountsList;
+        private static readonly string accountsFilePath = Path.Combine(Directory.GetCurrentDirectory(), "accounts.bot");
+        public static bool show_debug_messages { get; set; }
         public static string Ip = "34.251.172.139";
         public static short Port = 443;
 
         static GlobalConf()
         {
-            lista_cuentas = new List<AccountConfiguration>();
-            mostrar_mensajes_debug = false;
+            accountsList = new List<AccountConfiguration>();
+            show_debug_messages = false;
         }
 
-        public static void cargar_Todas_Accounts()
+        public static void LoadAllAccounts()
         {
-            if (File.Exists(ruta_archivo_cuentas))
+            if (File.Exists(accountsFilePath))
             {
-                lista_cuentas.Clear();
-                using (BinaryReader br = new BinaryReader(File.Open(ruta_archivo_cuentas, FileMode.Open)))
+                accountsList.Clear();
+                using (BinaryReader br = new BinaryReader(File.Open(accountsFilePath, FileMode.Open)))
                 {
                     int registros_totales = br.ReadInt32();
                     for (int i = 0; i < registros_totales; i++)
                     {
-                        lista_cuentas.Add(AccountConfiguration.cargar_Una_Account(br));
+                        accountsList.Add(AccountConfiguration.Load_Account(br));
                     }
-                    mostrar_mensajes_debug = br.ReadBoolean();
+                    show_debug_messages = br.ReadBoolean();
                     Ip = br.ReadString();
                     Port = br.ReadInt16();
                 }
@@ -49,22 +49,22 @@ namespace Bot_Dofus_1._29._1.Utilidades.Configuracion
             }
         }
 
-        public static void guardar_Configuracion()
+        public static void SaveConfig()
         {
-            using (BinaryWriter bw = new BinaryWriter(File.Open(ruta_archivo_cuentas, FileMode.Create)))
+            using (BinaryWriter bw = new BinaryWriter(File.Open(accountsFilePath, FileMode.Create)))
             {
-                bw.Write(lista_cuentas.Count);
-                lista_cuentas.ForEach(a => a.guardar_Account(bw));
-                bw.Write(mostrar_mensajes_debug);
+                bw.Write(accountsList.Count);
+                accountsList.ForEach(a => a.SaveAccount(bw));
+                bw.Write(show_debug_messages);
                 bw.Write(Ip);
                 bw.Write(Port);
             }
         }
 
-        public static void agregar_Account(string nombre_cuenta, string password, string servidor, string nombre_personaje) => lista_cuentas.Add(new AccountConfiguration(nombre_cuenta, password, servidor, nombre_personaje));
-        public static void eliminar_Account(int cuenta_index) => lista_cuentas.RemoveAt(cuenta_index);
-        public static AccountConfiguration get_Account(string nombre_cuenta) => lista_cuentas.FirstOrDefault(cuenta => cuenta.nombre_cuenta == nombre_cuenta);
-        public static AccountConfiguration get_Account(int cuenta_index) => lista_cuentas.ElementAt(cuenta_index);
-        public static List<AccountConfiguration> get_Lista_Accounts() => lista_cuentas;
+        public static void AddAccount(string accountNumber, string password, string server, string characterNumber) => accountsList.Add(new AccountConfiguration(accountNumber, password, server, characterNumber));
+        public static void DeleteAccount(int accountIndex) => accountsList.RemoveAt(accountIndex);
+        public static AccountConfiguration get_Account(string accountNumber) => accountsList.FirstOrDefault(account => account.accountNumber == accountNumber);
+        public static AccountConfiguration get_Account(int accountIndex) => accountsList.ElementAt(accountIndex);
+        public static List<AccountConfiguration> GetAccountList() => accountsList;
     }
 }

@@ -5,32 +5,32 @@ namespace Bot_Dofus_1._29._1.Utilidades.Logs
 {
     public class Logger
     {
-        public event Action<LogMensajes, string> log_evento;
+        public event Action<LogMessage, string> log_event;
 
-        private void log_Final(string referencia, string mensaje, string color, Exception ex = null)
+        private void log_Final(string _reference, string _message, string color, Exception ex = null)
         {
             try
             {
-                LogMensajes log_mensaje = new LogMensajes(referencia, mensaje, ex);
-                log_evento?.Invoke(log_mensaje, color);
+                LogMessage log_Message = new LogMessage(_reference, _message, ex);
+                log_event?.Invoke(log_Message, color);
             }
             catch (Exception e)
             {
-                log_Final("LOGGER", "An exception occurred when you activated the logged event.", LogTipos.ERROR, e);
+                log_Final("LOGGER", "An exception occurred when you activated the logged event.", LogTypes.ERROR, e);
             }
         }
 
-        private void log_Final(string referencia, string mensaje, LogTipos color, Exception ex = null)
+        private void log_Final(string _reference, string _message, LogTypes color, Exception ex = null)
         {
-            if (color == LogTipos.DEBUG && !GlobalConf.mostrar_mensajes_debug)
+            if (color == LogTypes.DEBUG && !GlobalConf.mostrar_mensajes_debug)
                 return;
-            log_Final(referencia, mensaje, ((int)color).ToString("X"), ex);
+            log_Final(_reference, _message, ((int)color).ToString("X"), ex);
         }
 
-        public void log_Error(string referencia, string mensaje) => log_Final(referencia, mensaje, LogTipos.ERROR);
-        public void log_Danger(string referencia, string mensaje) => log_Final(referencia, mensaje, LogTipos.PELIGRO);
-        public void log_information(string referencia, string mensaje) => log_Final(referencia, mensaje, LogTipos.INFORMACION);
-        public void log_normal(string referencia, string mensaje) => log_Final(referencia, mensaje, LogTipos.NORMAL);
-        public void private_log(string referencia, string mensaje) => log_Final(referencia, mensaje, LogTipos.PRIVADO);
+        public void log_Error(string _reference, string _message) => log_Final(_reference, _message, LogTypes.ERROR);
+        public void log_Danger(string _reference, string _message) => log_Final(_reference, _message, LogTypes.WARNING);
+        public void log_information(string _reference, string _message) => log_Final(_reference, _message, LogTypes.INFORMATION);
+        public void log_normal(string _reference, string _message) => log_Final(_reference, _message, LogTypes.NORMAL);
+        public void private_log(string _reference, string _message) => log_Final(_reference, _message, LogTypes.PRIVATE);
     }
 }

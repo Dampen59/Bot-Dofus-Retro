@@ -13,7 +13,7 @@ namespace Bot_Dofus_1._29._1.Utilidades.Criptografia
             'W', 'X', 'Y', 'Z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '-', '_'
         };
 
-        public static string encriptar_Password(string password, string key)
+        public static string Crypt_password(string password, string key)
         {
             StringBuilder str = new StringBuilder().Append("#1");
             for (int i = 0; i < password.Length; i++)
@@ -29,14 +29,14 @@ namespace Bot_Dofus_1._29._1.Utilidades.Criptografia
             return str.ToString();
         }
 
-        public static string desencriptar_Ip(string paquete)
+        public static string Decrypt_ip(string packet)
         {
             StringBuilder ip = new StringBuilder();
 
             for (int i = 0; i < 8; i += 2)
             {
-                int ascii1 = paquete[i] - 48;
-                int ascii2 = paquete[i + 1] - 48;
+                int ascii1 = packet[i] - 48;
+                int ascii2 = packet[i + 1] - 48;
                 
                 if (i != 0)
                     ip.Append('.');
@@ -46,17 +46,17 @@ namespace Bot_Dofus_1._29._1.Utilidades.Criptografia
             return ip.ToString();
         }
 
-        public static int desencriptar_Puerto(char[] chars)
+        public static int Decrypt_Port(char[] chars)
         {
             if (chars.Length != 3)
-                throw new ArgumentOutOfRangeException("El puerto debe estar encriptado en 3 caracteres.");
+                throw new ArgumentOutOfRangeException("The port must be 3-chars format coded.");
 
-            int puerto = 0;
+            int port = 0;
             for (int i = 0; i < 2; i++)
-                puerto += (int)(Math.Pow(64, 2 - i) * get_Hash(chars[i]));
+                port += (int)(Math.Pow(64, 2 - i) * get_Hash(chars[i]));
 
-            puerto += get_Hash(chars[2]);
-            return puerto;
+            port += get_Hash(chars[2]);
+            return port;
         }
 
         public static short get_Hash(char ch)
@@ -65,14 +65,14 @@ namespace Bot_Dofus_1._29._1.Utilidades.Criptografia
                 if (caracteres_array[i] == ch)
                     return i;
 
-            throw new IndexOutOfRangeException(ch + " no esta en el array del hash");
+            throw new IndexOutOfRangeException(ch + " isn't in the hash table.");
         }
 
-        public static string get_Celda_Char(short celda_id) => caracteres_array[celda_id / 64] + "" + caracteres_array[celda_id % 64];
+        public static string get_Cell_Char(short cellID) => caracteres_array[cellID / 64] + "" + caracteres_array[cellID % 64];
 
-        public static short get_Celda_Id_Desde_hash(string celdaCodigo)
+        public static short get_CellID_From_Hash(string cellIDHash)
         {
-            char char1 = celdaCodigo[0], char2 = celdaCodigo[1];
+            char char1 = cellIDHash[0], char2 = cellIDHash[1];
             short code1 = 0, code2 = 0, a = 0;
 
             while (a < caracteres_array.Length)

@@ -5,9 +5,9 @@ namespace Bot_Dofus_1._29._1.Utilidades.Extensiones
 {
     public static class Extensiones
     {
-        public static string cadena_Amigable(this AccountStatus estado)
+        public static string cadena_Amigable(this AccountStatus state)
         {
-            switch (estado)
+            switch (state)
             {
                 case AccountStatus.CONECTANDO:
                     return "Connected";
@@ -40,14 +40,14 @@ namespace Bot_Dofus_1._29._1.Utilidades.Extensiones
 
         public static T get_Or<T>(this Table table, string key, DataType type, T orValue)
         {
-            DynValue bandera = table.Get(key);
+            DynValue flag = table.Get(key);
 
-            if (bandera.IsNil() || bandera.Type != type)
+            if (flag.IsNil() || flag.Type != type)
                 return orValue;
 
             try
             {
-                return (T)bandera.ToObject(typeof(T));
+                return (T)flag.ToObject(typeof(T));
             }
             catch
             {
